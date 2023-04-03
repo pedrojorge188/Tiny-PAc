@@ -1,4 +1,4 @@
-package pt.isec.a2021142041.Utils;
+package pt.isec.pa.tinypac.ui.text;
 
 import java.util.Scanner;
 

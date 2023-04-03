@@ -1,16 +1,18 @@
-
 package pt.isec.pa.tinypac.model.data;
+
 public final class Maze {
     private final IMazeElement[][] board;
     public Maze(int height, int width) {
         board = new IMazeElement[height][width];
     }
+
     public boolean set(int y, int x,IMazeElement element) {
         if (y < 0 || y >= board.length || x < 0 || x >= board[0].length)
             return false;
         board[y][x] = element; // can be null
         return true;
     }
+
     public IMazeElement get(int y, int x) {
         if (y < 0 || y >= board.length || x < 0 || x >= board[0].length)
             return null;
@@ -26,4 +28,5 @@ public final class Maze {
                     char_board[y][x] = board[y][x].getSymbol();
         return char_board;
     }
+
 }
