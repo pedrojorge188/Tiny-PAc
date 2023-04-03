@@ -1,4 +1,5 @@
 package pt.isec.pa.tinypac.model.data.game;
+import pt.isec.pa.tinypac.model.data.IMazeElement;
 import pt.isec.pa.tinypac.model.data.Maze;
 
 public class GameManager{
@@ -10,8 +11,7 @@ public class GameManager{
     public GameManager(){
         this.level = 1;
         this.points = 0;
-        if(GameLevel.getLevel(this.level) != null)
-            this.current_maze = GameLevel.getLevel(this.level);
+        this.current_maze = GameLevel.getLevel(this.level).getValue2();
     }
 
     public int getLevel() {
@@ -20,9 +20,15 @@ public class GameManager{
 
     public boolean setLevel(int level) {
 
-        if(level < 20 && level > 0 &&  GameLevel.getLevel(this.level) != null){
-            this.level = level;
-            this.current_maze = GameLevel.getLevel(this.level);
+        if(level < 20 && level > 0){
+
+            if(GameLevel.getLevel(level).getValue1()){
+                current_maze = GameLevel.getLevel(level).getValue2();
+                this.level = level;
+            }else{
+                return false;
+            }
+
         } else {
             return false;
         }

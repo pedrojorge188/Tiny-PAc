@@ -3,8 +3,34 @@ import pt.isec.pa.tinypac.model.data.Maze;
 import pt.isec.pa.tinypac.model.data.MazeElementsGenerator;
 import pt.isec.pa.tinypac.model.data.game.interfaces.GameConsts;
 import java.io.*;
+import java.util.HashMap;
+
 
 class GameLevel implements GameConsts {
+
+    private static int n_wrap_zone = 0;
+    private static int n_fruit = 0;
+    private static int pacman_spawn = 0;
+    private static int ghost_spawn = 0;
+
+
+    public static class Result {
+        private final Boolean value1;
+        private final Maze value2;
+
+        public Result(Boolean v1, Maze v2){
+            value1 = v1;
+            value2 = v2;
+        }
+
+        public Boolean getValue1() {
+            return value1;
+        }
+
+        public Maze getValue2() {
+            return value2;
+        }
+    }
 
     private static String verifyLevel(int level){
 
@@ -21,13 +47,49 @@ class GameLevel implements GameConsts {
         return file.toString();
     }
 
+    private static Boolean verfifyElements(char ch){
 
-    public static Maze getLevel(int level){
+        if (ch == WALL || ch == BALL || ch == WRAP_ZONE
+                || ch == FRUIT || ch == SPAWN || ch == BIG_BALL || ch == SPAWN2
+                || ch == CAVE) {
+        }else{
+            return false;
+        }
+
+        if(ch == WRAP_ZONE) {
+            n_wrap_zone ++;
+            if(n_wrap_zone > 2)
+                return  false;
+        }
+
+        if(ch == FRUIT) {
+            n_fruit ++;
+            if(n_fruit > 1)
+                return  false;
+        }
+
+        if(ch == SPAWN) {
+            pacman_spawn ++;
+            if(pacman_spawn > 1)
+                return  false;
+        }
+
+        if(ch == SPAWN2) {
+            ghost_spawn ++;
+            if(ghost_spawn > 1)
+                return  false;
+        }
+
+        return true;
+    }
+
+    public static Result getLevel(int level){
 
         Maze maze;
         String file = verifyLevel(level);
+
         if(file == null)
-            return null;
+            return new Result(false,null);
 
         int rows = 0,cols = 0;
 
@@ -60,20 +122,16 @@ class GameLevel implements GameConsts {
 
             for (int i = 0; i < rows; i++) {
                 for (int j = 0; j < cols; j++) {
-                    if (m[i][j] == WALL || m[i][j] == BALL || m[i][j] == WRAP_ZONE
-                            || m[i][j] == FRUIT || m[i][j] == SPAWN || m[i][j] == BIG_BALL || m[i][j] == SPAWN2
-                            || m[i][j] == CAVE) {
-                    }else{
-                        return null;
-                    }
+                    if(!verfifyElements(m[i][j]))
+                        return new Result(false,null);
                 }
             }
 
-        } catch (IOException e) {
-            return null;
+        } catch (Exception e) {
+            return new Result(false,null);
         }
 
-        return maze;
+        return new Result(true,maze);
 
     }
 

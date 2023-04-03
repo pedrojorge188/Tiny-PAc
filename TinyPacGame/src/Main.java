@@ -22,6 +22,8 @@ public class Main {
             System.out.println("Mapa do nivel "+gm.getLevel()+" está mal estruturado!");
         }
 
+        System.out.println();
+
     }
 
 }
