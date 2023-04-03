@@ -5,7 +5,6 @@ import pt.isec.pa.tinypac.model.data.game.interfaces.GameConsts;
 import java.io.*;
 import java.util.HashMap;
 
-
 class GameLevel implements GameConsts {
 
     private static int n_wrap_zone = 0;
