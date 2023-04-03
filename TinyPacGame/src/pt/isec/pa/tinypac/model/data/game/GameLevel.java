@@ -126,6 +126,16 @@ class GameLevel implements GameConsts {
                 }
             }
 
+            if(n_wrap_zone == 0 || n_fruit == 0 || pacman_spawn == 0 || ghost_spawn == 0)
+                return new Result(false,null);
+
+           n_wrap_zone = 0;
+           n_fruit = 0;
+           pacman_spawn = 0;
+           ghost_spawn = 0;
+
+
+
         } catch (Exception e) {
             return new Result(false,null);
         }

@@ -2,8 +2,7 @@ package pt.isec.pa.tinypac.model.data.pacman;
 
 public class PacMan implements IPacMan{
 
-    private int x;
-    private int y;
+    private int x, y;
     private int direction;
     private int movement_speed;
     private int lives;
@@ -72,5 +71,16 @@ public class PacMan implements IPacMan{
     public void getDamage() {
         if(N_LIVES > 0)
             lives--;
+    }
+
+    @Override
+    public String toString() {
+        return "PacMan{" +
+                "x=" + x +
+                ", y=" + y +
+                ", direction=" + direction +
+                ", movement_speed=" + movement_speed +
+                ", lives=" + lives +
+                '}';
     }
 }
