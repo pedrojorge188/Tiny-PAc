@@ -6,7 +6,7 @@ public class Ball {
     protected int x,y;
 
     public Ball(int x, int y){
-        points = 10;
+        points = 1;
         this.x = x;
         this.y = y;
     }

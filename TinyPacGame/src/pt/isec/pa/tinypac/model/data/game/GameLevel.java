@@ -53,7 +53,7 @@ class GameLevel implements GameConsts {
 
         if (ch == WALL || ch == BALL || ch == WRAP_ZONE
                 || ch == FRUIT || ch == SPAWN || ch == BIG_BALL || ch == SPAWN2
-                || ch == CAVE || ch == ' ') {
+                || ch == CAVE ) {
         }else{
             return false;
         }

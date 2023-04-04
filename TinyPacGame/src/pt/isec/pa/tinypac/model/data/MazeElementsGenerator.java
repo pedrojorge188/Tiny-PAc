@@ -11,7 +11,7 @@ public class MazeElementsGenerator {
             case 'x' -> ret = new Wall();
             case 'W' -> ret = new WrapZone();
             case 'o' -> ret = new BallElement();
-            case 'F' -> ret = new Fruit();
+            case 'F' -> ret = new FruitElement();
             case 'M' -> ret = new PacManSpawn();
             case 'O' -> ret = new BigBallElement();
             case 'Y' -> ret = new GhostSpawn();

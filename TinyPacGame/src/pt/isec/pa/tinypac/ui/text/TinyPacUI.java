@@ -31,6 +31,12 @@ public class TinyPacUI {
     public void start() throws IOException {
 
         GameManager gm = new GameManager();
+        try{
+            gm.fillGame();
+        }catch (Exception e){
+            tg.setBackgroundColor(TextColor.ANSI.RED);
+            tg.putString(15, 4, "Mapa do nivel " + gm.getLevel() + " está mal estruturado!");
+        }
         screen.startScreen();
         boolean keepRunning = true;
 
@@ -39,8 +45,11 @@ public class TinyPacUI {
 
             if(keyPassed != null){
                 switch (keyPassed.getKeyType()){
-                    case Escape:
-                        keepRunning = false;
+                    case Escape -> keepRunning = false;
+                    case ArrowUp -> gm.movePacman(1);
+                    case ArrowDown -> gm.movePacman(2);
+                    case ArrowLeft -> gm.movePacman(3);
+                    case ArrowRight ->gm.movePacman(4);
                 }
             }
 
@@ -52,6 +61,7 @@ public class TinyPacUI {
 
             showMaze(gm);
 
+            screen.refresh();
             tg.setBackgroundColor(TextColor.ANSI.BLACK);
             tg.setForegroundColor(TextColor.ANSI.WHITE);
 
@@ -65,11 +75,10 @@ public class TinyPacUI {
 
     private void showMaze(GameManager gm) throws IOException {
 
+
         screen.refresh();
 
         try {
-            gm.setLevel(gm.getLevel());
-            gm.fillGame();
             char[][] m = gm.getMaze();
 
             for (int i = 0; i < gm.getMazeRows(); i++) {
@@ -88,27 +97,35 @@ public class TinyPacUI {
                         tg.putString(j+20, i+4, " ");
                     }else if(m[i][j] == 'W'){
                         tg.setBackgroundColor(TextColor.ANSI.GREEN);
-                        tg.setForegroundColor(TextColor.ANSI.BLACK);
-                        tg.putString(j+20, i+4, "W");
+                        tg.putString(j+20, i+4, " ");
                     }else if(m[i][j] == 'o'){
                         tg.setBackgroundColor(TextColor.ANSI.BLACK);
                         tg.setForegroundColor(TextColor.ANSI.YELLOW);
                         tg.putString(j+20, i+4, ".");
                     }else if(m[i][j] == 'O'){
                         tg.setBackgroundColor(TextColor.ANSI.BLACK);
-                        tg.setForegroundColor(TextColor.ANSI.YELLOW_BRIGHT);
+                        tg.setForegroundColor(TextColor.ANSI.YELLOW);
                         tg.putString(j+20, i+4, String.valueOf(m[i][j]));
                     }else if(m[i][j] == 'F'){
                         tg.setBackgroundColor(TextColor.ANSI.RED);
-                        tg.setForegroundColor(TextColor.ANSI.BLACK);
                         tg.putString(j+20, i+4," ");
                     }else if(m[i][j] == 'M'){
+                        tg.setBackgroundColor(TextColor.ANSI.YELLOW_BRIGHT);
+                        tg.putString(j+20, i+4," ");
+                    }else{
                         tg.setBackgroundColor(TextColor.ANSI.BLACK);
                         tg.setForegroundColor(TextColor.ANSI.WHITE);
-                        tg.putString(j+20, i+4,String.valueOf(m[i][j]));
+                        tg.putString(j+20, i+4," ");
                     }
                 }
             }
+
+            tg.setBackgroundColor(TextColor.ANSI.BLACK);
+            tg.setForegroundColor(TextColor.ANSI.GREEN);
+
+            tg.putString(30, gm.getMazeRows()+8, "POINTS:" + gm.getPoints());
+            tg.putString(30, gm.getMazeRows()+9, "PACMAN LIVES:" + gm.getPacManLife());
+            tg.putString(30, gm.getMazeRows()+7, "lEVEL:" + gm.getLevel());
 
         } catch (Exception e) {
             tg.setBackgroundColor(TextColor.ANSI.RED);

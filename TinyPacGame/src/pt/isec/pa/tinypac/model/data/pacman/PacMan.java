@@ -16,15 +16,15 @@ public class PacMan implements IPacMan{
     }
 
     //Movement methods
-    public void moveUp(){
+    public void moveUp()  {
         this.y -= movement_speed;
     }
 
-    public void moveDown(){
+    public void moveDown() {
         this.y += movement_speed;
     }
 
-    public void moveLeft(){
+    public void moveLeft()  {
         this.x -= movement_speed;
     }
 
@@ -68,6 +68,9 @@ public class PacMan implements IPacMan{
         return lives;
     }
 
+    public void removeLife(){
+        lives--;
+    }
     public void getDamage() {
         if(N_LIVES > 0)
             lives--;
