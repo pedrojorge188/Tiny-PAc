@@ -10,10 +10,10 @@ public class MazeElementsGenerator {
         switch (ch){
             case 'x' -> ret = new Wall();
             case 'W' -> ret = new WrapZone();
-            case 'o' -> ret = new Ball();
+            case 'o' -> ret = new BallElement();
             case 'F' -> ret = new Fruit();
             case 'M' -> ret = new PacManSpawn();
-            case 'O' -> ret = new BigBall();
+            case 'O' -> ret = new BigBallElement();
             case 'Y' -> ret = new GhostSpawn();
             case 'y' -> ret = new GhostSpawnCave();
         }

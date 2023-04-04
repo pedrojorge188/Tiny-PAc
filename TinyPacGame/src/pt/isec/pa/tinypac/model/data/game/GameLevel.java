@@ -1,9 +1,12 @@
 package pt.isec.pa.tinypac.model.data.game;
+
 import pt.isec.pa.tinypac.model.data.Maze;
 import pt.isec.pa.tinypac.model.data.MazeElementsGenerator;
 import pt.isec.pa.tinypac.model.data.game.interfaces.GameConsts;
-import java.io.*;
-import java.util.HashMap;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
 class GameLevel implements GameConsts {
 
@@ -50,7 +53,7 @@ class GameLevel implements GameConsts {
 
         if (ch == WALL || ch == BALL || ch == WRAP_ZONE
                 || ch == FRUIT || ch == SPAWN || ch == BIG_BALL || ch == SPAWN2
-                || ch == CAVE) {
+                || ch == CAVE || ch == ' ') {
         }else{
             return false;
         }
