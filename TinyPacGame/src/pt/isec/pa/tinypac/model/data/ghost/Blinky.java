@@ -11,7 +11,7 @@ public class Blinky extends Ghost{
 
     @Override
     public void move(Maze maze, PacMan pacMan) {
-
+        this.x --;
     }
 
     @Override

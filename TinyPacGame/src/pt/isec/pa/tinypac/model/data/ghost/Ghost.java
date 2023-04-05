@@ -11,11 +11,19 @@ public abstract class Ghost implements  IGhost{
     protected int vulnerability_time;
 
     protected Ghost(int x, int y) {
-        this.movement_speed = 0;
+        this.movement_speed = 1;
         this.vulnerability_time = 20;
         this.x = x;
         this.y = y;
         direction = UP;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
     }
 
     public void setMovement_speed(int movement_speed) {

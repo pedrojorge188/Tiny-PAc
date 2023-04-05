@@ -11,7 +11,7 @@ public class Pinky extends Ghost{
 
     @Override
     public void move(Maze maze, PacMan pacMan) {
-
+        this.y --;
     }
 
     @Override
