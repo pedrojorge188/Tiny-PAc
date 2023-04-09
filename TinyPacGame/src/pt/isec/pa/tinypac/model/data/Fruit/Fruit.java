@@ -15,12 +15,28 @@ public class Fruit implements IFruit{
         this.y = y;
     }
 
+    public Fruit(Fruit _new, int x, int y) {
+        this.points = _new.points + POINTS;
+        this.time = TIME;
+        this.active = false;
+        this.x = x;
+        this.y = y;
+    }
+
     public int getPoints() {
         return this.points;
     }
 
+    public  void setPoints(){
+        this.points += POINTS;
+    }
+
     public int getTime() {
         return this.time;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 
     public Boolean getStatus(){

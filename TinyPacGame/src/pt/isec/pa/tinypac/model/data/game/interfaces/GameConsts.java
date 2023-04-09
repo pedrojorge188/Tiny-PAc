@@ -2,6 +2,7 @@ package pt.isec.pa.tinypac.model.data.game.interfaces;
 
 public interface GameConsts {
     String FILE_DIRECTORY = "./out/level";
+    int FRUIT_SPAWN = 20;
     char WALL = 'x';
     char BALL = 'o';
     char WRAP_ZONE = 'W';

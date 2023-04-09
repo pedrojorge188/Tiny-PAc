@@ -38,7 +38,10 @@ public class MoveGhostState extends TinyPacStateAdapter {
 
     @Override
     public boolean pacManFinish() {
-        return false;
+        if(game.setLevel(game.getLevel()+1))
+            new StartGameState(context,game);
+
+        return true;
     }
 
     @Override
@@ -50,6 +53,9 @@ public class MoveGhostState extends TinyPacStateAdapter {
     @Override
     public void evolve(IGameEngine gameEngine, long currentTime) {
         game.moveGhost();
+
+        if(game.stepLevelState())
+            this.pacManFinish();
 
         if(scope_counter != game.getPacManLife()){
             this.getPacman();

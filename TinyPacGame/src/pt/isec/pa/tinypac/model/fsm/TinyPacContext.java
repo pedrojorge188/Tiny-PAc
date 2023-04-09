@@ -50,6 +50,10 @@ public class TinyPacContext {
         return game.getMaze();
     }
 
+    public Object getFruit(){
+        return game.getFruitStatus();
+    }
+
     public boolean keyPress(int direction) {
         return state.keyPress(direction);
     }
@@ -69,5 +73,4 @@ public class TinyPacContext {
     public boolean pacManKillGhosts() {
         return state.pacManKillGhosts();
     }
-
 }

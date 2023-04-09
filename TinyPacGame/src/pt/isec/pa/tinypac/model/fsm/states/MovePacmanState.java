@@ -46,6 +46,7 @@ public class MovePacmanState extends TinyPacStateAdapter {
         return true;
     }
 
+
     @Override
     public void evolve(IGameEngine gameEngine, long currentTime) {
         game.movePacman(direction);

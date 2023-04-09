@@ -15,6 +15,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class GameManager implements GameConsts , IConst {
+    static int eat_to_fruit = 0;
 
     private int level;
     private int stage;
@@ -23,11 +24,14 @@ public class GameManager implements GameConsts , IConst {
     private Set<Ghost> ghost_list;
     private PacMan pacman;
     private Fruit fruit;
+    private int total_foods;
+    private int eaten_foods;
     private Set <Ball> balls_list;
     private Set <WrapZone> portals;
 
     public GameManager(){
-
+        this.total_foods = 0;
+        this. eaten_foods ++;
         this.level = 1;
         this.stage = 1;
         this.points = 0;
@@ -163,9 +167,23 @@ public class GameManager implements GameConsts , IConst {
             if (e.getX() == pacman.getX() && e.getY() == pacman.getY()){
                 current_maze.set(e.getY(),e.getX(),void_element);
                 this.points += e.getPoints();
+                this.eaten_foods++;
+                if(eat_to_fruit == FRUIT_SPAWN){
+                    if(!fruit.getStatus())
+                        fruit.setActive(true);
+                    eat_to_fruit = 0;
+                }else{
+                    eat_to_fruit++;
+                    System.out.println(eat_to_fruit);
+                }
                 balls_list.remove(e);
                 break;
             }
+        }
+
+        if(pacman.getX() == fruit.getX() && pacman.getY() == fruit.getY() && fruit.getStatus()){
+            points += fruit.getPoints();
+            fruit.setActive(false);
         }
 
         return true;
@@ -199,8 +217,12 @@ public class GameManager implements GameConsts , IConst {
                     pacman.setLives(p.getLives());
 
                 }else if(tmp[i][j] == BALL){
+                    if(points == 0)
+                        this.total_foods+=1;
                     balls_list.add(new Ball(j,i));
                 }else if(tmp[i][j] == BIG_BALL){
+                    if(points == 0)
+                        this.total_foods+=1;
                     balls_list.add(new BigBall(j,i));
                 }else if(tmp[i][j] == FRUIT){
                     fruit = new Fruit(j,i);
@@ -219,6 +241,9 @@ public class GameManager implements GameConsts , IConst {
         if(level > 20 || level < 0)
             return false;
 
+        this.points = 0;
+        this.eaten_foods = 0;
+        this.eat_to_fruit = 0;
         this.level = level;
 
         if(!GameLevel.getLevel(level).getValue1()){
@@ -261,8 +286,17 @@ public class GameManager implements GameConsts , IConst {
 
     public int getMazeCols(){
         return GameLevel.getLevelCols(this.stage);
-
     }
 
+    public boolean stepLevelState(){
+        if(eaten_foods == total_foods)
+            return true;
+        else
+            return false;
+    }
+
+    public boolean getFruitStatus(){
+        return fruit.getStatus();
+    }
 
 }

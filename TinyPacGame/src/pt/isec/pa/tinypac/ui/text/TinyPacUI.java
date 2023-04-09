@@ -115,8 +115,15 @@ public class TinyPacUI {
                         tg.setForegroundColor(TextColor.ANSI.YELLOW);
                         tg.putString(j+20, i+4, String.valueOf(m[i][j]));
                     }else if(m[i][j] == 'F'){
-                        tg.setBackgroundColor(TextColor.ANSI.RED);
-                        tg.putString(j+20, i+4," ");
+
+                        if((Boolean) fsm.getFruit()){
+                            tg.setBackgroundColor(TextColor.ANSI.RED);
+                            tg.putString(j+20, i+4," ");
+                        }else{
+                            tg.setBackgroundColor(TextColor.ANSI.BLACK);
+                            tg.putString(j+20, i+4," ");
+                        }
+
                     }else{
                         tg.setBackgroundColor(TextColor.ANSI.BLACK);
                         tg.setForegroundColor(TextColor.ANSI.WHITE);
