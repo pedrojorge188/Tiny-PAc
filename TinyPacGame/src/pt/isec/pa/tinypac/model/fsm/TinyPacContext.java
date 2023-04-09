@@ -7,6 +7,7 @@ public class TinyPacContext {
 
     private GameManager game;
     private ITinyPacState state;
+    
 
     public TinyPacContext(){
         this.game = new GameManager();
@@ -20,6 +21,10 @@ public class TinyPacContext {
     public void changeState(ITinyPacState newState) {
         this.state = newState;
     }
+
+    public Object getGhosts(){return  game.getGhost();}
+
+    public Object getPacmanModel(){return  game.getPacman();}
 
     public Object getPoints(){
         return game.getPoints();

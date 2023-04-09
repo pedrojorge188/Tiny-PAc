@@ -6,34 +6,30 @@ import pt.isec.pa.tinypac.model.fsm.TinyPacContext;
 import pt.isec.pa.tinypac.model.fsm.TinyPacState;
 import pt.isec.pa.tinypac.model.fsm.TinyPacStateAdapter;
 
-public class MoveGhostState extends TinyPacStateAdapter {
+public class GameOverState extends TinyPacStateAdapter{
 
-    private final int scope_counter;
 
-    public MoveGhostState(TinyPacContext context, GameManager game) {
+    public GameOverState(TinyPacContext context, GameManager game) {
         super(context, game);
-
-        System.out.println("ESTADO 3");
-        scope_counter = game.getPacManLife();
-        gameEngine.registerClient(this);
-        game.moveGhost();
+        System.out.println("ESTADO 5");
+        gameEngine.stop();
+        gameEngine.waitForTheEnd();
     }
 
     @Override
     public TinyPacState getState() {
-        return TinyPacState.MOVE_GHOST;
+        return TinyPacState.GAME_OVER;
     }
 
     @Override
     public boolean keyPress(int direction) {
-        TinyPacStateAdapter.direction = direction;
         return true;
     }
 
+
     @Override
     public boolean getPacman() {
-        context.changeState(new PacManLostLifeState(context,game));
-        return true;
+        return false;
     }
 
     @Override
@@ -46,14 +42,15 @@ public class MoveGhostState extends TinyPacStateAdapter {
         return false;
     }
 
+    @Override
+    public boolean pacManKillGhosts() {
+        return false;
+    }
 
     @Override
     public void evolve(IGameEngine gameEngine, long currentTime) {
-        game.moveGhost();
-
-        if(scope_counter != game.getPacManLife()){
-            this.getPacman();
-        }
 
     }
+
+
 }

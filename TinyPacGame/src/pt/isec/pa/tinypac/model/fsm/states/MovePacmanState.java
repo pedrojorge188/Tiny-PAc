@@ -1,5 +1,6 @@
 package pt.isec.pa.tinypac.model.fsm.states;
 
+import pt.isec.pa.tinypac.gameengine.IGameEngine;
 import pt.isec.pa.tinypac.model.data.game.GameManager;
 import pt.isec.pa.tinypac.model.fsm.TinyPacContext;
 import pt.isec.pa.tinypac.model.fsm.TinyPacState;
@@ -14,14 +15,18 @@ public class MovePacmanState extends TinyPacStateAdapter {
 
     public MovePacmanState(TinyPacContext context, GameManager game) {
         super(context, game);
+        System.out.println("ESTADO 2");
         timer = new Timer();
+        gameEngine.registerClient(this);
+
         this.timer.schedule(new TimerTask() {
                                 @Override
                                 public void run() {
-                                    context.changeState(new MoveGhostState(context,game));
+                                    timeout();
                                 }
                             }
                 , 5000);
+
     }
 
     @Override
@@ -31,29 +36,18 @@ public class MovePacmanState extends TinyPacStateAdapter {
 
     @Override
     public boolean keyPress(int direction) {
-        game.movePacman(direction);
+        TinyPacStateAdapter.direction = direction;
         return true;
     }
 
-
     @Override
-    public boolean getPacman() {
-        return false;
+    public boolean timeout() {
+        context.changeState(new MoveGhostState(context,game));
+        return true;
     }
 
     @Override
-    public boolean pacManFinish() {
-        return false;
+    public void evolve(IGameEngine gameEngine, long currentTime) {
+        game.movePacman(direction);
     }
-
-    @Override
-    public boolean pacManBuff() {
-        return false;
-    }
-
-    @Override
-    public boolean pacManKillGhosts() {
-        return false;
-    }
-
 }

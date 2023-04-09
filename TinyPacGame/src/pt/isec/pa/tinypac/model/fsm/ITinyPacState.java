@@ -8,6 +8,7 @@ public interface ITinyPacState {
     boolean pacManFinish(); // MOVE_GHOST -> NEXT_LEVEL
     boolean pacManBuff(); // MOVE_GHOST -> VULNERABLE_GHOST
     boolean pacManKillGhosts(); //VULNERABLE_GHOST -> MOVE_GHOST
+    boolean timeout();
 
 
 }

@@ -8,18 +8,20 @@ import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
+import pt.isec.pa.tinypac.model.data.ghost.Ghost;
+import pt.isec.pa.tinypac.model.data.pacman.PacMan;
 import pt.isec.pa.tinypac.model.fsm.TinyPacContext;
 import pt.isec.pa.tinypac.model.fsm.TinyPacState;
 
 import java.io.IOException;
+import java.util.HashSet;
 
 public class TinyPacUI {
 
     private TinyPacContext fsm;
     Terminal terminal;
-    Terminal options;
-    Screen screen, options_screen;
-    TextGraphics tg, op;
+    Screen screen;
+    TextGraphics tg;
 
     public TinyPacUI(TinyPacContext fsm) throws IOException {
 
@@ -29,6 +31,7 @@ public class TinyPacUI {
         terminal = terminalFactory.createTerminal();
         screen = new TerminalScreen(terminal);
         tg = screen.newTextGraphics();
+
     }
 
     public void start() throws IOException {
@@ -43,9 +46,14 @@ public class TinyPacUI {
                 tg.setBackgroundColor(TextColor.ANSI.BLACK);
                 tg.setForegroundColor(TextColor.ANSI.YELLOW_BRIGHT);
                 tg.putString(25,3,"PRESS KEY TO START");
-            }else{
+            }else if(fsm.getState() == TinyPacState.GAME_OVER){
                 screen.refresh();
-                tg.putString(28,3,"                       ");
+                tg.setBackgroundColor(TextColor.ANSI.RED);
+                tg.putString(25,3,"                    ");
+                tg.putString(25,3,"GAME_OVER");
+            }else{
+                tg.setBackgroundColor(TextColor.ANSI.BLACK);
+                tg.putString(25,3,"                    ");
             }
 
             if(keyPassed != null){
@@ -95,10 +103,6 @@ public class TinyPacUI {
                         tg.setBackgroundColor(TextColor.ANSI.BLACK);
                         tg.setForegroundColor(TextColor.ANSI.WHITE);
                         tg.putString(j+20, i+4, " ");
-                    }else if(m[i][j] == 'Y'){
-                        tg.setBackgroundColor(TextColor.ANSI.RED);
-                        tg.setForegroundColor(TextColor.ANSI.WHITE);
-                        tg.putString(j+20, i+4, " ");
                     }else if(m[i][j] == 'W'){
                         tg.setBackgroundColor(TextColor.ANSI.GREEN);
                         tg.putString(j+20, i+4, " ");
@@ -113,9 +117,6 @@ public class TinyPacUI {
                     }else if(m[i][j] == 'F'){
                         tg.setBackgroundColor(TextColor.ANSI.RED);
                         tg.putString(j+20, i+4," ");
-                    }else if(m[i][j] == 'M'){
-                        tg.setBackgroundColor(TextColor.ANSI.YELLOW_BRIGHT);
-                        tg.putString(j+20, i+4," ");
                     }else{
                         tg.setBackgroundColor(TextColor.ANSI.BLACK);
                         tg.setForegroundColor(TextColor.ANSI.WHITE);
@@ -124,6 +125,22 @@ public class TinyPacUI {
                 }
             }
 
+
+
+            for(Ghost e : (HashSet<Ghost>) fsm.getGhosts()){
+                if(fsm.getState() == TinyPacState.MOVE_GHOST){
+                    tg.setBackgroundColor(TextColor.ANSI.CYAN);
+                    tg.setForegroundColor(TextColor.ANSI.WHITE);
+                    tg.putString(e.getX()+20, e.getY()+4, " ");
+                }
+            }
+
+
+            tg.setBackgroundColor(TextColor.ANSI.YELLOW_BRIGHT);
+            tg.setForegroundColor(TextColor.ANSI.WHITE);
+            tg.putString(((PacMan)fsm.getPacmanModel()).getX()+20, ((PacMan)fsm.getPacmanModel()).getY()+4, " ");
+
+
             tg.setBackgroundColor(TextColor.ANSI.BLACK);
             tg.setForegroundColor(TextColor.ANSI.GREEN);
 
@@ -131,9 +148,10 @@ public class TinyPacUI {
             tg.putString(30, (int)fsm.getMazeRows()+9, "PACMAN LIVES:" + (int)fsm.getPacManLife());
             tg.putString(30, (int)fsm.getMazeRows()+7, "lEVEL:" + (int)fsm.getLevel());
 
-        } catch (Exception e) {
+    } catch (Exception e) {
             tg.setBackgroundColor(TextColor.ANSI.RED);
-            tg.putString(15, 4, "Mapa do nivel " + (int)fsm.getLevel() + " está mal estruturado!");
+            tg.putString(15, 4,  "Erro ao carregar modelos");
+
         }
 
         screen.refresh();

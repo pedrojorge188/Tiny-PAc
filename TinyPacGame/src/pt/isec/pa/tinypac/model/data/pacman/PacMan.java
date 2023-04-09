@@ -15,6 +15,14 @@ public class PacMan implements IPacMan{
         this.lives = N_LIVES;
     }
 
+    public PacMan(PacMan pacman){
+        this.x = pacman.x;
+        this.y = pacman.y;
+        this.movement_speed = pacman.movement_speed;
+        this.direction = pacman.direction;
+        this.lives = pacman.lives;
+    }
+
     //Movement methods
     public void moveUp()  {
         this.y -= movement_speed;
@@ -85,5 +93,9 @@ public class PacMan implements IPacMan{
                 ", movement_speed=" + movement_speed +
                 ", lives=" + lives +
                 '}';
+    }
+
+    public void setLives(int lives) {
+        this.lives = lives;
     }
 }

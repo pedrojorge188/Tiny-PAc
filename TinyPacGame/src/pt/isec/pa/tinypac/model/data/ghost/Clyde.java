@@ -11,8 +11,9 @@ public class Clyde extends Ghost{
 
     @Override
     public void move(Maze maze, PacMan pacMan) {
-        this.x ++;
+        this.x --;
     }
+
 
     @Override
     public String toString() {

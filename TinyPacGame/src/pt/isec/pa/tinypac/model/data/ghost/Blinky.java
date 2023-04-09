@@ -11,7 +11,11 @@ public class Blinky extends Ghost{
 
     @Override
     public void move(Maze maze, PacMan pacMan) {
-        this.x --;
+
+        if(getX() == pacMan.getX() && getY() == pacMan.getY())
+            pacMan.removeLife();
+
+        this.x = this.x;
     }
 
     @Override

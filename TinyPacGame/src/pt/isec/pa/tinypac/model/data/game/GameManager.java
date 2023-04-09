@@ -16,7 +16,6 @@ import java.util.Set;
 
 public class GameManager implements GameConsts , IConst {
 
-    private static boolean level_trigger;
     private int level;
     private int stage;
     private int points;
@@ -29,7 +28,6 @@ public class GameManager implements GameConsts , IConst {
 
     public GameManager(){
 
-        this.level_trigger = false;
         this.level = 1;
         this.stage = 1;
         this.points = 0;
@@ -47,13 +45,21 @@ public class GameManager implements GameConsts , IConst {
         GhostSpawn ghost = new GhostSpawn();
 
         for (Ghost e: ghost_list){
-            current_maze.set(e.getY(), e.getX(), void_element);
             e.move(current_maze,pacman);
-            current_maze.set(e.getY(),e.getX(), void_element);
         }
     }
 
-    public void movePacman(int direction) {
+    public HashSet<Ghost> getGhost(){
+        HashSet<Ghost> cpy = new HashSet<>(ghost_list) ;
+        return cpy;
+    }
+
+    public PacMan getPacman(){
+        PacMan cpy = new PacMan(pacman);
+        return cpy;
+    }
+
+    public boolean movePacman(int direction) {
 
         BallElement b = new BallElement();
         Void void_element = new Void();
@@ -62,8 +68,6 @@ public class GameManager implements GameConsts , IConst {
         Wall w = new Wall();
 
         int x = 0, y = 0;
-
-        current_maze.set(pacman.getY(), pacman.getX(), void_element);
 
         for(WrapZone e : portals)
             current_maze.set(e.getY(), e.getX(), wrapzone);
@@ -85,6 +89,8 @@ public class GameManager implements GameConsts , IConst {
                     }else{
                         pacman.moveUp();
                     }
+                }else{
+                    return false;
                 }
                 break;
 
@@ -103,6 +109,8 @@ public class GameManager implements GameConsts , IConst {
                     }else{
                         pacman.moveLeft();
                     }
+                }else{
+                    return false;
                 }
                 break;
 
@@ -122,6 +130,8 @@ public class GameManager implements GameConsts , IConst {
                         pacman.moveDown();
                     }
 
+                }else{
+                    return false;
                 }
 
                 break;
@@ -141,20 +151,24 @@ public class GameManager implements GameConsts , IConst {
                     }else{
                         pacman.moveRight();
                     }
+                }else{
+                    return false;
                 }
 
                 break;
         }
 
-        current_maze.set(pacman.getY(), pacman.getX(), nPac);
 
         for(Ball e:balls_list){
             if (e.getX() == pacman.getX() && e.getY() == pacman.getY()){
+                current_maze.set(e.getY(),e.getX(),void_element);
                 this.points += e.getPoints();
                 balls_list.remove(e);
                 break;
             }
         }
+
+        return true;
     }
 
     public boolean fillGame(){
@@ -180,12 +194,9 @@ public class GameManager implements GameConsts , IConst {
                     }
 
                 }else if(tmp[i][j] == SPAWN){
-                    if(!level_trigger){
-                        pacman = new PacMan(j,i);
-                    }else{
-                        pacman.setX(j);
-                        pacman.setY(i);
-                    }
+                    PacMan  p = pacman;
+                    pacman = new PacMan(j,i);
+                    pacman.setLives(p.getLives());
 
                 }else if(tmp[i][j] == BALL){
                     balls_list.add(new Ball(j,i));
@@ -200,6 +211,7 @@ public class GameManager implements GameConsts , IConst {
 
         }
         return true;
+
     }
 
     public boolean setLevel(int level) {
@@ -208,7 +220,6 @@ public class GameManager implements GameConsts , IConst {
             return false;
 
         this.level = level;
-        this.level_trigger = true;
 
         if(!GameLevel.getLevel(level).getValue1()){
             return false;

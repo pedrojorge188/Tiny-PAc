@@ -1,5 +1,7 @@
 package pt.isec.pa.tinypac.model.fsm.states;
 
+import pt.isec.pa.tinypac.gameengine.GameEngine;
+import pt.isec.pa.tinypac.gameengine.IGameEngine;
 import pt.isec.pa.tinypac.model.data.game.GameManager;
 import pt.isec.pa.tinypac.model.fsm.TinyPacContext;
 import pt.isec.pa.tinypac.model.fsm.TinyPacState;
@@ -10,8 +12,22 @@ public class StartGameState extends TinyPacStateAdapter {
 
     public StartGameState(TinyPacContext context, GameManager game) {
         super(context, game);
-        game.fillGame();
+
+        try{
+            gameEngine = new GameEngine();
+            gameEngine.start(290);
+
+            System.out.println("ESTADO 1");
+            game.fillGame();
+
+            if(game.getPacManLife() < 3){
+                new MovePacmanState(context,game);
+            }
+
+        }catch (Exception e){}
+
     }
+
 
     @Override
     public TinyPacState getState() {
@@ -20,30 +36,14 @@ public class StartGameState extends TinyPacStateAdapter {
 
     @Override
     public boolean keyPress(int direction) {
-        game.movePacman(direction);
+
+        TinyPacStateAdapter.direction = direction;
         changeState(new MovePacmanState(context,game));
         return true;
     }
 
-
     @Override
-    public boolean getPacman() {
-        return false;
-    }
+    public void evolve(IGameEngine gameEngine, long currentTime) {
 
-    @Override
-    public boolean pacManFinish() {
-        return false;
     }
-
-    @Override
-    public boolean pacManBuff() {
-        return false;
-    }
-
-    @Override
-    public boolean pacManKillGhosts() {
-        return false;
-    }
-
 }
