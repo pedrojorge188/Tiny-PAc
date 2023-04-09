@@ -8,7 +8,7 @@ public class Fruit implements IFruit{
     private int x,y;
 
     public Fruit(int x, int y) {
-        this.points = POINTS;
+        this.points = 0;
         this.time = TIME;
         this.active = false;
         this.x = x;

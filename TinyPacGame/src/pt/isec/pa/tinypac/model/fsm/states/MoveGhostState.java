@@ -12,8 +12,7 @@ public class MoveGhostState extends TinyPacStateAdapter {
 
     public MoveGhostState(TinyPacContext context, GameManager game) {
         super(context, game);
-
-        System.out.println("ESTADO 3");
+        System.out.println("ESTADO MOVE_GHOST");
         scope_counter = game.getPacManLife();
         gameEngine.registerClient(this);
         game.moveGhost();
@@ -38,9 +37,8 @@ public class MoveGhostState extends TinyPacStateAdapter {
 
     @Override
     public boolean pacManFinish() {
-        if(game.setLevel(game.getLevel()+1))
-            new StartGameState(context,game);
-
+        gameEngine.unregisterClient(this);
+        context.changeState(new NextLevelState(context,game));
         return true;
     }
 

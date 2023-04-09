@@ -12,22 +12,22 @@ public class StartGameState extends TinyPacStateAdapter {
 
     public StartGameState(TinyPacContext context, GameManager game) {
         super(context, game);
+        System.out.println("ESTADO START_GAME");
 
         try{
-            gameEngine = new GameEngine();
-            gameEngine.start(290);
+            if(game.getLevel() == 1)
+                game.fillGame();
 
-            System.out.println("ESTADO 1");
-            game.fillGame();
-
-            if(game.getPacManLife() < 3){
-                new MovePacmanState(context,game);
+            if(game.getLevel() != 1 || game.getPacManLife() < 3){
+                gameEngine = new GameEngine();
+                gameEngine.start(250);
+                changeState(new MovePacmanState(context,game));
             }
 
         }catch (Exception e){}
 
-    }
 
+    }
 
     @Override
     public TinyPacState getState() {
@@ -36,7 +36,7 @@ public class StartGameState extends TinyPacStateAdapter {
 
     @Override
     public boolean keyPress(int direction) {
-
+        gameEngine.start(250);
         TinyPacStateAdapter.direction = direction;
         changeState(new MovePacmanState(context,game));
         return true;

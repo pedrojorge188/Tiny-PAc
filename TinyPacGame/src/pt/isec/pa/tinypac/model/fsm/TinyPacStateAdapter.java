@@ -1,12 +1,13 @@
 package pt.isec.pa.tinypac.model.fsm;
 
+import pt.isec.pa.tinypac.gameengine.GameEngine;
 import pt.isec.pa.tinypac.gameengine.IGameEngine;
 import pt.isec.pa.tinypac.gameengine.IGameEngineEvolve;
 import pt.isec.pa.tinypac.model.data.game.GameManager;
 
 public abstract class TinyPacStateAdapter implements ITinyPacState, IGameEngineEvolve {
 
-    protected static IGameEngine gameEngine;
+    protected static IGameEngine gameEngine = new GameEngine();
 
     protected static GameManager game;
 

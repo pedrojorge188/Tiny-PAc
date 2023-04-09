@@ -31,7 +31,7 @@ public class GameManager implements GameConsts , IConst {
 
     public GameManager(){
         this.total_foods = 0;
-        this. eaten_foods ++;
+        this.eaten_foods = 0;
         this.level = 1;
         this.stage = 1;
         this.points = 0;
@@ -39,14 +39,12 @@ public class GameManager implements GameConsts , IConst {
         ghost_list = new HashSet<>();
         balls_list = new HashSet<>();
         portals = new HashSet<>();
-        pacman = null;
-        fruit = null;
+        pacman = new PacMan(0,0);
+        fruit = new Fruit(0,0);
 
     }
 
     public void moveGhost(){
-        Void void_element = new Void();
-        GhostSpawn ghost = new GhostSpawn();
 
         for (Ghost e: ghost_list){
             e.move(current_maze,pacman);
@@ -68,10 +66,7 @@ public class GameManager implements GameConsts , IConst {
         BallElement b = new BallElement();
         Void void_element = new Void();
         WrapZone wrapzone = new WrapZone(0,0);
-        PacManSpawn nPac = new PacManSpawn();
         Wall w = new Wall();
-
-        int x = 0, y = 0;
 
         for(WrapZone e : portals)
             current_maze.set(e.getY(), e.getX(), wrapzone);
@@ -165,20 +160,25 @@ public class GameManager implements GameConsts , IConst {
 
         for(Ball e:balls_list){
             if (e.getX() == pacman.getX() && e.getY() == pacman.getY()){
-                current_maze.set(e.getY(),e.getX(),void_element);
-                this.points += e.getPoints();
-                this.eaten_foods++;
+
                 if(eat_to_fruit == FRUIT_SPAWN){
-                    if(!fruit.getStatus())
+                    if(!fruit.getStatus()){
                         fruit.setActive(true);
+                        eat_to_fruit = 0;
+                    }
                     eat_to_fruit = 0;
                 }else{
                     eat_to_fruit++;
-                    System.out.println(eat_to_fruit);
                 }
+
+                current_maze.set(e.getY(),e.getX(),void_element);
+                this.points += e.getPoints();
+                this.eaten_foods++;
                 balls_list.remove(e);
                 break;
             }
+
+
         }
 
         if(pacman.getX() == fruit.getX() && pacman.getY() == fruit.getY() && fruit.getStatus()){
@@ -191,6 +191,7 @@ public class GameManager implements GameConsts , IConst {
 
     public boolean fillGame(){
 
+        int counter = 0;
         ghost_list.clear();
         balls_list.clear();
         portals.clear();
@@ -212,46 +213,49 @@ public class GameManager implements GameConsts , IConst {
                     }
 
                 }else if(tmp[i][j] == SPAWN){
-                    PacMan  p = pacman;
+                    PacMan p = new PacMan(this.pacman);
                     pacman = new PacMan(j,i);
+
                     pacman.setLives(p.getLives());
 
                 }else if(tmp[i][j] == BALL){
-                    if(points == 0)
-                        this.total_foods+=1;
+                    counter ++;
                     balls_list.add(new Ball(j,i));
                 }else if(tmp[i][j] == BIG_BALL){
-                    if(points == 0)
-                        this.total_foods+=1;
+                    counter ++;
                     balls_list.add(new BigBall(j,i));
                 }else if(tmp[i][j] == FRUIT){
-                    fruit = new Fruit(j,i);
+                    fruit = new Fruit(fruit,j,i);
                 }else if(tmp[i][j] == WRAP_ZONE){
                     portals.add(new WrapZone(j,i));
                 }
             }
 
         }
+
+        if(total_foods == 0)
+            total_foods = counter;
+
         return true;
 
     }
 
-    public boolean setLevel(int level) {
+    public boolean setLevel() {
 
         if(level > 20 || level < 0)
             return false;
 
-        this.points = 0;
         this.eaten_foods = 0;
-        this.eat_to_fruit = 0;
-        this.level = level;
+        this.total_foods = 0;
+        this.level += 1;
 
         if(!GameLevel.getLevel(level).getValue1()){
-            return false;
+            current_maze = GameLevel.getLevel(this.stage).getValue2();
+            return true;
         }
 
-        this.stage = level;
-        current_maze = GameLevel.getLevel(level).getValue2();
+        this.stage += 1;
+        current_maze = GameLevel.getLevel(this.level).getValue2();
 
         return true;
     }

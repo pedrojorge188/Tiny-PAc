@@ -40,6 +40,8 @@ public class TinyPacUI {
         boolean keepRunning = true;
 
         while(keepRunning){
+
+            screen.refresh();
             KeyStroke keyPassed = terminal.pollInput();
 
             if(fsm.getState() == TinyPacState.START_GAME){
@@ -71,7 +73,6 @@ public class TinyPacUI {
             tg.setForegroundColor(TextColor.ANSI.WHITE);
 
             tg.putString(30,1,"PAC-MAN");
-
             showMaze();
 
             screen.refresh();

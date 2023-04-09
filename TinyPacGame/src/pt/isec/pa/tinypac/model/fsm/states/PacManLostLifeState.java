@@ -10,12 +10,16 @@ public class PacManLostLifeState extends TinyPacStateAdapter {
 
     public PacManLostLifeState(TinyPacContext context, GameManager game) {
         super(context, game);
-        System.out.println("ESTADO 4");
+        System.out.println("ESTADO PACMAN_LOST_LIFE");
         timeout();
     }
 
     @Override
     public boolean timeout() {
+
+        try{
+            game.fillGame();
+        }catch (Exception e){};
 
         if(game.getPacManLife() == 0){
             context.changeState(new GameOverState(context,game));
