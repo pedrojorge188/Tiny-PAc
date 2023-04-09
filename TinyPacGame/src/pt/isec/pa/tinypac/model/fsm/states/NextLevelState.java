@@ -11,14 +11,11 @@ public class NextLevelState extends TinyPacStateAdapter {
         public NextLevelState(TinyPacContext context, GameManager game) {
             super(context, game);
             System.out.println("ESTADO NEXT_LEVEL");
+
             gameEngine.stop();
             gameEngine.waitForTheEnd();
 
             if(game.setLevel()){
-                try{
-                    game.fillGame();
-                }catch (Exception e){}
-
                 this.changeState(new StartGameState(context,game));
             }
 

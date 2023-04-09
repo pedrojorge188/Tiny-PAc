@@ -15,8 +15,8 @@ public class StartGameState extends TinyPacStateAdapter {
         System.out.println("ESTADO START_GAME");
 
         try{
-            if(game.getLevel() == 1)
-                game.fillGame();
+            game.fillGame();
+            gameEngine = new GameEngine();
 
             if(game.getLevel() != 1 || game.getPacManLife() < 3){
                 gameEngine = new GameEngine();

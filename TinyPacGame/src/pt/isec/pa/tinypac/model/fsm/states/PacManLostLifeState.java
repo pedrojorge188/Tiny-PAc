@@ -17,10 +17,6 @@ public class PacManLostLifeState extends TinyPacStateAdapter {
     @Override
     public boolean timeout() {
 
-        try{
-            game.fillGame();
-        }catch (Exception e){};
-
         if(game.getPacManLife() == 0){
             context.changeState(new GameOverState(context,game));
         }else{

@@ -17,6 +17,7 @@ public class MovePacmanState extends TinyPacStateAdapter {
         super(context, game);
         System.out.println("ESTADO MOVE_PACMAN");
         timer = new Timer();
+
         gameEngine.registerClient(this);
 
         this.timer.schedule(new TimerTask() {
@@ -49,7 +50,7 @@ public class MovePacmanState extends TinyPacStateAdapter {
 
     @Override
     public void evolve(IGameEngine gameEngine, long currentTime) {
-        if(getState() == TinyPacState.START_GAME)
+        if(getState() == TinyPacState.START_GAME || getState() == TinyPacState.GAME_OVER)
             gameEngine.unregisterClient(this);
         game.movePacman(direction);
     }
