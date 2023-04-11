@@ -18,6 +18,87 @@ public class Pinky extends Ghost{
         rand = new Random();
     }
 
+    private void move_directions(Maze maze){
+        if (direction == RIGHT) {
+
+            if(maze.get(getY(), getX() + 1).getSymbol() == (new Wall()).getSymbol() &&
+                    maze.get(getY() - 1, getX() + 1).getSymbol() == (new Wall()).getSymbol() &&
+                    maze.get(getY() - 1, getX()).getSymbol() == (new Wall()).getSymbol()){
+                m1 = false;
+            }
+
+            if (maze.get(getY(), getX() + 1).getSymbol() != (new Wall()).getSymbol() && maze.get(getY(), getX() + 1).getSymbol() != 'y') {
+                this.x++;
+                return;
+            } else {
+
+                int selectPositions = rand.nextInt(3);
+
+                if (selectPositions == 0) {
+                    direction = UP;
+                } else if (selectPositions == 1) {
+                    direction = DOWN;
+                } else {
+                    direction = LEFT;
+                }
+            }
+
+        }
+        if (direction == LEFT) {
+            if (maze.get(getY(), getX() - 1).getSymbol() != (new Wall()).getSymbol() && maze.get(getY(), getX() - 1).getSymbol() != 'y') {
+                this.x--;
+                return;
+            } else {
+                int selectPositions = rand.nextInt(3);
+
+                if (selectPositions == 0) {
+                    direction = UP;
+
+                } else if (selectPositions == 1) {
+                    direction = DOWN;
+                } else {
+                    direction = RIGHT;
+                }
+            }
+
+        }
+        if (direction == UP) {
+            if (maze.get(getY() - 1, getX()).getSymbol() != (new Wall()).getSymbol() && maze.get(getY() - 1, getX()).getSymbol() != 'y') {
+                this.y--;
+                return;
+            } else {
+                int selectPositions = rand.nextInt(3);
+
+                if (selectPositions == 0) {
+                    direction = RIGHT;
+
+                } else if (selectPositions == 1) {
+                    direction = LEFT;
+                } else {
+                    direction = DOWN;
+                }
+            }
+
+        }
+
+        if (direction == DOWN) {
+            if (maze.get(getY() + 1, getX()).getSymbol() != (new Wall()).getSymbol() && maze.get(getY() + 1, getX()).getSymbol() != 'y') {
+                this.y++;
+            } else {
+                int selectPositions = rand.nextInt(3);
+
+                if (selectPositions == 0) {
+                    direction = RIGHT;
+
+                } else if (selectPositions == 1) {
+                    direction = LEFT;
+                } else {
+                    direction = UP;
+                }
+            }
+
+        }
+    }
     @Override
     public void move(Maze maze, PacMan pacMan) {
 
@@ -28,67 +109,46 @@ public class Pinky extends Ghost{
 
         if(m1) {
 
-            if (maze.get(getY(), getX() + 1).getSymbol() != (new Wall()).getSymbol() && maze.get(getY(), getX() + 1).getSymbol() != 'y') {
-                this.x++;
-
-            }else if (maze.get(getY() - 1, getX()).getSymbol() != (new Wall()).getSymbol() && maze.get(getY() - 1, getX()).getSymbol() != 'y') {
-                this.y--;
-
-
-            } else if(maze.get(getY() + 1, getX()).getSymbol() != (new Wall()).getSymbol() && maze.get(getY() + 1, getX()).getSymbol() != 'y'){
-
-                this.y ++;
-
-            }else{
+            if(maze.get(getY(), getX() + 1).getSymbol() == (new Wall()).getSymbol() &&
+                    maze.get(getY() - 1, getX() + 1).getSymbol() == (new Wall()).getSymbol() &&
+                    maze.get(getY() - 1, getX()).getSymbol() == (new Wall()).getSymbol()){
                 m1 = false;
             }
 
-        } else if( m2 ){
+            move_directions(maze);
 
-            if (maze.get(getY(), getX() + 1).getSymbol() != (new Wall()).getSymbol() && maze.get(getY(), getX() + 1).getSymbol() != 'y') {
+        }else if(m2){
 
-                this.x++;
-
-            } else if (maze.get(getY() + 1, getX()).getSymbol() != (new Wall()).getSymbol() && maze.get(getY() + 1, getX()).getSymbol() != 'y') {
-
-                this.y++;
-
-            }else {
+            if(maze.get(getY(), getX() + 1).getSymbol() == (new Wall()).getSymbol() &&
+                    maze.get(getY() + 1, getX() + 1).getSymbol() == (new Wall()).getSymbol() &&
+                    maze.get(getY() + 1, getX()).getSymbol() == (new Wall()).getSymbol()){
                 m2 = false;
             }
 
-        } else if( m3 ){
 
-            if (maze.get(getY(), getX() - 1).getSymbol() != (new Wall()).getSymbol() && maze.get(getY(), getX() - 1).getSymbol() != 'y') {
+            move_directions(maze);
 
-                this.x--;
+        }else if(m3){
 
-            } else if (maze.get(getY() - 1, getX()).getSymbol() != (new Wall()).getSymbol() && maze.get(getY() - 1, getX()).getSymbol() != 'y') {
-
-                this.y--;
-
-            } else{
+            if(maze.get(getY(), getX() - 1).getSymbol() == (new Wall()).getSymbol() &&
+                    maze.get(getY() - 1, getX() - 1).getSymbol() == (new Wall()).getSymbol() &&
+                    maze.get(getY() - 1, getX()).getSymbol() == (new Wall()).getSymbol()){
                 m3 = false;
             }
 
-        } else {
 
-            if (maze.get(getY(), getX() - 1).getSymbol() != (new Wall()).getSymbol() && maze.get(getY(), getX() - 1).getSymbol() != 'y') {
+            move_directions(maze);
 
-                this.x--;
+        }else if(m3){
 
-
-            } else if (maze.get(getY() + 1, getX()).getSymbol() != (new Wall()).getSymbol() && maze.get(getY() + 1, getX()).getSymbol() != 'y') {
-
-                this.y++;
-
-            } else{
-
-                m1 = true;
-                m2 = true;
-                m3 = true;
-
+            if(maze.get(getY(), getX() - 1).getSymbol() == (new Wall()).getSymbol() &&
+                    maze.get(getY() + 1, getX() - 1).getSymbol() == (new Wall()).getSymbol() &&
+                    maze.get(getY() + 1, getX()).getSymbol() == (new Wall()).getSymbol()){
+                m1 = true; m2 = true; m3 = true;
             }
+
+
+            move_directions(maze);
 
         }
 
