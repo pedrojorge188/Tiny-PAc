@@ -118,7 +118,7 @@ public class TinyPacUI {
                     }else if(m[i][j] == 'F'){
 
                         if((Boolean) fsm.getFruit()){
-                            tg.setBackgroundColor(TextColor.ANSI.RED);
+                            tg.setBackgroundColor(TextColor.ANSI.RED_BRIGHT);
                             tg.putString(j+20, i+4," ");
                         }else{
                             tg.setBackgroundColor(TextColor.ANSI.BLACK);
@@ -137,8 +137,16 @@ public class TinyPacUI {
 
             for(Ghost e : (HashSet<Ghost>) fsm.getGhosts()){
                 if(fsm.getState() == TinyPacState.MOVE_GHOST){
-                    tg.setBackgroundColor(TextColor.ANSI.CYAN);
-                    tg.setForegroundColor(TextColor.ANSI.WHITE);
+                    if(e.getName() == "Blinky"){
+                        tg.setBackgroundColor(TextColor.ANSI.RED);
+                        tg.setForegroundColor(TextColor.ANSI.WHITE);
+                    }else if(e.getName() == "Clyde"){
+                        tg.setBackgroundColor(TextColor.ANSI.MAGENTA);
+                        tg.setForegroundColor(TextColor.ANSI.WHITE);
+                    }else if(e.getName() == "Pinky") {
+                        tg.setBackgroundColor(TextColor.ANSI.CYAN);
+                        tg.setForegroundColor(TextColor.ANSI.WHITE);
+                    }
                     tg.putString(e.getX()+20, e.getY()+4, " ");
                 }
             }

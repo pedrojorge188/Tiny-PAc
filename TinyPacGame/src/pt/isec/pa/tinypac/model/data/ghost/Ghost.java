@@ -6,15 +6,22 @@ import pt.isec.pa.tinypac.model.data.pacman.PacMan;
 public abstract class Ghost implements  IGhost{
 
     protected int x,y;
+    private int spawn_x , spawn_y;
+    protected String name;
     protected int direction;
     protected int movement_speed;
     protected int vulnerability_time;
+    protected boolean vulnerability;
 
     protected Ghost(int x, int y) {
         this.movement_speed = 1;
         this.vulnerability_time = 20;
+        this.vulnerability = false;
+        this.name = new String("Name");
         this.x = x;
+        this.spawn_x = x;
         this.y = y;
+        this.spawn_y = y;
         direction = UP;
     }
 
@@ -24,6 +31,10 @@ public abstract class Ghost implements  IGhost{
 
     public int getY() {
         return y;
+    }
+
+    public String getName(){
+        return name;
     }
 
     public void setMovement_speed(int movement_speed) {
@@ -40,5 +51,18 @@ public abstract class Ghost implements  IGhost{
 
     public abstract void move(Maze maze , PacMan pacMan);
 
+    public void reset(){
+        x = spawn_x;
+        y = spawn_y;
+        vulnerability = false;
+    }
+
+    public void toggleVulnerability(){
+        if(!this.vulnerability){
+            vulnerability = true;
+        }else{
+            vulnerability = false;
+        }
+    }
 
 }
