@@ -1,7 +1,6 @@
 package pt.isec.pa.tinypac.model.fsm;
 
 import pt.isec.pa.tinypac.model.data.game.GameManager;
-import pt.isec.pa.tinypac.model.fsm.states.StartGameState;
 
 public class TinyPacContext {
 
@@ -11,7 +10,7 @@ public class TinyPacContext {
 
     public TinyPacContext(){
         this.game = new GameManager();
-        state = new StartGameState(this,game);
+        state = ITinyPacState.createState(TinyPacState.START_GAME,this,game);
     }
 
     public TinyPacState getState(){

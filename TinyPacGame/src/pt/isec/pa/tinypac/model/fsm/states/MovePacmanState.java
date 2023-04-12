@@ -5,6 +5,7 @@ import pt.isec.pa.tinypac.model.data.game.GameManager;
 import pt.isec.pa.tinypac.model.fsm.TinyPacContext;
 import pt.isec.pa.tinypac.model.fsm.TinyPacState;
 import pt.isec.pa.tinypac.model.fsm.TinyPacStateAdapter;
+import pt.isec.pa.tinypac.utils.Messages;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -15,18 +16,13 @@ public class MovePacmanState extends TinyPacStateAdapter {
 
     public MovePacmanState(TinyPacContext context, GameManager game) {
         super(context, game);
-        System.out.println("ESTADO MOVE_PACMAN");
-        timer = new Timer();
 
         gameEngine.registerClient(this);
+        Messages.getInstance().clearLogs();
+        Messages.getInstance().addLog("ESTADO-> MOVE_PACMAN");
 
-        this.timer.schedule(new TimerTask() {
-                                @Override
-                                public void run() {
-                                    timeout();
-                                }
-                            }
-                , 5000);
+        timer = new Timer();
+        this.timeout();
 
     }
 
@@ -43,15 +39,24 @@ public class MovePacmanState extends TinyPacStateAdapter {
 
     @Override
     public boolean timeout() {
-        context.changeState(new MoveGhostState(context,game));
+
+        this.timer.schedule(new TimerTask() {
+                                @Override
+                                public void run() {
+                                    changeState(TinyPacState.MOVE_GHOST);
+                                }
+                            }
+                , 5000);
+
+
+
         return true;
     }
 
 
     @Override
     public void evolve(IGameEngine gameEngine, long currentTime) {
-        if(getState() == TinyPacState.START_GAME || getState() == TinyPacState.GAME_OVER)
-            gameEngine.unregisterClient(this);
+
         game.movePacman(direction);
     }
 }

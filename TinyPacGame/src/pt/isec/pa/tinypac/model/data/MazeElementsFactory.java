@@ -1,7 +1,7 @@
 package pt.isec.pa.tinypac.model.data;
 import pt.isec.pa.tinypac.model.data.elements.*;
 
-public class MazeElementsGenerator {
+public class MazeElementsFactory {
 
     public static IMazeElement create (char ch){
 
@@ -21,6 +21,6 @@ public class MazeElementsGenerator {
         return ret;
     }
 
-    private MazeElementsGenerator() {}
+    private MazeElementsFactory() {}
 
 }

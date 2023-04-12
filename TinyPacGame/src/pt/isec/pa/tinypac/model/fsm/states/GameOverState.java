@@ -5,15 +5,15 @@ import pt.isec.pa.tinypac.model.data.game.GameManager;
 import pt.isec.pa.tinypac.model.fsm.TinyPacContext;
 import pt.isec.pa.tinypac.model.fsm.TinyPacState;
 import pt.isec.pa.tinypac.model.fsm.TinyPacStateAdapter;
+import pt.isec.pa.tinypac.utils.Messages;
 
 public class GameOverState extends TinyPacStateAdapter{
 
 
     public GameOverState(TinyPacContext context, GameManager game) {
         super(context, game);
-        System.out.println("ESTADO 5");
-        gameEngine.stop();
-        gameEngine.waitForTheEnd();
+        Messages.getInstance().clearLogs();
+        Messages.getInstance().addLog("ESTADO-> GAME_OVER");
     }
 
     @Override

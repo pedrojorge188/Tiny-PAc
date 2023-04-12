@@ -1,7 +1,7 @@
 package pt.isec.pa.tinypac.model.data.game;
 
 import pt.isec.pa.tinypac.model.data.Maze;
-import pt.isec.pa.tinypac.model.data.MazeElementsGenerator;
+import pt.isec.pa.tinypac.model.data.MazeElementsFactory;
 import pt.isec.pa.tinypac.model.data.game.interfaces.GameConsts;
 
 import java.io.BufferedReader;
@@ -115,7 +115,7 @@ class GameLevel implements GameConsts {
             int cLine = 0;
             while((get = mazeRead.readLine()) != null){
                 for(int i=0;i < get.length(); i++){
-                    maze.set(cLine,i, MazeElementsGenerator.create(get.charAt(i)));
+                    maze.set(cLine,i, MazeElementsFactory.create(get.charAt(i)));
                 }
                 cLine++;
             }

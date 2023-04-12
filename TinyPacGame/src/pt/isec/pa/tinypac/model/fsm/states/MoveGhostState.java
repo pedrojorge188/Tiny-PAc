@@ -5,22 +5,20 @@ import pt.isec.pa.tinypac.model.data.game.GameManager;
 import pt.isec.pa.tinypac.model.fsm.TinyPacContext;
 import pt.isec.pa.tinypac.model.fsm.TinyPacState;
 import pt.isec.pa.tinypac.model.fsm.TinyPacStateAdapter;
+import pt.isec.pa.tinypac.utils.Messages;
 
 public class MoveGhostState extends TinyPacStateAdapter {
 
-    private final int scope_counter;
+    private int scope_counter;
 
     public MoveGhostState(TinyPacContext context, GameManager game) {
         super(context, game);
-        System.out.println("ESTADO MOVE_GHOST");
-        scope_counter = game.getPacManLife();
 
         gameEngine.registerClient(this);
-        game.moveGhost();
-    }
+        Messages.getInstance().clearLogs();
+        Messages.getInstance().addLog("ESTADO-> MOVE_GHOST");
 
-    void remove_linker(){
-        gameEngine.unregisterClient(this);
+        scope_counter = game.getPacManLife();
     }
 
     @Override
@@ -28,21 +26,26 @@ public class MoveGhostState extends TinyPacStateAdapter {
         return TinyPacState.MOVE_GHOST;
     }
 
-    @Override
-    public boolean keyPress(int direction) {
-        TinyPacStateAdapter.direction = direction;
-        return true;
-    }
 
     @Override
     public boolean getPacman() {
-        context.changeState(new PacManLostLifeState(context,game));
+        if(game.getPacManLife() > 0){
+            gameEngine.stop(); gameEngine.waitForTheEnd();
+            changeState(TinyPacState.START_GAME);
+
+        }else{
+            gameEngine.stop();
+            gameEngine.waitForTheEnd();
+            changeState(TinyPacState.GAME_OVER);
+        }
         return true;
     }
 
     @Override
     public boolean pacManFinish() {
-        context.changeState(new NextLevelState(context,game));
+        gameEngine.stop();
+        gameEngine.waitForTheEnd();
+        changeState(TinyPacState.NEXT_LEVEL);
         return true;
     }
 
@@ -54,13 +57,14 @@ public class MoveGhostState extends TinyPacStateAdapter {
 
     @Override
     public void evolve(IGameEngine gameEngine, long currentTime) {
-        game.moveGhost();
+
+       // game.moveGhost();
 
         if(game.stepLevelState())
-            this.pacManFinish();
+            pacManFinish();
 
         if(scope_counter != game.getPacManLife()){
-            this.getPacman();
+            getPacman();
         }
 
     }
