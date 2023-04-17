@@ -32,6 +32,7 @@ public class TinyPacUI {
 
         TerminalSize size = new TerminalSize(80, 60);
         DefaultTerminalFactory terminalFactory = new DefaultTerminalFactory().setInitialTerminalSize(size);
+        terminalFactory.setTerminalEmulatorTitle("TinyPAC GAME - Trabalho Prático - Programação Avançada 2022 / 2023");
         terminal = terminalFactory.createTerminal();
         screen = new TerminalScreen(terminal);
         tg = screen.newTextGraphics();
@@ -44,7 +45,6 @@ public class TinyPacUI {
         boolean keepRunning = true;
 
         while(keepRunning){
-
 
             screen.refresh();
 
@@ -67,7 +67,7 @@ public class TinyPacUI {
             screen.refresh();
             tg.setBackgroundColor(TextColor.ANSI.BLUE);
             tg.setForegroundColor(TextColor.ANSI.WHITE);
-            tg.putString(25,1,"PAC-MAN");
+            tg.putString(30,1,"PAC-MAN");
 
             showMaze();
 
@@ -89,7 +89,6 @@ public class TinyPacUI {
             TinyPacState tmp = fsm.getState();
             if(tmp == TinyPacState.START_GAME){
                 screen.clear();
-                tmp = null;
             }
             System.out.println(Messages.getInstance().listLogs());
             current_state = fsm.getState();
@@ -101,26 +100,26 @@ public class TinyPacUI {
 
                 tg.setBackgroundColor(TextColor.ANSI.BLACK);
                 tg.setForegroundColor(TextColor.ANSI.YELLOW_BRIGHT);
-                tg.putString(25,3,"PRESS KEY TO START");
+                tg.putString(27,3,"PRESS KEY TO START");
 
             }
             case NEXT_LEVEL -> {
 
                 tg.setBackgroundColor(TextColor.ANSI.BLACK);
-                tg.putString(25,3,"LEVEL UP!!");
+                tg.putString(27,3,"LEVEL UP!!");
 
             }
             case GAME_OVER -> {
 
                 tg.setBackgroundColor(TextColor.ANSI.BLACK);
                 tg.setForegroundColor(TextColor.ANSI.RED);
-                tg.putString(25,3,"GAME_OVER");
+                tg.putString(27,3,"GAME_OVER");
 
             }
             default -> {
 
                 tg.setBackgroundColor(TextColor.ANSI.BLACK);
-                tg.putString(25,3,"                    ");
+                tg.putString(27,3,"                    ");
 
             }
 
@@ -221,7 +220,7 @@ public class TinyPacUI {
     } catch (Exception e) {
 
             tg.setBackgroundColor(TextColor.ANSI.RED);
-            tg.putString(15, 4,  "Erro ao carregar modelos");
+            tg.putString(30, 4,  "Erro ao carregar modelos");
 
         }
 
