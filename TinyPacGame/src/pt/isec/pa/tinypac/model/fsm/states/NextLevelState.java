@@ -1,6 +1,5 @@
 package pt.isec.pa.tinypac.model.fsm.states;
 
-import pt.isec.pa.tinypac.gameengine.IGameEngine;
 import pt.isec.pa.tinypac.model.data.game.GameManager;
 import pt.isec.pa.tinypac.model.fsm.TinyPacContext;
 import pt.isec.pa.tinypac.model.fsm.TinyPacState;
@@ -16,6 +15,9 @@ public class NextLevelState extends TinyPacStateAdapter {
     }
 
     @Override
+    public void action() { }
+
+    @Override
     public TinyPacState getState() {
         return TinyPacState.NEXT_LEVEL;
     }
@@ -28,12 +30,7 @@ public class NextLevelState extends TinyPacStateAdapter {
             changeState(TinyPacState.START_GAME);
         }
 
-        TinyPacStateAdapter.direction = direction;
         return true;
     }
 
-    @Override
-    public void evolve(IGameEngine gameEngine, long currentTime) {
-
-    }
 }

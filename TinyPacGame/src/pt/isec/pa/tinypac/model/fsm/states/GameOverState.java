@@ -1,6 +1,5 @@
 package pt.isec.pa.tinypac.model.fsm.states;
 
-import pt.isec.pa.tinypac.gameengine.IGameEngine;
 import pt.isec.pa.tinypac.model.data.game.GameManager;
 import pt.isec.pa.tinypac.model.fsm.TinyPacContext;
 import pt.isec.pa.tinypac.model.fsm.TinyPacState;
@@ -14,6 +13,11 @@ public class GameOverState extends TinyPacStateAdapter{
         super(context, game);
         Messages.getInstance().clearLogs();
         Messages.getInstance().addLog("ESTADO-> GAME_OVER");
+    }
+
+    @Override
+    public void action() {
+
     }
 
     @Override
@@ -46,11 +50,5 @@ public class GameOverState extends TinyPacStateAdapter{
     public boolean pacManKillGhosts() {
         return false;
     }
-
-    @Override
-    public void evolve(IGameEngine gameEngine, long currentTime) {
-
-    }
-
 
 }

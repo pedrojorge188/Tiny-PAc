@@ -6,6 +6,7 @@ import pt.isec.pa.tinypac.model.fsm.states.*;
 public interface ITinyPacState {
 
     TinyPacState getState();
+    void action();
     boolean keyPress(int direction); // START_GAME -> MOVE_PACMAN
     boolean getPacman(); // MOVE_GHOST -> PACMAN_LOST_LIFE
     boolean pacManFinish(); // MOVE_GHOST -> NEXT_LEVEL
@@ -23,8 +24,7 @@ public interface ITinyPacState {
             case NEXT_LEVEL -> new NextLevelState(context,game);
             case GAME_OVER -> new GameOverState(context,game);
             //case GAME_WIN -> new GameWinState(context,game);
-            //case VULNERABLE_GHOST -> new VulnerableGhostState(context,game);
-            case VULNERABLE_GHOST -> null;
+            case VULNERABLE_GHOST -> new VulnerableGhostState(context,game);
             case GAME_WIN -> null;
         };
 

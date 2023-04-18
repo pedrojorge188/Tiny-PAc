@@ -1,23 +1,16 @@
 package pt.isec.pa.tinypac.model.fsm;
 
-import pt.isec.pa.tinypac.gameengine.IGameEngine;
-import pt.isec.pa.tinypac.gameengine.IGameEngineEvolve;
 import pt.isec.pa.tinypac.model.data.game.GameManager;
 
-public abstract class TinyPacStateAdapter implements ITinyPacState, IGameEngineEvolve {
-
-    protected static IGameEngine gameEngine ;
+public abstract class TinyPacStateAdapter implements ITinyPacState{
 
     protected static GameManager game;
-
     protected static int direction = 0;
     protected TinyPacContext context;
 
     public TinyPacStateAdapter(TinyPacContext context, GameManager game){
-
         TinyPacStateAdapter.game = game;
         this.context = context;
-
     }
 
     protected void changeState(TinyPacState newState){
@@ -26,15 +19,17 @@ public abstract class TinyPacStateAdapter implements ITinyPacState, IGameEngineE
 
 
     @Override
-    public void evolve(IGameEngine gameEngine, long currentTime) {
-
-    }
+    public abstract void action();
 
     @Override
     public boolean keyPress(int direction) {
+        GameManager test = new GameManager(game);
 
-        System.out.println("clicou");
-        TinyPacStateAdapter.direction = direction;
+        if(test.movePacman(direction)){
+
+            TinyPacStateAdapter.direction = direction;
+
+        }
         return true;
     }
 

@@ -193,19 +193,39 @@ public class TinyPacUI {
 
 
             for(Ghost e : (HashSet<Ghost>) fsm.getGhosts()){
-                if(fsm.getState() == TinyPacState.MOVE_GHOST){
+                if(fsm.getState() != TinyPacState.START_GAME){
                     if(e.getName() == "Blinky"){
-                        tg.setBackgroundColor(TextColor.ANSI.RED);
-                        tg.setForegroundColor(TextColor.ANSI.WHITE);
+                        if(e.getVulnerability()){
+                            tg.setBackgroundColor(TextColor.ANSI.CYAN);
+                            tg.setForegroundColor(TextColor.ANSI.WHITE);
+                        }else{
+                            tg.setBackgroundColor(TextColor.ANSI.RED);
+                            tg.setForegroundColor(TextColor.ANSI.WHITE);
+                        }
                     }else if(e.getName() == "Clyde"){
-                        tg.setBackgroundColor(TextColor.ANSI.MAGENTA);
-                        tg.setForegroundColor(TextColor.ANSI.WHITE);
+                        if(e.getVulnerability()){
+                            tg.setBackgroundColor(TextColor.ANSI.CYAN);
+                            tg.setForegroundColor(TextColor.ANSI.WHITE);
+                        }else{
+                            tg.setBackgroundColor(TextColor.ANSI.MAGENTA);
+                            tg.setForegroundColor(TextColor.ANSI.WHITE);
+                        }
                     }else if(e.getName() == "Pinky") {
-                        tg.setBackgroundColor(TextColor.ANSI.CYAN);
-                        tg.setForegroundColor(TextColor.ANSI.WHITE);
+                        if(e.getVulnerability()){
+                            tg.setBackgroundColor(TextColor.ANSI.CYAN);
+                            tg.setForegroundColor(TextColor.ANSI.WHITE);
+                        }else{
+                            tg.setBackgroundColor(TextColor.ANSI.WHITE);
+                            tg.setForegroundColor(TextColor.ANSI.WHITE);
+                        }
                     }else if(e.getName() == "Inky"){
-                        tg.setBackgroundColor(TextColor.ANSI.GREEN_BRIGHT);
-                        tg.setForegroundColor(TextColor.ANSI.WHITE);
+                        if(e.getVulnerability()){
+                            tg.setBackgroundColor(TextColor.ANSI.CYAN);
+                            tg.setForegroundColor(TextColor.ANSI.WHITE);
+                        }else{
+                            tg.setBackgroundColor(TextColor.ANSI.GREEN_BRIGHT);
+                            tg.setForegroundColor(TextColor.ANSI.WHITE);
+                        }
                     }
                     tg.putString(e.getX()+25, e.getY()+4, " ");
                 }

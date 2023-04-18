@@ -1,5 +1,4 @@
 package pt.isec.pa.tinypac.model.data.game;
-
 import pt.isec.pa.tinypac.model.IConst;
 import pt.isec.pa.tinypac.model.data.Balls.Ball;
 import pt.isec.pa.tinypac.model.data.Balls.BigBall;
@@ -44,6 +43,21 @@ public class GameManager implements GameConsts , IConst {
 
     }
 
+    public GameManager(GameManager g){
+        this.total_foods = g.total_foods;
+        this.eaten_foods = g.eaten_foods;
+        this.level = g.level;
+        this.stage = g.stage;
+        this.points = g.getPoints();
+        this.current_maze = g.current_maze;
+        ghost_list = new HashSet<>(g.ghost_list);
+        balls_list = new HashSet<>(g.balls_list);
+        portals = new HashSet<>(g.portals);
+        pacman = new PacMan(g.pacman);
+        fruit = g.fruit;
+
+    }
+
     public void moveGhost(){
 
         for (Ghost e: ghost_list){
@@ -59,6 +73,30 @@ public class GameManager implements GameConsts , IConst {
     public PacMan getPacman(){
         PacMan cpy = new PacMan(pacman);
         return cpy;
+    }
+
+    public int getBuff(){
+
+        int result = 0;
+
+        for(Ball e : balls_list){
+            if(e.getPoints() > 1){
+                result++;
+            }
+        }
+
+        return result;
+
+    }
+
+    public void setPoints(int value){
+        this.points += value;
+    }
+
+    public void toogleGhostsStatus(boolean value){
+        for (Ghost e: ghost_list){
+                 e.toggleVulnerability(value);
+        }
     }
 
     public boolean movePacman(int direction) {

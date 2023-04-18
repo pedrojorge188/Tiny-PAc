@@ -1,16 +1,28 @@
 package pt.isec.pa.tinypac.model.fsm;
 
+import pt.isec.pa.tinypac.gameengine.GameEngine;
+import pt.isec.pa.tinypac.gameengine.IGameEngine;
+import pt.isec.pa.tinypac.gameengine.IGameEngineEvolve;
 import pt.isec.pa.tinypac.model.data.game.GameManager;
 
-public class TinyPacContext {
+public class TinyPacContext implements IGameEngineEvolve{
 
     private GameManager game;
     private ITinyPacState state;
-    
+    private GameEngine gameEngine;
 
     public TinyPacContext(){
         this.game = new GameManager();
+        gameEngine = new GameEngine();
         state = ITinyPacState.createState(TinyPacState.START_GAME,this,game);
+        gameEngine.start(250);
+        gameEngine.registerClient(this);
+
+    }
+
+    @Override
+    public void evolve(IGameEngine gameEngine, long currentTime) {
+        state.action();
     }
 
     public TinyPacState getState(){

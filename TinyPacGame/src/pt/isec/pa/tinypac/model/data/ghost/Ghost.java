@@ -49,6 +49,10 @@ public abstract class Ghost implements  IGhost{
         return this.vulnerability_time;
     }
 
+    public boolean getVulnerability(){
+        return vulnerability;
+    }
+
     public abstract void move(Maze maze , PacMan pacMan);
 
     public void reset(){
@@ -57,12 +61,8 @@ public abstract class Ghost implements  IGhost{
         vulnerability = false;
     }
 
-    public void toggleVulnerability(){
-        if(!this.vulnerability){
-            vulnerability = true;
-        }else{
-            vulnerability = false;
-        }
+    public void toggleVulnerability(boolean value){
+        this.vulnerability = value;
     }
 
 }

@@ -1,6 +1,5 @@
 package pt.isec.pa.tinypac.model.fsm.states;
 
-import pt.isec.pa.tinypac.gameengine.GameEngine;
 import pt.isec.pa.tinypac.model.data.game.GameManager;
 import pt.isec.pa.tinypac.model.fsm.TinyPacContext;
 import pt.isec.pa.tinypac.model.fsm.TinyPacState;
@@ -13,13 +12,17 @@ public class StartGameState extends TinyPacStateAdapter {
         super(context, game);
 
         try{
-            gameEngine =  new GameEngine();
             Messages.getInstance().clearLogs();
             Messages.getInstance().addLog("ESTADO-> START_GAME");
             game.fillGame();
 
         }catch (Exception e){}
 
+
+    }
+
+    @Override
+    public void action() {
 
     }
 
@@ -31,7 +34,6 @@ public class StartGameState extends TinyPacStateAdapter {
     @Override
     public boolean keyPress(int direction) {
 
-        gameEngine.start(250);
         TinyPacStateAdapter.direction = direction;
         changeState(TinyPacState.MOVE_PACMAN);
         return true;
