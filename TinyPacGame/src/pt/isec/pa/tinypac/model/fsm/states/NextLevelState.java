@@ -27,7 +27,11 @@ public class NextLevelState extends TinyPacStateAdapter {
 
         if(game.setLevel()){
             direction = 0;
-            changeState(TinyPacState.START_GAME);
+            if(game.getLevel() == 20){
+                changeState(TinyPacState.GAME_WIN);
+            }else{
+                changeState(TinyPacState.START_GAME);
+            }
         }
 
         return true;

@@ -1,5 +1,4 @@
 package pt.isec.pa.tinypac.model.fsm.states;
-
 import pt.isec.pa.tinypac.model.data.game.GameManager;
 import pt.isec.pa.tinypac.model.fsm.TinyPacContext;
 import pt.isec.pa.tinypac.model.fsm.TinyPacState;
@@ -16,9 +15,7 @@ public class GameOverState extends TinyPacStateAdapter{
     }
 
     @Override
-    public void action() {
-
-    }
+    public void action() {  }
 
     @Override
     public TinyPacState getState() {
@@ -46,9 +43,5 @@ public class GameOverState extends TinyPacStateAdapter{
         return false;
     }
 
-    @Override
-    public boolean pacManKillGhosts() {
-        return false;
-    }
 
 }

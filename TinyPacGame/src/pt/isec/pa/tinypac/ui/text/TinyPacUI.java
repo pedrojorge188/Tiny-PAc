@@ -113,8 +113,18 @@ public class TinyPacUI {
 
                 tg.setBackgroundColor(TextColor.ANSI.BLACK);
                 tg.setForegroundColor(TextColor.ANSI.RED);
-                tg.putString(27,3,"GAME_OVER");
+                tg.putString(27,3,"GAME OVER");
 
+            }
+            case GAME_WIN -> {
+                tg.setBackgroundColor(TextColor.ANSI.BLACK);
+                tg.setForegroundColor(TextColor.ANSI.GREEN_BRIGHT);
+                tg.putString(27,3,"YOU WIN!");
+            }
+            case VULNERABLE_GHOST -> {
+                tg.setBackgroundColor(TextColor.ANSI.BLACK);
+                tg.setForegroundColor(TextColor.ANSI.CYAN);
+                tg.putString(27,3,"Vulnerable Ghosts!");
             }
             default -> {
 
@@ -215,7 +225,7 @@ public class TinyPacUI {
                             tg.setBackgroundColor(TextColor.ANSI.CYAN);
                             tg.setForegroundColor(TextColor.ANSI.WHITE);
                         }else{
-                            tg.setBackgroundColor(TextColor.ANSI.WHITE);
+                            tg.setBackgroundColor(TextColor.ANSI.WHITE_BRIGHT);
                             tg.setForegroundColor(TextColor.ANSI.WHITE);
                         }
                     }else if(e.getName() == "Inky"){

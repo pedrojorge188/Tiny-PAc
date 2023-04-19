@@ -49,11 +49,6 @@ public abstract class TinyPacStateAdapter implements ITinyPacState{
     }
 
     @Override
-    public boolean pacManKillGhosts() {
-        return false;
-    }
-
-    @Override
     public boolean timeout() {
         return false;
     }

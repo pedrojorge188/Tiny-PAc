@@ -81,7 +81,4 @@ public class TinyPacContext implements IGameEngineEvolve{
         return state.pacManBuff();
     }
 
-    public boolean pacManKillGhosts() {
-        return state.pacManKillGhosts();
-    }
 }
