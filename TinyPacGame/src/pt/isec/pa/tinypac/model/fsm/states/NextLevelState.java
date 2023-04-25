@@ -6,6 +6,12 @@ import pt.isec.pa.tinypac.model.fsm.TinyPacState;
 import pt.isec.pa.tinypac.model.fsm.TinyPacStateAdapter;
 import pt.isec.pa.tinypac.utils.Messages;
 
+/**
+ *  Estado NextLevel:
+ *  este estado gere qual será o proximo nivel a ser jogado.
+ *  Caso o nivel seja 20 então o jogo mudará de estado para o estado de vitoria "GameWinState"
+ */
+
 public class NextLevelState extends TinyPacStateAdapter {
 
     public NextLevelState(TinyPacContext context, GameManager game) {

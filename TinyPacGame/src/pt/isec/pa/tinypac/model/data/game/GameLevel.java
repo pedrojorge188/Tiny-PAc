@@ -8,6 +8,12 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
+/**
+ * Class GameLevel:
+ * esta classe e responsavel por aceder aos ficheiros de texto representativos
+ * dos niveis e faz a inicialização destes ficheiros para o tabuleiro de jogo
+ */
+
 class GameLevel implements GameConsts {
 
     private static int n_wrap_zone = 0;
@@ -34,6 +40,10 @@ class GameLevel implements GameConsts {
         }
     }
 
+    /**
+     * Este metodo verifica se o nivel e valido ou nao
+     @param level
+     */
     private static String verifyLevel(int level){
 
         StringBuilder file = new StringBuilder(FILE_DIRECTORY);
@@ -84,6 +94,12 @@ class GameLevel implements GameConsts {
 
         return true;
     }
+
+    /**
+     * Este metodo carrega o ficheiro
+     * @param level
+     * @return
+     */
 
     public static Result getLevel(int level){
 

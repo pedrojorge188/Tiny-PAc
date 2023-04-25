@@ -2,6 +2,12 @@ package pt.isec.pa.tinypac.utils;
 
 import java.util.HashSet;
 
+/**
+ * Esta classe utiliza o modelo Singleton
+ * onde é gerido as logs do programa.
+ * Esta classe apenas permite a criação de uma instancia no programa inteiro
+ */
+
 public class Messages {
 
     private static Messages instance = null;
@@ -19,6 +25,9 @@ public class Messages {
         logs = new HashSet<>();
     }
 
+    /**
+     * Limpa todas as logs localmente armazenadas
+     */
     public void clearLogs(){
         logs.clear();
     }
@@ -26,6 +35,11 @@ public class Messages {
     public void addLog(String str){
         logs.add(str);
     }
+
+    /**
+     * Lista todas as logs localmente armazenadas
+     * @return
+     */
 
     public String listLogs(){
 

@@ -2,6 +2,10 @@ package pt.isec.pa.tinypac.model.fsm;
 
 import pt.isec.pa.tinypac.model.data.game.GameManager;
 
+/**
+ * Classe do adaptavel aos estados gestores do jogo
+ */
+
 public abstract class TinyPacStateAdapter implements ITinyPacState{
 
     protected static GameManager game;

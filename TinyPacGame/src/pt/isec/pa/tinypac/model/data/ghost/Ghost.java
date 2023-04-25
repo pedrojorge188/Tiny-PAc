@@ -3,6 +3,11 @@ package pt.isec.pa.tinypac.model.data.ghost;
 import pt.isec.pa.tinypac.model.data.Maze;
 import pt.isec.pa.tinypac.model.data.pacman.PacMan;
 
+
+/**
+ * Classe abstrata Ghost que gere todas as instancias dos fantasmas:
+ * esta classe será "rescrita" por todos os tipos de fantasmas necessários
+ */
 public abstract class Ghost implements  IGhost{
 
     protected int x,y;

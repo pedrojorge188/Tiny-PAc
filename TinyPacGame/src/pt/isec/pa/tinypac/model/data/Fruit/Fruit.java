@@ -1,5 +1,10 @@
 package pt.isec.pa.tinypac.model.data.Fruit;
 
+/**
+ * Classe Fruit:
+ * Gere as instancias de frutas
+ */
+
 public class Fruit implements IFruit{
 
     private int points;

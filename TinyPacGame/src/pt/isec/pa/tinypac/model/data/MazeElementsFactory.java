@@ -1,6 +1,10 @@
 package pt.isec.pa.tinypac.model.data;
 import pt.isec.pa.tinypac.model.data.elements.*;
 
+/**
+ * Factory para a criação dos elementos armazenados no maze
+ */
+
 public class MazeElementsFactory {
 
     public static IMazeElement create (char ch){

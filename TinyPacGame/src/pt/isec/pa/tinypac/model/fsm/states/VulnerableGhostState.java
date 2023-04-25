@@ -7,6 +7,12 @@ import pt.isec.pa.tinypac.model.fsm.TinyPacState;
 import pt.isec.pa.tinypac.model.fsm.TinyPacStateAdapter;
 import pt.isec.pa.tinypac.utils.Messages;
 
+/**
+ * Estado VulnerableGhostState:
+ * Este estado è responsavel por realizar todas as verificações necessárias
+ * para o estado onde os fantasmas podem ser mortos pelo pacman
+ */
+
 public class VulnerableGhostState extends TinyPacStateAdapter {
 
     private int scope_counter;

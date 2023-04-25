@@ -6,6 +6,13 @@ import pt.isec.pa.tinypac.model.fsm.TinyPacState;
 import pt.isec.pa.tinypac.model.fsm.TinyPacStateAdapter;
 import pt.isec.pa.tinypac.utils.Messages;
 
+/**
+ * Estado movepacmanstate:
+ * Este estado é responsavel por inicial o movimento do pacman,
+ * assim que um timeout de x segundos chegar ao fim então o estado
+ * de jogo será alterado para o move ghost state.
+ */
+
 public class MovePacmanState extends TinyPacStateAdapter {
 
     private static int counter = 0;

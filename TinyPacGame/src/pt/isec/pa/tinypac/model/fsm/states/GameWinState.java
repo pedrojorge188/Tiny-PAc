@@ -6,6 +6,13 @@ import pt.isec.pa.tinypac.model.fsm.TinyPacState;
 import pt.isec.pa.tinypac.model.fsm.TinyPacStateAdapter;
 import pt.isec.pa.tinypac.utils.Messages;
 
+/**
+ * Estado GameWin:
+ * este estado representa o fim de jogo como uma vitoria,
+ * onde será possivel realizar as verificações necessarias do top5 e
+ * garantias da vitoria do jogo.
+ */
+
 public class GameWinState extends TinyPacStateAdapter {
 
     public GameWinState(TinyPacContext context, GameManager game) {

@@ -6,6 +6,14 @@ import pt.isec.pa.tinypac.model.fsm.TinyPacState;
 import pt.isec.pa.tinypac.model.fsm.TinyPacStateAdapter;
 import pt.isec.pa.tinypac.utils.Messages;
 
+/**
+ * Estado MoveGhostState:
+ * Este estado liberta os fantasmas das casas iniciais,
+ * sempre que o pacman comer todos os alimentos do maze então o estado será alterado para o nextLevel,
+ * sempre que o pacman perder uma vida e esta for maior que zero então o jogo iniciará de novo, caso
+ * contrario entao o jogador perde o jogo.
+ */
+
 public class MoveGhostState extends TinyPacStateAdapter {
 
     private int scope_counter;

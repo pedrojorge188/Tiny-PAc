@@ -5,6 +5,11 @@ import pt.isec.pa.tinypac.model.fsm.TinyPacState;
 import pt.isec.pa.tinypac.model.fsm.TinyPacStateAdapter;
 import pt.isec.pa.tinypac.utils.Messages;
 
+/**
+ * Estado GameOverState:
+ * este estado representa o fim do jogo como uma derrota.
+ */
+
 public class GameOverState extends TinyPacStateAdapter{
 
 

@@ -1,17 +1,26 @@
 package pt.isec.pa.tinypac.model.data.game;
+
 import pt.isec.pa.tinypac.model.IConst;
 import pt.isec.pa.tinypac.model.data.Balls.Ball;
 import pt.isec.pa.tinypac.model.data.Balls.BigBall;
 import pt.isec.pa.tinypac.model.data.Fruit.Fruit;
 import pt.isec.pa.tinypac.model.data.Maze;
-import pt.isec.pa.tinypac.model.data.elements.*;
+import pt.isec.pa.tinypac.model.data.elements.BallElement;
 import pt.isec.pa.tinypac.model.data.elements.Void;
+import pt.isec.pa.tinypac.model.data.elements.Wall;
+import pt.isec.pa.tinypac.model.data.elements.WrapZone;
 import pt.isec.pa.tinypac.model.data.game.interfaces.GameConsts;
 import pt.isec.pa.tinypac.model.data.ghost.*;
 import pt.isec.pa.tinypac.model.data.pacman.PacMan;
 
 import java.util.HashSet;
 import java.util.Set;
+
+/**
+ * Class GameManager:
+ * Esta classe tem a função de gerir todos os elementos do jogo de maneira direnta, armazenado os fantasmas,
+ * pacman e outros elementos necessários
+ */
 
 public class GameManager implements GameConsts , IConst {
     static int eat_to_fruit = 0;
@@ -43,7 +52,12 @@ public class GameManager implements GameConsts , IConst {
 
     }
 
+    /**
+     * Construtor por cópia da class
+     */
+
     public GameManager(GameManager g){
+
         this.total_foods = g.total_foods;
         this.eaten_foods = g.eaten_foods;
         this.level = g.level;
@@ -57,6 +71,10 @@ public class GameManager implements GameConsts , IConst {
         fruit = g.fruit;
 
     }
+
+    /**
+     * Função que irá mover cada instancia de fantasmas presentes no jogo
+     */
 
     public void moveGhost(){
 
@@ -74,6 +92,10 @@ public class GameManager implements GameConsts , IConst {
         PacMan cpy = new PacMan(pacman);
         return cpy;
     }
+
+    /**
+     * Esta função tem o objetivo de saber se o pacman comeu alguma comida especial
+     */
 
     public int getBuff(){
 
@@ -99,7 +121,14 @@ public class GameManager implements GameConsts , IConst {
         }
     }
 
+    /**
+     * Função para movimentar o pacman bem como gerir algumas verificações necessárias,
+     * como se este comeu a fruta e etc.
+     * @param direction
+     */
+
     public boolean movePacman(int direction) {
+
 
         BallElement b = new BallElement();
         Void void_element = new Void();
@@ -227,6 +256,11 @@ public class GameManager implements GameConsts , IConst {
         return true;
     }
 
+
+    /**
+     * esta função gere a inicialização do labirinto e das instancias necessárias para o desenrrolar do jogo.
+     */
+
     public boolean fillGame(){
 
         int counter = 0;
@@ -278,7 +312,12 @@ public class GameManager implements GameConsts , IConst {
 
     }
 
+    /**
+     * Função para alterar o nivel de jogo
+     */
+
     public boolean setLevel() {
+
 
         if(level > 20 || level < 0)
             return false;

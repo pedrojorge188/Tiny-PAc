@@ -1,0 +1,15 @@
+unnamed package
+pt.isec.pa.tinypac.gameengine
+pt.isec.pa.tinypac.model
+pt.isec.pa.tinypac.model.data
+pt.isec.pa.tinypac.model.data.Balls
+pt.isec.pa.tinypac.model.data.elements
+pt.isec.pa.tinypac.model.data.Fruit
+pt.isec.pa.tinypac.model.data.game
+pt.isec.pa.tinypac.model.data.game.interfaces
+pt.isec.pa.tinypac.model.data.ghost
+pt.isec.pa.tinypac.model.data.pacman
+pt.isec.pa.tinypac.model.fsm
+pt.isec.pa.tinypac.model.fsm.states
+pt.isec.pa.tinypac.ui.text
+pt.isec.pa.tinypac.utils

@@ -1,5 +1,11 @@
 package pt.isec.pa.tinypac.model.data.Balls;
 
+
+/**
+ * Class Ball:
+ * Classe que gere as instancias dos alimentos do pacman
+ */
+
 public class Ball {
 
     protected int points;

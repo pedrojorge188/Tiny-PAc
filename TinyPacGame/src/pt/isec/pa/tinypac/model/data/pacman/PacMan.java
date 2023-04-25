@@ -1,5 +1,9 @@
 package pt.isec.pa.tinypac.model.data.pacman;
 
+/**
+ * Classe Pacman:
+ * Classe para criação e gestão das instancia/s do pacman
+ */
 public class PacMan implements IPacMan{
 
     private int x, y;

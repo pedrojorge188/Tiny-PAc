@@ -5,6 +5,11 @@ import pt.isec.pa.tinypac.gameengine.IGameEngine;
 import pt.isec.pa.tinypac.gameengine.IGameEngineEvolve;
 import pt.isec.pa.tinypac.model.data.game.GameManager;
 
+/**
+ * Contexo da maquina de estados:
+ *  - Esta classe gere as dependencias usadas na maquina de estados.
+ */
+
 public class TinyPacContext implements IGameEngineEvolve{
 
     private GameManager game;
@@ -20,14 +25,26 @@ public class TinyPacContext implements IGameEngineEvolve{
 
     }
 
+    /**
+     * Evole da interface IGameEngineEvole, garante a evolução dos elementos do jogo
+     * @param gameEngine
+     * @param currentTime
+     */
+
     @Override
     public void evolve(IGameEngine gameEngine, long currentTime) {
         state.action();
     }
 
+
     public TinyPacState getState(){
         return state.getState();
     }
+
+    /**
+     * Muda de estado para o estado introduzido por paramentro
+     * @param newState
+     */
 
     public void changeState(ITinyPacState newState) {
         this.state = newState;
@@ -65,6 +82,11 @@ public class TinyPacContext implements IGameEngineEvolve{
         return game.getFruitStatus();
     }
 
+    /**
+     * indica a direção da tecla introduzida e guarda a numa variavel
+     * @param direction
+     * @return
+     */
     public boolean keyPress(int direction) {
         return state.keyPress(direction);
     }

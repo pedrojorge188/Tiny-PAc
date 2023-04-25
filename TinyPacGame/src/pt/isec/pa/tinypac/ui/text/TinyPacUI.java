@@ -17,6 +17,10 @@ import pt.isec.pa.tinypac.utils.Messages;
 import java.io.IOException;
 import java.util.HashSet;
 
+/**
+ * Classe representatica da interface de texto para a META 1 do desenvolvimento do trabalho.
+ */
+
 public class TinyPacUI {
 
     private TinyPacContext fsm;

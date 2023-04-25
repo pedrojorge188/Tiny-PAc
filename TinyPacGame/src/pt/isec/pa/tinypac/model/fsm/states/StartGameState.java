@@ -6,6 +6,11 @@ import pt.isec.pa.tinypac.model.fsm.TinyPacState;
 import pt.isec.pa.tinypac.model.fsm.TinyPacStateAdapter;
 import pt.isec.pa.tinypac.utils.Messages;
 
+/**
+ * Estado Inicial do Jogo:
+ * - este estado é o estado inicial onde será esperada o seu inicio clicando uma tecla
+ */
+
 public class StartGameState extends TinyPacStateAdapter {
 
     public StartGameState(TinyPacContext context, GameManager game) {

@@ -3,18 +3,25 @@ package pt.isec.pa.tinypac.model.fsm;
 import pt.isec.pa.tinypac.model.data.game.GameManager;
 import pt.isec.pa.tinypac.model.fsm.states.*;
 
+/**
+ * Interface com todos os metodos necessarios para a gestão da maquina de estados
+ */
+
 public interface ITinyPacState {
 
     TinyPacState getState();
     void action();
-    boolean keyPress(int direction); // START_GAME -> MOVE_PACMAN
+    boolean keyPress(int direction);
     boolean getPacman(); // MOVE_GHOST -> PACMAN_LOST_LIFE
     boolean pacManFinish(); // MOVE_GHOST -> NEXT_LEVEL
     boolean pacManBuff(); // MOVE_GHOST -> VULNERABLE_GHOST
     boolean timeout();
 
-    static ITinyPacState createState(TinyPacState type, TinyPacContext context, GameManager game){
+    /**
+     * Função create state, corresponde a uma "factory" para a criação das instancias correspondente aos estados da máquina de estados
+     */
 
+    static ITinyPacState createState(TinyPacState type, TinyPacContext context, GameManager game){
 
         return switch (type) {
             case START_GAME -> new StartGameState(context,game);

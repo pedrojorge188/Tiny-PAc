@@ -1,5 +1,10 @@
 package pt.isec.pa.tinypac.model.data;
 
+/**
+ * Classe Maze:
+ * classe dos docentes fornecida com o documento enunciado do projeto
+ */
+
 public final class Maze {
     private final IMazeElement[][] board;
     public Maze(int height, int width) {
