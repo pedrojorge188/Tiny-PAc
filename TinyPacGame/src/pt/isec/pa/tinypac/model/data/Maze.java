@@ -1,11 +1,17 @@
 package pt.isec.pa.tinypac.model.data;
 
+import java.io.Serializable;
+
 /**
  * Classe Maze:
- * classe dos docentes fornecida com o documento enunciado do projeto
+ * classe dos docentes fornecida com o documento enunciado do projeto:
+ * O objétivo desta função no contexto do projeto é armazenar o estado do labirinto incial para o decorrer dos niveis.
+ * A classe gameManager irá manipular e gerir este tabuleiro do jogo.
  */
 
-public final class Maze {
+public final class Maze implements Serializable {
+    static final long serialVersionUID = 1L;
+
     private final IMazeElement[][] board;
     public Maze(int height, int width) {
         board = new IMazeElement[height][width];

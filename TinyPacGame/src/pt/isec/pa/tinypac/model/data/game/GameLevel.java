@@ -59,6 +59,12 @@ class GameLevel implements GameConsts {
         return file.toString();
     }
 
+    /**
+     * Esta Função verifica se o ficheiro que é para ser carregado cumpre os requesitos necessários
+     * para poder ser carregado com sucesso
+     * @param ch
+     * @return
+     */
     private static Boolean verfifyElements(char ch){
 
         if (ch == WALL || ch == BALL || ch == WRAP_ZONE

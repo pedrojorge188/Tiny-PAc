@@ -24,10 +24,10 @@ import java.util.HashSet;
 public class TinyPacUI {
 
     private TinyPacContext fsm;
-    Terminal terminal;
-    Screen screen;
-    TextGraphics tg;
-    TinyPacState current_state;
+    private Terminal terminal;
+    private Screen screen;
+    private TextGraphics tg;
+    private TinyPacState current_state;
 
     public TinyPacUI(TinyPacContext fsm) throws IOException {
 
@@ -147,7 +147,9 @@ public class TinyPacUI {
 
         if(keyPassed != null){
             switch (keyPassed.getKeyType()){
-                case Escape -> keepRunning = false;
+                case Escape -> {
+                    fsm.keyPress(5);
+                        keepRunning = false;}
                 case ArrowUp -> fsm.keyPress(1);
                 case ArrowDown -> fsm.keyPress(2);
                 case ArrowLeft -> fsm.keyPress(3);

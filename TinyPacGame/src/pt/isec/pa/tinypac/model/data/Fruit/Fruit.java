@@ -1,11 +1,15 @@
 package pt.isec.pa.tinypac.model.data.Fruit;
 
+import java.io.Serializable;
+
 /**
  * Classe Fruit:
  * Gere as instancias de frutas
  */
 
-public class Fruit implements IFruit{
+public class Fruit implements IFruit, Serializable {
+
+    static final long serialVersionUID = 1L;
 
     private int points;
     private int time;

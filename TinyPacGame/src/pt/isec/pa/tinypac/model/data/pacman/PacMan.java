@@ -1,10 +1,14 @@
 package pt.isec.pa.tinypac.model.data.pacman;
 
+import java.io.Serializable;
+
 /**
  * Classe Pacman:
  * Classe para criação e gestão das instancia/s do pacman
  */
-public class PacMan implements IPacMan{
+public class PacMan implements IPacMan , Serializable {
+
+    static final long serialVersionUID = 1L;
 
     private int x, y;
     private int direction;

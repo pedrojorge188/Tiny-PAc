@@ -5,6 +5,10 @@ import pt.isec.pa.tinypac.gameengine.IGameEngine;
 import pt.isec.pa.tinypac.gameengine.IGameEngineEvolve;
 import pt.isec.pa.tinypac.model.data.game.GameManager;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
+
 /**
  * Contexo da maquina de estados:
  *  - Esta classe gere as dependencias usadas na maquina de estados.
@@ -17,7 +21,19 @@ public class TinyPacContext implements IGameEngineEvolve{
     private GameEngine gameEngine;
 
     public TinyPacContext(){
-        this.game = new GameManager();
+
+        File fileO = new File("files/save.dat");
+        try(FileInputStream file = new FileInputStream(fileO);
+            ObjectInputStream ois = new ObjectInputStream(file);){
+
+            game = (GameManager) ois.readObject();
+
+        }catch(Exception e){
+            this.game = new GameManager();
+        }
+
+        fileO.delete();
+
         gameEngine = new GameEngine();
         state = ITinyPacState.createState(TinyPacState.START_GAME,this,game);
         gameEngine.start(250);

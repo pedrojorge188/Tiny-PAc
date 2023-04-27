@@ -1,12 +1,16 @@
 package pt.isec.pa.tinypac.model.data.Balls;
 
 
+import java.io.Serializable;
+
 /**
  * Class Ball:
  * Classe que gere as instancias dos alimentos do pacman
  */
 
-public class Ball {
+public class Ball implements Serializable {
+
+    static final long serialVersionUID = 1L;
 
     protected int points;
     protected int x,y;

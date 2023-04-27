@@ -3,12 +3,15 @@ package pt.isec.pa.tinypac.model.data.ghost;
 import pt.isec.pa.tinypac.model.data.Maze;
 import pt.isec.pa.tinypac.model.data.pacman.PacMan;
 
+import java.io.Serializable;
+
 
 /**
  * Classe abstrata Ghost que gere todas as instancias dos fantasmas:
  * esta classe será "rescrita" por todos os tipos de fantasmas necessários
  */
-public abstract class Ghost implements  IGhost{
+public abstract class Ghost implements  IGhost , Serializable {
+    static final long serialVersionUID = 1L;
 
     protected int x,y;
     private int spawn_x , spawn_y;
@@ -58,6 +61,12 @@ public abstract class Ghost implements  IGhost{
         return vulnerability;
     }
 
+    /**
+     * Função responsavel por mover os fantasmas,
+     * esta função e abstrata pois cada tipo de fantasmas vai ter o seu movimento especifico
+     * @param maze
+     * @param pacMan
+     */
     public abstract void move(Maze maze , PacMan pacMan);
 
     public void reset(){
