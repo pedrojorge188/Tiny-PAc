@@ -28,15 +28,12 @@ public class MovePacmanState extends TinyPacStateAdapter {
     }
 
     @Override
-    public void action() {
+    public boolean action() {
         game.movePacman(direction);
         timeout();
-    }
-
-    @Override
-    public boolean pause() {
         return false;
     }
+
 
     @Override
     public TinyPacState getState() {

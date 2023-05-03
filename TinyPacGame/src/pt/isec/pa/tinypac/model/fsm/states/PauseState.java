@@ -1,4 +1,5 @@
 package pt.isec.pa.tinypac.model.fsm.states;
+
 import pt.isec.pa.tinypac.model.data.game.GameManager;
 import pt.isec.pa.tinypac.model.fsm.TinyPacContext;
 import pt.isec.pa.tinypac.model.fsm.TinyPacState;
@@ -6,17 +7,22 @@ import pt.isec.pa.tinypac.model.fsm.TinyPacStateAdapter;
 import pt.isec.pa.tinypac.utils.Messages;
 
 /**
- * Estado GameOverState:
- * este estado representa o fim do jogo como uma derrota.
+ * Estado onde o jogo fica pausado
  */
 
-public class GameOverState extends TinyPacStateAdapter{
+public class PauseState extends TinyPacStateAdapter{
 
-
-    public GameOverState(TinyPacContext context, GameManager game) {
+    public PauseState(TinyPacContext context, GameManager game) {
         super(context, game);
+
         Messages.getInstance().clearLogs();
-        Messages.getInstance().addLog("ESTADO-> GAME_OVER");
+        Messages.getInstance().addLog("ESTADO-> PAUSE_STATE");
+
+    }
+
+    @Override
+    public TinyPacState getState() {
+        return  TinyPacState.PAUSE_STATE;
     }
 
     @Override
@@ -24,22 +30,15 @@ public class GameOverState extends TinyPacStateAdapter{
         return false;
     }
 
-
     @Override
-    public boolean resume() {
+    public boolean keyPress(int direction) {
         return false;
     }
 
     @Override
-    public TinyPacState getState() {
-        return TinyPacState.GAME_OVER;
+    public boolean resume() {
+            changeState(stop_state);
+            return true;
     }
-
-    @Override
-    public boolean keyPress(int direction) {
-        return true;
-    }
-
-
-
 }
+

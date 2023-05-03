@@ -1,8 +1,6 @@
 package pt.isec.pa.tinypac.model.fsm;
 
 import pt.isec.pa.tinypac.gameengine.GameEngine;
-import pt.isec.pa.tinypac.gameengine.IGameEngine;
-import pt.isec.pa.tinypac.gameengine.IGameEngineEvolve;
 import pt.isec.pa.tinypac.model.data.game.GameManager;
 
 import java.io.File;
@@ -14,7 +12,7 @@ import java.io.ObjectInputStream;
  *  - Esta classe gere as dependencias usadas na maquina de estados.
  */
 
-public class TinyPacContext implements IGameEngineEvolve{
+public class TinyPacContext{
 
     private GameManager game;
     private ITinyPacState state;
@@ -34,22 +32,8 @@ public class TinyPacContext implements IGameEngineEvolve{
 
         fileO.delete();
 
-        gameEngine = new GameEngine();
         state = ITinyPacState.createState(TinyPacState.START_GAME,this,game);
-        gameEngine.start(270);
-        gameEngine.registerClient(this);
 
-    }
-
-    /**
-     * Evole da interface IGameEngineEvole, garante a evolução dos elementos do jogo
-     * @param gameEngine
-     * @param currentTime
-     */
-
-    @Override
-    public void evolve(IGameEngine gameEngine, long currentTime) {
-        state.action();
     }
 
 
@@ -65,13 +49,22 @@ public class TinyPacContext implements IGameEngineEvolve{
     void changeState(ITinyPacState newState) {
         this.state = newState;
     }
+
+    public boolean action(){
+        return state.action();
+    }
+
     public boolean keyPress(int direction) {
         return state.keyPress(direction);
     }
+
     public boolean pause(){
         return state.pause();
     }
 
+    public boolean resume(){
+        return state.resume();
+    }
 
     public int getPoints(){
         return game.getPoints();

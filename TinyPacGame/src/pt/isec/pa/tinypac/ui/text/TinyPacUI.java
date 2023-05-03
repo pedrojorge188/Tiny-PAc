@@ -104,12 +104,7 @@ public class TinyPacUI {
                 tg.putString(27,3,"PRESS KEY TO START");
 
             }
-            case NEXT_LEVEL -> {
 
-                tg.setBackgroundColor(TextColor.ANSI.BLACK);
-                tg.putString(27,3,"LEVEL UP!!");
-
-            }
             case GAME_OVER -> {
 
                 tg.setBackgroundColor(TextColor.ANSI.BLACK);
@@ -126,6 +121,11 @@ public class TinyPacUI {
                 tg.setBackgroundColor(TextColor.ANSI.BLACK);
                 tg.setForegroundColor(TextColor.ANSI.CYAN);
                 tg.putString(27,3,"Vulnerable Ghosts!");
+            }
+            case PAUSE_STATE -> {
+                tg.setBackgroundColor(TextColor.ANSI.BLACK);
+                tg.setForegroundColor(TextColor.ANSI.CYAN);
+                tg.putString(27,3,"Game Paused!");
             }
             default -> {
 
@@ -151,6 +151,8 @@ public class TinyPacUI {
                 case ArrowDown -> fsm.keyPress(2);
                 case ArrowLeft -> fsm.keyPress(3);
                 case ArrowRight -> fsm.keyPress(4);
+                case Enter -> fsm.pause();
+                case Backspace -> fsm.resume();
             }
         }
 

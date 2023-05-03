@@ -26,8 +26,9 @@ public class StartGameState extends TinyPacStateAdapter {
     }
 
     @Override
-    public void action() {
+    public boolean action() {
 
+        return false;
     }
 
     @Override
@@ -43,10 +44,6 @@ public class StartGameState extends TinyPacStateAdapter {
         return true;
     }
 
-    @Override
-    public boolean pause() {
-        return false;
-    }
 
 
 }

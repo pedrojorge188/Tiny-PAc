@@ -1,5 +1,4 @@
 package pt.isec.pa.tinypac.model.fsm.states;
-
 import pt.isec.pa.tinypac.model.data.game.GameManager;
 import pt.isec.pa.tinypac.model.data.ghost.Ghost;
 import pt.isec.pa.tinypac.model.fsm.TinyPacContext;
@@ -54,12 +53,21 @@ public class VulnerableGhostState extends TinyPacStateAdapter {
     }
 
     private boolean pacManFinish() {
-        changeState(TinyPacState.NEXT_LEVEL);
+
+        if(game.setLevel()){
+            direction = 0;
+            if(game.getLevel() == 20){
+                changeState(TinyPacState.GAME_WIN);
+            }else{
+                changeState(TinyPacState.START_GAME);
+            }
+        }
+
         return true;
     }
 
     @Override
-    public void action() {
+    public boolean action() {
 
         for(Ghost e : game.getGhost()){
             if(e.getX() == game.getPacman().getX() && e.getY() == game.getPacman().getY() && e.getVulnerability()){
@@ -81,12 +89,9 @@ public class VulnerableGhostState extends TinyPacStateAdapter {
 
         timeout();
 
-    }
-
-    @Override
-    public boolean pause() {
         return false;
     }
+
 
 
     @Override

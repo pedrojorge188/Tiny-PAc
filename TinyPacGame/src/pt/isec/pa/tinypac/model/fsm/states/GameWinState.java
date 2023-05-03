@@ -22,10 +22,17 @@ public class GameWinState extends TinyPacStateAdapter {
     }
 
     @Override
-    public void action() { }
+    public boolean action() {
+        return false;
+    }
 
     @Override
-    public boolean pause() {
+    public boolean keyPress(int direction) {
+        return false;
+    }
+
+    @Override
+    public boolean resume() {
         return false;
     }
 

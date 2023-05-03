@@ -8,8 +8,8 @@ public enum TinyPacState {
     START_GAME,
     MOVE_PACMAN,
     MOVE_GHOST,
+    PAUSE_STATE,
     VULNERABLE_GHOST,
-    NEXT_LEVEL,
     GAME_OVER,
     GAME_WIN
 }

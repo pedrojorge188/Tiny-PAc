@@ -198,9 +198,11 @@ public class GameManager implements GameConsts , IConst, Serializable {
                                 }
 
                         }else{
-                            if(current_maze.get(pacman.getY(),pacman.getY()).getSymbol() != FRUIT || current_maze.get(pacman.getY(),pacman.getX()).getSymbol() != WRAP_ZONE){
-                                current_maze.set(pacman.getY(),pacman.getX(),void_element);
-                            }
+                            try {
+                                if(current_maze.get(pacman.getY(),pacman.getY()).getSymbol() != FRUIT || current_maze.get(pacman.getY(),pacman.getX()).getSymbol() != WRAP_ZONE){
+                                    current_maze.set(pacman.getY(),pacman.getX(),void_element);
+                                }
+                            }catch (Exception e){}
                             pacman.moveUp();
                         }
                     }else{
@@ -222,9 +224,11 @@ public class GameManager implements GameConsts , IConst, Serializable {
                                 }
 
                         }else{
-                            if(current_maze.get(pacman.getY(),pacman.getY()).getSymbol() != FRUIT || current_maze.get(pacman.getY(),pacman.getX()).getSymbol() != WRAP_ZONE){
-                                current_maze.set(pacman.getY(),pacman.getX(),void_element);
-                            }
+                            try {
+                                if(current_maze.get(pacman.getY(),pacman.getY()).getSymbol() != FRUIT || current_maze.get(pacman.getY(),pacman.getX()).getSymbol() != WRAP_ZONE){
+                                    current_maze.set(pacman.getY(),pacman.getX(),void_element);
+                                }
+                            }catch (Exception e){}
                             pacman.moveLeft();
                         }
                     }else{
@@ -246,9 +250,11 @@ public class GameManager implements GameConsts , IConst, Serializable {
                                 }
 
                         }else{
-                            if(current_maze.get(pacman.getY(),pacman.getY()).getSymbol() != FRUIT || current_maze.get(pacman.getY(),pacman.getX()).getSymbol() != WRAP_ZONE){
-                                current_maze.set(pacman.getY(),pacman.getX(),void_element);
-                            }
+                            try {
+                                if(current_maze.get(pacman.getY(),pacman.getY()).getSymbol() != FRUIT || current_maze.get(pacman.getY(),pacman.getX()).getSymbol() != WRAP_ZONE){
+                                    current_maze.set(pacman.getY(),pacman.getX(),void_element);
+                                }
+                            }catch (Exception e){}
                             pacman.moveDown();
                         }
 
@@ -272,9 +278,11 @@ public class GameManager implements GameConsts , IConst, Serializable {
                                 }
 
                         }else{
-                            if(current_maze.get(pacman.getY(),pacman.getY()).getSymbol() != FRUIT || current_maze.get(pacman.getY(),pacman.getX()).getSymbol() != WRAP_ZONE){
-                                current_maze.set(pacman.getY(),pacman.getX(),void_element);
-                            }
+                            try {
+                                if(current_maze.get(pacman.getY(),pacman.getY()).getSymbol() != FRUIT || current_maze.get(pacman.getY(),pacman.getX()).getSymbol() != WRAP_ZONE){
+                                    current_maze.set(pacman.getY(),pacman.getX(),void_element);
+                                }
+                            }catch (Exception e){}
                             pacman.moveRight();
                         }
                     }else{

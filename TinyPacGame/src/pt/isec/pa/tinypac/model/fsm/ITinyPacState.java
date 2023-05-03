@@ -10,9 +10,11 @@ import pt.isec.pa.tinypac.model.fsm.states.*;
 public interface ITinyPacState {
 
     TinyPacState getState();
-    void action();
+
+    boolean action();
     boolean keyPress(int direction);
     boolean pause();
+    boolean resume();
 
     /**
      * Função create state, corresponde a uma "factory" para a criação das instancias correspondente aos estados da máquina de estados
@@ -24,7 +26,7 @@ public interface ITinyPacState {
             case START_GAME -> new StartGameState(context,game);
             case MOVE_PACMAN -> new MovePacmanState(context,game);
             case MOVE_GHOST -> new MoveGhostState(context,game);
-            case NEXT_LEVEL -> new NextLevelState(context,game);
+            case PAUSE_STATE -> new PauseState(context,game);
             case GAME_OVER -> new GameOverState(context,game);
             case GAME_WIN -> new GameWinState(context,game);
             case VULNERABLE_GHOST -> new VulnerableGhostState(context,game);

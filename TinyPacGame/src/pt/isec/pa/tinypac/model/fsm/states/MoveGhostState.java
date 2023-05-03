@@ -48,7 +48,16 @@ public class MoveGhostState extends TinyPacStateAdapter {
     }
 
     private boolean pacManFinish() {
-        changeState(TinyPacState.NEXT_LEVEL);
+
+        if(game.setLevel()){
+            direction = 0;
+            if(game.getLevel() == 20){
+                changeState(TinyPacState.GAME_WIN);
+            }else{
+                changeState(TinyPacState.START_GAME);
+            }
+        }
+
         return true;
     }
 
@@ -61,7 +70,7 @@ public class MoveGhostState extends TinyPacStateAdapter {
     }
 
     @Override
-    public void action() {
+    public boolean action() {
 
         game.movePacman(direction);
         game.moveGhost();
@@ -77,11 +86,8 @@ public class MoveGhostState extends TinyPacStateAdapter {
             pacManBuff();
         }
 
-    }
-
-    @Override
-    public boolean pause() {
         return false;
     }
+
 
 }
