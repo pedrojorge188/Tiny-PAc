@@ -165,4 +165,8 @@ public class Pinky extends Ghost{
                 '}';
     }
 
+    @Override
+    public char getSymbol() {
+        return 'K';
+    }
 }

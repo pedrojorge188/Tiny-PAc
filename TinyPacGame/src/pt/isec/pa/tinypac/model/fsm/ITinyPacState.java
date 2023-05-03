@@ -12,10 +12,7 @@ public interface ITinyPacState {
     TinyPacState getState();
     void action();
     boolean keyPress(int direction);
-    boolean getPacman(); // MOVE_GHOST -> PACMAN_LOST_LIFE
-    boolean pacManFinish(); // MOVE_GHOST -> NEXT_LEVEL
-    boolean pacManBuff(); // MOVE_GHOST -> VULNERABLE_GHOST
-    boolean timeout();
+    boolean pause();
 
     /**
      * Função create state, corresponde a uma "factory" para a criação das instancias correspondente aos estados da máquina de estados

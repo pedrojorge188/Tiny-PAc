@@ -10,13 +10,15 @@ public class PacMan implements IPacMan , Serializable {
 
     static final long serialVersionUID = 1L;
 
-    private int x, y;
+    private int x, y, spawn_x, spawn_y;
     private int direction;
     private int movement_speed;
     private int lives;
 
     public PacMan(int x, int y){
         this.x = x;
+        this.spawn_x = x;
+        this.spawn_y = y;
         this.y = y;
         this.movement_speed = SPEED_DEFAULT;
         this.direction = 0;
@@ -25,6 +27,8 @@ public class PacMan implements IPacMan , Serializable {
 
     public PacMan(PacMan pacman){
         this.x = pacman.x;
+        this.spawn_x = pacman.spawn_x;
+        this.spawn_y = pacman.spawn_y;
         this.y = pacman.y;
         this.movement_speed = pacman.movement_speed;
         this.direction = pacman.direction;
@@ -85,12 +89,10 @@ public class PacMan implements IPacMan , Serializable {
     }
 
     public void removeLife(){
-        lives--;
+        if(getLives() > 0)
+             lives--;
     }
-    public void getDamage() {
-        if(N_LIVES > 0)
-            lives--;
-    }
+
 
     @Override
     public String toString() {
@@ -105,5 +107,16 @@ public class PacMan implements IPacMan , Serializable {
 
     public void setLives(int lives) {
         this.lives = lives;
+    }
+
+    @Override
+    public char getSymbol() {
+        return 'P';
+    }
+
+    public void reset() {
+        this.x = spawn_x;
+        this.y = spawn_y;
+
     }
 }

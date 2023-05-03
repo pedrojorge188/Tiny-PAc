@@ -131,4 +131,9 @@ public class Clyde extends Ghost{
                 ", vulnerability_time=" + vulnerability_time +
                 '}';
     }
+
+    @Override
+    public char getSymbol() {
+        return 'C';
+    }
 }

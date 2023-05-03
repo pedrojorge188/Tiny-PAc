@@ -8,14 +8,11 @@ import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
-import pt.isec.pa.tinypac.model.data.ghost.Ghost;
-import pt.isec.pa.tinypac.model.data.pacman.PacMan;
 import pt.isec.pa.tinypac.model.fsm.TinyPacContext;
 import pt.isec.pa.tinypac.model.fsm.TinyPacState;
 import pt.isec.pa.tinypac.utils.Messages;
 
 import java.io.IOException;
-import java.util.HashSet;
 
 /**
  * Classe representatica da interface de texto para a META 1 do desenvolvimento do trabalho.
@@ -199,59 +196,58 @@ public class TinyPacUI {
                             tg.putString(j+25, i+4," ");
                         }
 
-                    }else{
+                    }else if(m[i][j] == 'P'){
+                        tg.setBackgroundColor(TextColor.ANSI.YELLOW_BRIGHT);
+                        tg.setForegroundColor(TextColor.ANSI.WHITE);
+                        tg.putString(j+25, i+4, " ");
+
+                    }else if(m[i][j] == 'I'){
+                        if(current_state == TinyPacState.VULNERABLE_GHOST){
+                            tg.setBackgroundColor(TextColor.ANSI.CYAN);
+                            tg.setForegroundColor(TextColor.ANSI.WHITE);
+                            tg.putString(j+25, i+4," ");
+                        }else{
+                            tg.setBackgroundColor(TextColor.ANSI.GREEN_BRIGHT);
+                            tg.setForegroundColor(TextColor.ANSI.WHITE);
+                            tg.putString(j+25, i+4," ");
+                        }
+                    }else if(m[i][j] == 'B'){
+                        if(current_state == TinyPacState.VULNERABLE_GHOST){
+                            tg.setBackgroundColor(TextColor.ANSI.CYAN);
+                            tg.setForegroundColor(TextColor.ANSI.WHITE);
+                            tg.putString(j+25, i+4," ");
+                        }else{
+                            tg.setBackgroundColor(TextColor.ANSI.RED);
+                            tg.setForegroundColor(TextColor.ANSI.WHITE);
+                            tg.putString(j+25, i+4," ");
+                        }
+                    }else if(m[i][j] == 'K'){
+                        if(current_state == TinyPacState.VULNERABLE_GHOST){
+                            tg.setBackgroundColor(TextColor.ANSI.CYAN);
+                            tg.setForegroundColor(TextColor.ANSI.WHITE);
+                            tg.putString(j+25, i+4," ");
+                        }else{
+                            tg.setBackgroundColor(TextColor.ANSI.WHITE_BRIGHT);
+                            tg.setForegroundColor(TextColor.ANSI.WHITE);
+                            tg.putString(j+25, i+4," ");
+                        }
+                    }else if(m[i][j] == 'C'){
+                        if(current_state == TinyPacState.VULNERABLE_GHOST){
+                            tg.setBackgroundColor(TextColor.ANSI.CYAN);
+                            tg.setForegroundColor(TextColor.ANSI.WHITE);
+                            tg.putString(j+25, i+4," ");
+                        }else{
+                            tg.setBackgroundColor(TextColor.ANSI.MAGENTA);
+                            tg.setForegroundColor(TextColor.ANSI.WHITE);
+                            tg.putString(j+25, i+4," ");
+                        }
+                    } else{
                         tg.setBackgroundColor(TextColor.ANSI.BLACK);
                         tg.setForegroundColor(TextColor.ANSI.WHITE);
                         tg.putString(j+25, i+4," ");
                     }
                 }
             }
-
-
-            for(Ghost e : (HashSet<Ghost>) fsm.getGhosts()){
-                if(fsm.getState() != TinyPacState.START_GAME){
-                    if(e.getName() == "Blinky"){
-                        if(e.getVulnerability()){
-                            tg.setBackgroundColor(TextColor.ANSI.CYAN);
-                            tg.setForegroundColor(TextColor.ANSI.WHITE);
-                        }else{
-                            tg.setBackgroundColor(TextColor.ANSI.RED);
-                            tg.setForegroundColor(TextColor.ANSI.WHITE);
-                        }
-                    }else if(e.getName() == "Clyde"){
-                        if(e.getVulnerability()){
-                            tg.setBackgroundColor(TextColor.ANSI.CYAN);
-                            tg.setForegroundColor(TextColor.ANSI.WHITE);
-                        }else{
-                            tg.setBackgroundColor(TextColor.ANSI.MAGENTA);
-                            tg.setForegroundColor(TextColor.ANSI.WHITE);
-                        }
-                    }else if(e.getName() == "Pinky") {
-                        if(e.getVulnerability()){
-                            tg.setBackgroundColor(TextColor.ANSI.CYAN);
-                            tg.setForegroundColor(TextColor.ANSI.WHITE);
-                        }else{
-                            tg.setBackgroundColor(TextColor.ANSI.WHITE_BRIGHT);
-                            tg.setForegroundColor(TextColor.ANSI.WHITE);
-                        }
-                    }else if(e.getName() == "Inky"){
-                        if(e.getVulnerability()){
-                            tg.setBackgroundColor(TextColor.ANSI.CYAN);
-                            tg.setForegroundColor(TextColor.ANSI.WHITE);
-                        }else{
-                            tg.setBackgroundColor(TextColor.ANSI.GREEN_BRIGHT);
-                            tg.setForegroundColor(TextColor.ANSI.WHITE);
-                        }
-                    }
-                    tg.putString(e.getX()+25, e.getY()+4, " ");
-                }
-            }
-
-
-            tg.setBackgroundColor(TextColor.ANSI.YELLOW_BRIGHT);
-            tg.setForegroundColor(TextColor.ANSI.WHITE);
-            tg.putString(((PacMan)fsm.getPacmanModel()).getX()+25, ((PacMan)fsm.getPacmanModel()).getY()+4, " ");
-
 
     } catch (Exception e) {
 

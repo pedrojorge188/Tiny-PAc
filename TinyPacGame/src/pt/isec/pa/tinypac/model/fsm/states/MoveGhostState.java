@@ -36,9 +36,9 @@ public class MoveGhostState extends TinyPacStateAdapter {
     }
 
 
-    @Override
-    public boolean getPacman() {
+    private boolean getPacman() {
         if(game.getPacManLife() > 0){
+            game.removePacManLife();
             changeState(TinyPacState.START_GAME);
 
         }else{
@@ -47,14 +47,13 @@ public class MoveGhostState extends TinyPacStateAdapter {
         return true;
     }
 
-    @Override
-    public boolean pacManFinish() {
+    private boolean pacManFinish() {
         changeState(TinyPacState.NEXT_LEVEL);
         return true;
     }
 
-    @Override
-    public boolean pacManBuff() {
+
+    private boolean pacManBuff() {
 
         changeState(TinyPacState.VULNERABLE_GHOST);
         return true;
@@ -78,6 +77,11 @@ public class MoveGhostState extends TinyPacStateAdapter {
             pacManBuff();
         }
 
+    }
+
+    @Override
+    public boolean pause() {
+        return false;
     }
 
 }

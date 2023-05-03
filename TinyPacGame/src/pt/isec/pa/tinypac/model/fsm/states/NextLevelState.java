@@ -43,4 +43,9 @@ public class NextLevelState extends TinyPacStateAdapter {
         return true;
     }
 
+    @Override
+    public boolean pause() {
+        return false;
+    }
+
 }

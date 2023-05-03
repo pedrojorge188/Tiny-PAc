@@ -25,6 +25,11 @@ public class GameWinState extends TinyPacStateAdapter {
     public void action() { }
 
     @Override
+    public boolean pause() {
+        return false;
+    }
+
+    @Override
     public TinyPacState getState() {
         return TinyPacState.GAME_WIN;
     }

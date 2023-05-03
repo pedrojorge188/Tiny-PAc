@@ -41,6 +41,14 @@ public abstract class Ghost implements  IGhost , Serializable {
         return y;
     }
 
+    public int getSpawn_x() {
+        return spawn_x;
+    }
+
+    public int getSpawn_y() {
+        return spawn_y;
+    }
+
     public String getName(){
         return name;
     }
@@ -68,6 +76,7 @@ public abstract class Ghost implements  IGhost , Serializable {
      * @param pacMan
      */
     public abstract void move(Maze maze , PacMan pacMan);
+
 
     public void reset(){
         x = spawn_x;

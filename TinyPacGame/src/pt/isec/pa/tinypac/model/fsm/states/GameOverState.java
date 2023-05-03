@@ -32,19 +32,8 @@ public class GameOverState extends TinyPacStateAdapter{
         return true;
     }
 
-
     @Override
-    public boolean getPacman() {
-        return false;
-    }
-
-    @Override
-    public boolean pacManFinish() {
-        return false;
-    }
-
-    @Override
-    public boolean pacManBuff() {
+    public boolean pause() {
         return false;
     }
 

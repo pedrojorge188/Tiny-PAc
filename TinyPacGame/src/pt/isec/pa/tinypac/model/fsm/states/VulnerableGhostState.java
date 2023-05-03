@@ -30,8 +30,7 @@ public class VulnerableGhostState extends TinyPacStateAdapter {
 
     }
 
-    @Override
-    public boolean timeout() {
+    private boolean timeout() {
 
         counter++;
         if(counter == 45 || n_ghost_dead == 5){
@@ -44,8 +43,7 @@ public class VulnerableGhostState extends TinyPacStateAdapter {
         return true;
     }
 
-    @Override
-    public boolean getPacman() {
+    private boolean getPacman() {
         if(game.getPacManLife() > 0){
             changeState(TinyPacState.START_GAME);
 
@@ -55,8 +53,7 @@ public class VulnerableGhostState extends TinyPacStateAdapter {
         return true;
     }
 
-    @Override
-    public boolean pacManFinish() {
+    private boolean pacManFinish() {
         changeState(TinyPacState.NEXT_LEVEL);
         return true;
     }
@@ -84,6 +81,11 @@ public class VulnerableGhostState extends TinyPacStateAdapter {
 
         timeout();
 
+    }
+
+    @Override
+    public boolean pause() {
+        return false;
     }
 
 

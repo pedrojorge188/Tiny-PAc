@@ -34,13 +34,17 @@ public class MovePacmanState extends TinyPacStateAdapter {
     }
 
     @Override
+    public boolean pause() {
+        return false;
+    }
+
+    @Override
     public TinyPacState getState() {
         return TinyPacState.MOVE_PACMAN;
     }
 
 
-    @Override
-    public boolean timeout() {
+    private boolean timeout() {
 
         counter++;
         if(counter == 7){

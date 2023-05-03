@@ -1,5 +1,4 @@
 package pt.isec.pa.tinypac.model.fsm.states;
-
 import pt.isec.pa.tinypac.model.data.game.GameManager;
 import pt.isec.pa.tinypac.model.fsm.TinyPacContext;
 import pt.isec.pa.tinypac.model.fsm.TinyPacState;
@@ -42,6 +41,11 @@ public class StartGameState extends TinyPacStateAdapter {
         TinyPacStateAdapter.direction = direction;
         changeState(TinyPacState.MOVE_PACMAN);
         return true;
+    }
+
+    @Override
+    public boolean pause() {
+        return false;
     }
 
 

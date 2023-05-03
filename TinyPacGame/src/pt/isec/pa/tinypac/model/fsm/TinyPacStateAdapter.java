@@ -59,23 +59,4 @@ public abstract class TinyPacStateAdapter implements ITinyPacState{
         return true;
     }
 
-    @Override
-    public boolean getPacman() {
-        return false;
-    }
-
-    @Override
-    public boolean pacManFinish() {
-        return false;
-    }
-
-    @Override
-    public boolean pacManBuff() {
-        return false;
-    }
-
-    @Override
-    public boolean timeout() {
-        return false;
-    }
 }

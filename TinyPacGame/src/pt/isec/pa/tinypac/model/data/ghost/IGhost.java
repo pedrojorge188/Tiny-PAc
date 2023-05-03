@@ -1,6 +1,8 @@
 package pt.isec.pa.tinypac.model.data.ghost;
 
-public interface IGhost {
+import pt.isec.pa.tinypac.model.data.IMazeElement;
+
+public interface IGhost extends IMazeElement {
     int UP = 0;
     int DOWN = 1;
     int RIGHT = 2;

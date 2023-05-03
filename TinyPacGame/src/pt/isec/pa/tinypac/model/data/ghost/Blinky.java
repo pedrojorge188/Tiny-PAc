@@ -110,4 +110,9 @@ public class Blinky extends Ghost{
                 ", vulnerability_time=" + vulnerability_time +
                 '}';
     }
+
+    @Override
+    public char getSymbol() {
+        return 'B';
+    }
 }

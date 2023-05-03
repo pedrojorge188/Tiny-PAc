@@ -1,14 +1,11 @@
 package pt.isec.pa.tinypac.model.data.game;
-
 import pt.isec.pa.tinypac.model.IConst;
 import pt.isec.pa.tinypac.model.data.Balls.Ball;
 import pt.isec.pa.tinypac.model.data.Balls.BigBall;
 import pt.isec.pa.tinypac.model.data.Fruit.Fruit;
 import pt.isec.pa.tinypac.model.data.Maze;
-import pt.isec.pa.tinypac.model.data.elements.BallElement;
 import pt.isec.pa.tinypac.model.data.elements.Void;
-import pt.isec.pa.tinypac.model.data.elements.Wall;
-import pt.isec.pa.tinypac.model.data.elements.WrapZone;
+import pt.isec.pa.tinypac.model.data.elements.*;
 import pt.isec.pa.tinypac.model.data.game.interfaces.GameConsts;
 import pt.isec.pa.tinypac.model.data.ghost.*;
 import pt.isec.pa.tinypac.model.data.pacman.PacMan;
@@ -26,7 +23,6 @@ import java.util.Set;
 public class GameManager implements GameConsts , IConst, Serializable {
 
         private static int eat_to_fruit = 0;
-
         private int level;
         private int stage;
         private int points;
@@ -34,18 +30,16 @@ public class GameManager implements GameConsts , IConst, Serializable {
         private Set<Ghost> ghost_list;
         private PacMan pacman;
         private Fruit fruit;
-        private int total_foods;
-        private int eaten_foods;
         private Set <Ball> balls_list;
         private Set <WrapZone> portals;
 
         public GameManager(){
-            this.total_foods = 0;
-            this.eaten_foods = 0;
+
             this.level = 1;
             this.stage = 1;
             this.points = 0;
             this.current_maze = GameLevel.getLevel(this.stage).getValue2();
+
             ghost_list = new HashSet<>();
             balls_list = new HashSet<>();
             portals = new HashSet<>();
@@ -62,8 +56,6 @@ public class GameManager implements GameConsts , IConst, Serializable {
 
         public GameManager(GameManager g){
 
-            this.total_foods = g.total_foods;
-            this.eaten_foods = g.eaten_foods;
             this.level = g.level;
             this.stage = g.stage;
             this.points = g.getPoints();
@@ -77,14 +69,46 @@ public class GameManager implements GameConsts , IConst, Serializable {
         }
 
         /**
-         * Função que irá mover cada instancia de fantasmas presentes no jogo
+         * Função que tem o objetivo de corrigir algum erro que possa haver na sobreposição de objetos no contexto do maze
          */
 
+        private void maze_correction(){
+
+            for(Ghost e: ghost_list){
+                current_maze.set(e.getSpawn_y(),e.getSpawn_x(),new GhostSpawn());
+            }
+
+            for (Ball e: balls_list){
+
+                if(e.getPoints() == 1)
+                    current_maze.set(e.getY(),e.getX(),new BallElement());
+                else
+                    current_maze.set(e.getY(),e.getX(),new BigBallElement());
+
+            }
+
+            for(WrapZone e: portals){
+                current_maze.set(e.getY(),e.getX(),e);
+            }
+        }
+
+        /**
+         * Função que irá mover cada instancia de fantasmas presentes no jogo
+         */
         public void moveGhost(){
 
+            maze_correction();
+
             for (Ghost e: ghost_list){
+
+                current_maze.set(e.getY(),e.getX(),new Void());
+
                 e.move(current_maze,pacman);
+
+                current_maze.set(e.getY(),e.getX(),e);
             }
+
+
         }
 
         /**
@@ -168,11 +192,15 @@ public class GameManager implements GameConsts , IConst, Serializable {
                                     wrapzone = e;
                             for(WrapZone e : portals)
                                 if(e.getId() != wrapzone.getId()){
+                                    current_maze.set(pacman.getY(),pacman.getX(),void_element);
                                     pacman.setX(e.getX());
                                     pacman.setY(e.getY());
                                 }
 
                         }else{
+                            if(current_maze.get(pacman.getY(),pacman.getY()).getSymbol() != FRUIT || current_maze.get(pacman.getY(),pacman.getX()).getSymbol() != WRAP_ZONE){
+                                current_maze.set(pacman.getY(),pacman.getX(),void_element);
+                            }
                             pacman.moveUp();
                         }
                     }else{
@@ -188,11 +216,15 @@ public class GameManager implements GameConsts , IConst, Serializable {
                                     wrapzone = e;
                             for(WrapZone e : portals)
                                 if(e.getId() != wrapzone.getId()){
+                                    current_maze.set(pacman.getY(),pacman.getX(),void_element);
                                     pacman.setX(e.getX());
                                     pacman.setY(e.getY());
                                 }
 
                         }else{
+                            if(current_maze.get(pacman.getY(),pacman.getY()).getSymbol() != FRUIT || current_maze.get(pacman.getY(),pacman.getX()).getSymbol() != WRAP_ZONE){
+                                current_maze.set(pacman.getY(),pacman.getX(),void_element);
+                            }
                             pacman.moveLeft();
                         }
                     }else{
@@ -208,11 +240,15 @@ public class GameManager implements GameConsts , IConst, Serializable {
                                     wrapzone = e;
                             for(WrapZone e : portals)
                                 if(e.getId() != wrapzone.getId()){
+                                    current_maze.set(pacman.getY(),pacman.getX(),void_element);
                                     pacman.setX(e.getX());
                                     pacman.setY(e.getY());
                                 }
 
                         }else{
+                            if(current_maze.get(pacman.getY(),pacman.getY()).getSymbol() != FRUIT || current_maze.get(pacman.getY(),pacman.getX()).getSymbol() != WRAP_ZONE){
+                                current_maze.set(pacman.getY(),pacman.getX(),void_element);
+                            }
                             pacman.moveDown();
                         }
 
@@ -230,11 +266,15 @@ public class GameManager implements GameConsts , IConst, Serializable {
                                     wrapzone = e;
                             for(WrapZone e : portals)
                                 if(e.getId() != wrapzone.getId()){
+                                    current_maze.set(pacman.getY(),pacman.getX(),void_element);
                                     pacman.setX(e.getX());
                                     pacman.setY(e.getY());
                                 }
 
                         }else{
+                            if(current_maze.get(pacman.getY(),pacman.getY()).getSymbol() != FRUIT || current_maze.get(pacman.getY(),pacman.getX()).getSymbol() != WRAP_ZONE){
+                                current_maze.set(pacman.getY(),pacman.getX(),void_element);
+                            }
                             pacman.moveRight();
                         }
                     }else{
@@ -258,9 +298,9 @@ public class GameManager implements GameConsts , IConst, Serializable {
                         eat_to_fruit++;
                     }
 
-                    current_maze.set(e.getY(),e.getX(),void_element);
+                    current_maze.set(e.getY(),e.getX(),pacman);
+
                     this.points += e.getPoints();
-                    this.eaten_foods++;
                     balls_list.remove(e);
                     break;
                 }
@@ -272,6 +312,8 @@ public class GameManager implements GameConsts , IConst, Serializable {
                 points += fruit.getPoints();
                 fruit.setActive(false);
             }
+
+            current_maze.set(pacman.getY(),pacman.getX(),pacman);
 
             return true;
         }
@@ -292,6 +334,7 @@ public class GameManager implements GameConsts , IConst, Serializable {
 
             for (int i = 0; i < this.getMazeRows(); i++) {
                 for (int j = 0; j < this.getMazeCols(); j++) {
+
                     if(tmp[i][j] == SPAWN2){
 
                         ghost_list.add(new Inky(j,i));
@@ -304,12 +347,13 @@ public class GameManager implements GameConsts , IConst, Serializable {
                             e.setVulnerability_time(e.getVulnerability_time()-this.level);
                         }
 
-                    }else if(tmp[i][j] == SPAWN){
+                    }else
+                    if(tmp[i][j] == SPAWN){
 
                         PacMan p = new PacMan(this.pacman);
                         pacman = new PacMan(j,i);
-
                         pacman.setLives(p.getLives());
+                        current_maze.set(pacman.getY(),pacman.getX(),pacman);
 
                     }else if(tmp[i][j] == BALL){
 
@@ -334,9 +378,6 @@ public class GameManager implements GameConsts , IConst, Serializable {
 
             }
 
-            if(total_foods == 0)
-                total_foods = counter;
-
             return true;
 
         }
@@ -351,8 +392,6 @@ public class GameManager implements GameConsts , IConst, Serializable {
             if(level > 20 || level < 0)
                 return false;
 
-            this.eaten_foods = 0;
-            this.total_foods = 0;
             this.level += 1;
 
             if(!GameLevel.getLevel(level).getValue1()){
@@ -388,7 +427,16 @@ public class GameManager implements GameConsts , IConst, Serializable {
         }
 
         public void removePacManLife(){
-            pacman.removeLife();
+
+            current_maze.set(pacman.getY(),pacman.getX(),new Void());
+            pacman.reset();
+            maze_correction();
+
+            for(Ghost e: ghost_list){
+                current_maze.set(e.getY(),e.getX(),new Void());
+                e.reset();
+                current_maze.set(e.getY(),e.getX(),new GhostSpawn());
+            }
         }
 
         public char[][] getMaze(){
@@ -410,10 +458,21 @@ public class GameManager implements GameConsts , IConst, Serializable {
 
         public boolean stepLevelState(){
 
-            if(eaten_foods == total_foods)
+            int counter = 0;
+
+            for(int i = 0; i < getMazeRows(); i++){
+                for(int j= 0; j < getMazeCols(); j++){
+                    if(current_maze.get(i,j).getSymbol() == BALL || current_maze.get(i,j).getSymbol() == BIG_BALL )
+                        counter++;
+                }
+            }
+
+            if(counter == 0){
                 return true;
-            else
+            }else{
                 return false;
+            }
+
         }
 
         /**

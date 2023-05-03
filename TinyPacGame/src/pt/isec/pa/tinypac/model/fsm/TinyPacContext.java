@@ -36,7 +36,7 @@ public class TinyPacContext implements IGameEngineEvolve{
 
         gameEngine = new GameEngine();
         state = ITinyPacState.createState(TinyPacState.START_GAME,this,game);
-        gameEngine.start(250);
+        gameEngine.start(270);
         gameEngine.registerClient(this);
 
     }
@@ -62,39 +62,42 @@ public class TinyPacContext implements IGameEngineEvolve{
      * @param newState
      */
 
-    public void changeState(ITinyPacState newState) {
+    void changeState(ITinyPacState newState) {
         this.state = newState;
     }
+    public boolean keyPress(int direction) {
+        return state.keyPress(direction);
+    }
+    public boolean pause(){
+        return state.pause();
+    }
 
-    public Object getGhosts(){return  game.getGhost();}
 
-    public Object getPacmanModel(){return  game.getPacman();}
-
-    public Object getPoints(){
+    public int getPoints(){
         return game.getPoints();
     }
 
-    public Object getMazeCols(){
+    public int getMazeCols(){
         return game.getMazeCols();
     }
 
-    public Object getMazeRows(){
+    public int getMazeRows(){
         return game.getMazeRows();
     }
 
-    public  Object getLevel(){
+    public int getLevel(){
         return game.getLevel();
     }
 
-    public Object getPacManLife(){
+    public int getPacManLife(){
         return game.getPacManLife();
     }
 
-    public Object getMaze(){
+    public char[][] getMaze(){
         return game.getMaze();
     }
 
-    public Object getFruit(){
+    public boolean getFruit(){
         return game.getFruitStatus();
     }
 
@@ -103,20 +106,5 @@ public class TinyPacContext implements IGameEngineEvolve{
      * @param direction
      * @return
      */
-    public boolean keyPress(int direction) {
-        return state.keyPress(direction);
-    }
-
-    public boolean getPacman() {
-        return state.getPacman();
-    }
-
-    public boolean pacManFinish() {
-        return state.pacManFinish();
-    }
-
-    public boolean pacManBuff() {
-        return state.pacManBuff();
-    }
 
 }
