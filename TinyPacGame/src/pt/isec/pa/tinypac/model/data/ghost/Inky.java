@@ -30,6 +30,7 @@ public class Inky extends Ghost{
 
             if (maze.get(getY(), getX() + 1).getSymbol() != (new Wall()).getSymbol() && maze.get(getY(), getX() + 1).getSymbol() != 'y') {
                 this.x++;
+                moves.add(RIGHT);
                 return;
             } else {
 
@@ -48,6 +49,7 @@ public class Inky extends Ghost{
         if (direction == LEFT) {
             if (maze.get(getY(), getX() - 1).getSymbol() != (new Wall()).getSymbol() && maze.get(getY(), getX() - 1).getSymbol() != 'y') {
                 this.x--;
+                moves.add(LEFT);
                 return;
             } else {
                 int selectPositions = rand.nextInt(3);
@@ -66,6 +68,7 @@ public class Inky extends Ghost{
         if (direction == UP) {
             if (maze.get(getY() - 1, getX()).getSymbol() != (new Wall()).getSymbol() && maze.get(getY() - 1, getX()).getSymbol() != 'y') {
                 this.y--;
+                moves.add(UP);
                 return;
             } else {
                 int selectPositions = rand.nextInt(3);
@@ -85,6 +88,7 @@ public class Inky extends Ghost{
         if (direction == DOWN) {
             if (maze.get(getY() + 1, getX()).getSymbol() != (new Wall()).getSymbol() && maze.get(getY() + 1, getX()).getSymbol() != 'y') {
                 this.y++;
+                moves.add(DOWN);
             } else {
                 int selectPositions = rand.nextInt(3);
 
@@ -102,6 +106,10 @@ public class Inky extends Ghost{
     }
     @Override
     public void move(Maze maze, PacMan pacMan) {
+
+        if(returning_moves()){
+            return;
+        }
 
         if (!vulnerability) {
             if (getX() == pacMan.getX() && getY() == pacMan.getY())

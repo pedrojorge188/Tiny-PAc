@@ -36,6 +36,11 @@ public class PauseState extends TinyPacStateAdapter{
     }
 
     @Override
+    public boolean pause() {
+        return false;
+    }
+
+    @Override
     public boolean resume() {
             changeState(stop_state);
             return true;

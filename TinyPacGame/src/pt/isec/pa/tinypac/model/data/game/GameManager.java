@@ -442,9 +442,9 @@ public class GameManager implements GameConsts , IConst, Serializable {
 
             for(Ghost e: ghost_list){
                 current_maze.set(e.getY(),e.getX(),new Void());
-                e.reset();
-                current_maze.set(e.getY(),e.getX(),new GhostSpawn());
+                current_maze.set(e.getSpawn_y(),e.getSpawn_x(),new GhostSpawn());
             }
+            ghost_list.clear();
         }
 
         public char[][] getMaze(){

@@ -18,7 +18,7 @@ public class Pinky extends Ghost{
         rand = new Random();
     }
 
-    private void move_directions(Maze maze){
+    private boolean move_directions(Maze maze){
         if (direction == RIGHT) {
 
             if(maze.get(getY(), getX() + 1).getSymbol() == (new Wall()).getSymbol() &&
@@ -29,7 +29,8 @@ public class Pinky extends Ghost{
 
             if (maze.get(getY(), getX() + 1).getSymbol() != (new Wall()).getSymbol() && maze.get(getY(), getX() + 1).getSymbol() != 'y') {
                 this.x++;
-                return;
+                moves.add(RIGHT);
+                return true;
             } else {
 
                 int selectPositions = rand.nextInt(3);
@@ -47,7 +48,8 @@ public class Pinky extends Ghost{
         if (direction == LEFT) {
             if (maze.get(getY(), getX() - 1).getSymbol() != (new Wall()).getSymbol() && maze.get(getY(), getX() - 1).getSymbol() != 'y') {
                 this.x--;
-                return;
+                moves.add(LEFT);
+                return true;
             } else {
                 int selectPositions = rand.nextInt(3);
 
@@ -65,7 +67,8 @@ public class Pinky extends Ghost{
         if (direction == UP) {
             if (maze.get(getY() - 1, getX()).getSymbol() != (new Wall()).getSymbol() && maze.get(getY() - 1, getX()).getSymbol() != 'y') {
                 this.y--;
-                return;
+                moves.add(UP);
+                return true;
             } else {
                 int selectPositions = rand.nextInt(3);
 
@@ -84,6 +87,8 @@ public class Pinky extends Ghost{
         if (direction == DOWN) {
             if (maze.get(getY() + 1, getX()).getSymbol() != (new Wall()).getSymbol() && maze.get(getY() + 1, getX()).getSymbol() != 'y') {
                 this.y++;
+                moves.add(DOWN);
+                return true;
             } else {
                 int selectPositions = rand.nextInt(3);
 
@@ -98,9 +103,16 @@ public class Pinky extends Ghost{
             }
 
         }
+
+        return false;
+
     }
     @Override
     public void move(Maze maze, PacMan pacMan) {
+
+        if(returning_moves()){
+            return;
+        }
 
         if(!vulnerability){
             if(getX() == pacMan.getX() && getY() == pacMan.getY())
@@ -115,7 +127,8 @@ public class Pinky extends Ghost{
                 m1 = false;
             }
 
-            move_directions(maze);
+            if(move_directions(maze))
+                return;
 
         }else if(m2){
 
@@ -126,7 +139,8 @@ public class Pinky extends Ghost{
             }
 
 
-            move_directions(maze);
+            if(move_directions(maze))
+                return;
 
         }else if(m3){
 
@@ -137,7 +151,8 @@ public class Pinky extends Ghost{
             }
 
 
-            move_directions(maze);
+            if(move_directions(maze))
+                return;
 
         }else if(m3){
 
@@ -148,7 +163,8 @@ public class Pinky extends Ghost{
             }
 
 
-            move_directions(maze);
+            if(move_directions(maze))
+                return;
 
         }
 

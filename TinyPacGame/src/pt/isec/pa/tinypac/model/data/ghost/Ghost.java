@@ -4,6 +4,7 @@ import pt.isec.pa.tinypac.model.data.Maze;
 import pt.isec.pa.tinypac.model.data.pacman.PacMan;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 
 /**
@@ -20,12 +21,16 @@ public abstract class Ghost implements  IGhost , Serializable {
     protected int movement_speed;
     protected int vulnerability_time;
     protected boolean vulnerability;
+    protected boolean returning;
+    protected ArrayList<Integer> moves;
 
     protected Ghost(int x, int y) {
         this.movement_speed = 1;
         this.vulnerability_time = 20;
         this.vulnerability = false;
+        this.returning = false;
         this.name = new String("Name");
+        this.moves = new ArrayList<>();
         this.x = x;
         this.spawn_x = x;
         this.y = y;
@@ -77,10 +82,36 @@ public abstract class Ghost implements  IGhost , Serializable {
      */
     public abstract void move(Maze maze , PacMan pacMan);
 
+    protected boolean returning_moves(){
+
+        if(returning){
+            int lastMove = moves.get(moves.size()-1);
+            moves.remove(moves.size()-1);
+
+            if(lastMove == UP){
+                y++;
+            }else if(lastMove == RIGHT){
+                x--;
+            }else if(lastMove == LEFT){
+                x++;
+            } else if (lastMove == DOWN) {
+                y--;
+            }
+
+            if(this.x == getSpawn_x() && this.y == getSpawn_y()){
+                returning = false;
+                System.out.println(returning);
+            }
+
+            return true;
+        }
+
+        return false;
+    }
+
 
     public void reset(){
-        x = spawn_x;
-        y = spawn_y;
+        returning = true;
         vulnerability = false;
     }
 
