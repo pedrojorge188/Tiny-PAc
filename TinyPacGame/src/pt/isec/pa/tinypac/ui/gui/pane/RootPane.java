@@ -1,4 +1,4 @@
-package pt.isec.pa.tinypac.ui.gui;
+package pt.isec.pa.tinypac.ui.gui.pane;
 
 
 import javafx.geometry.Insets;
@@ -36,7 +36,6 @@ public class RootPane extends StackPane {
      */
 
     private void createViews() {
-        //page
 
         limits = new Stop[]{
                 new Stop(0, Color.BLACK),
@@ -46,8 +45,6 @@ public class RootPane extends StackPane {
         fill = new BackgroundFill(gradient, CornerRadii.EMPTY, Insets.EMPTY);
         background = new Background(fill);
         this.setBackground(background);
-
-        //items
 
 
         btn1 = new MainBtn("Start Game");
@@ -72,7 +69,6 @@ public class RootPane extends StackPane {
     }
 
     private void registerHandlers() {
-
 
 
     }

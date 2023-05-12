@@ -3,6 +3,7 @@ package pt.isec.pa.tinypac.ui.gui;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import pt.isec.pa.tinypac.ui.gui.pane.RootPane;
 
 /**
  * Classe onde extendemos a application para usarmos o JavaFX
