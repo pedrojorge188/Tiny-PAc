@@ -1,0 +1,17 @@
+<component name="libraryTable">
+  <library name="JavaFx17">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/../../../../../../../../Program Files (x86)/Java/Jdk/openjfx-17.0.7_windows-x64_bin-sdk/javafx-sdk-17.0.7/lib" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="file://$PROJECT_DIR$/../../../../../../../../Program Files (x86)/Java/Jdk/openjfx-17.0.7_windows-x64_bin-sdk/javafx-sdk-17.0.7/doc" />
+      <root url="file://$PROJECT_DIR$/../../../JFX/openjfx-17.0.7_windows-x64_bin-sdk/javafx-sdk-17.0.7/doc/javafx.base" />
+      <root url="file://$PROJECT_DIR$/../../../JFX/openjfx-17.0.7_windows-x64_bin-sdk/javafx-sdk-17.0.7/doc/javafx.controls" />
+      <root url="file://$PROJECT_DIR$/../../../JFX/openjfx-17.0.7_windows-x64_bin-sdk/javafx-sdk-17.0.7/doc/javafx.media" />
+      <root url="file://$PROJECT_DIR$/../../../JFX/openjfx-17.0.7_windows-x64_bin-sdk/javafx-sdk-17.0.7/doc/javafx.fxml" />
+      <root url="file://$PROJECT_DIR$/../../../JFX/openjfx-17.0.7_windows-x64_bin-sdk/javafx-sdk-17.0.7/doc/javafx.graphics" />
+    </JAVADOC>
+    <SOURCES />
+    <jarDirectory url="file://$PROJECT_DIR$/../../../../../../../../Program Files (x86)/Java/Jdk/openjfx-17.0.7_windows-x64_bin-sdk/javafx-sdk-17.0.7/lib" recursive="false" />
+  </library>
+</component>

@@ -11,7 +11,7 @@ public interface ITinyPacState {
 
     TinyPacState getState();
 
-    boolean action();
+    boolean action(); //evoluir açoes do estado
     boolean keyPress(int direction);
     boolean pause();
     boolean resume();

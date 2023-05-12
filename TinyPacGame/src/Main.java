@@ -1,23 +1,29 @@
-import pt.isec.pa.tinypac.gameengine.GameEngine;
-import pt.isec.pa.tinypac.model.Controller;
-import pt.isec.pa.tinypac.model.fsm.TinyPacContext;
-import pt.isec.pa.tinypac.ui.text.TinyPacUI;
+import javafx.application.Application;
+import pt.isec.pa.tinypac.ui.gui.MainJFX;
 
 import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) throws IOException, InterruptedException {
 
-    GameEngine gameEngine = new GameEngine();
+    //Interface de terminal com lanterna
+    /*
 
-    TinyPacContext fsm = new TinyPacContext();
-    Controller controller = new Controller(fsm);
-    TinyPacUI ui = new TinyPacUI(fsm);
-    gameEngine.registerClient(controller);
-    gameEngine.start(300);
+        GameEngine gameEngine = new GameEngine();
 
-    ui.start();
-    gameEngine.waitForTheEnd();
+        TinyPacContext fsm = new TinyPacContext();
+        Controller controller = new Controller(fsm);
+        TinyPacUI ui = new TinyPacUI(fsm);
+        gameEngine.registerClient(controller);
+        gameEngine.start(300);
+
+        ui.start();
+        gameEngine.waitForTheEnd();
+    */
+
+    //Interface GUI
+
+    Application.launch(MainJFX.class,args);
 
     }
 }

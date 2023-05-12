@@ -100,7 +100,6 @@ public abstract class Ghost implements  IGhost , Serializable {
 
             if(this.x == getSpawn_x() && this.y == getSpawn_y()){
                 returning = false;
-                System.out.println(returning);
             }
 
             return true;
