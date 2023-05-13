@@ -25,6 +25,7 @@ public class StartGameState extends TinyPacStateAdapter {
 
     }
 
+
     @Override
     public boolean action() {
 

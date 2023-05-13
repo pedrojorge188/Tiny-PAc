@@ -43,7 +43,7 @@ public class Messages {
 
     public String listLogs(){
 
-        StringBuilder sb = new StringBuilder("Logs States:\n");
+        StringBuilder sb = new StringBuilder("");
 
         for(String e: logs){
             sb.append(e).append("\n");

@@ -1,4 +1,4 @@
-package pt.isec.pa.tinypac.ui.gui.pane;
+package pt.isec.pa.tinypac.ui.gui.nodes;
 
 import javafx.scene.layout.BorderPane;
 

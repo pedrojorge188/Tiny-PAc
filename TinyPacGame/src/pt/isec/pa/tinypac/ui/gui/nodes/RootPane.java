@@ -1,4 +1,4 @@
-package pt.isec.pa.tinypac.ui.gui.pane;
+package pt.isec.pa.tinypac.ui.gui.nodes;
 
 
 import javafx.geometry.Insets;
@@ -9,12 +9,15 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.CycleMethod;
 import javafx.scene.paint.LinearGradient;
 import javafx.scene.paint.Stop;
-import pt.isec.pa.tinypac.ui.gui.graphicElements.MainBtn;
+import pt.isec.pa.tinypac.model.Controller;
+import pt.isec.pa.tinypac.ui.gui.components.MainBtn;
 
 /**
  * Pane principal do javafx , este é o jogo è iniciado
  */
 public class RootPane extends StackPane {
+
+    private Controller manager;
 
     private MainBtn btn1,btn2,btn3,btn4;
     private Label pageTitle;
@@ -23,8 +26,9 @@ public class RootPane extends StackPane {
     private Background background;
     private Stop[] limits;
 
-    public RootPane() {
+    public RootPane(Controller manager) {
 
+        this.manager = manager;
         createViews();
         registerHandlers();
         update();

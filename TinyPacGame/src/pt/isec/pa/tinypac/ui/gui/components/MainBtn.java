@@ -1,4 +1,4 @@
-package pt.isec.pa.tinypac.ui.gui.graphicElements;
+package pt.isec.pa.tinypac.ui.gui.components;
 
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
