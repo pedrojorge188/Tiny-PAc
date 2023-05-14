@@ -61,6 +61,7 @@ public class ModalRestore {
         modalStage.setMinHeight(200);
         modalStage.setMinWidth(200);
         modalStage.initModality(Modality.APPLICATION_MODAL);
+        modalStage.initOwner(mainStage);
 
         limits = new Stop[]{
                 new Stop(0, Color.BLACK),
@@ -104,13 +105,17 @@ public class ModalRestore {
             GamePane gamePage = new  GamePane(mainStage,manager);
             init.getChildren().add(gamePage);
             modalStage.close();
+            init.setEffect(null);
         });
 
         btn2.setOnAction(actionEvent -> {
+
             manager.deleteCacheFiles();
             GamePane gamePage = new  GamePane(mainStage,manager);
             init.getChildren().add(gamePage);
             modalStage.close();
+            init.setEffect(null);
+
         });
 
         update();

@@ -59,6 +59,7 @@ public class ModalPause {
         modalStage.setMinHeight(200);
         modalStage.setMinWidth(200);
         modalStage.initModality(Modality.APPLICATION_MODAL);
+        modalStage.initOwner(mainStage);
 
         limits = new Stop[]{
                 new Stop(0, Color.BLACK),
@@ -103,11 +104,13 @@ public class ModalPause {
             manager.saveGame();
             manager.resume();
             modalStage.close();
+            init.setEffect(null);
         });
 
         btn3.setOnAction(actionEvent -> {
             init.getChildren().add(new RootPane(mainStage,manager));
             modalStage.close();
+            init.setEffect(null);
         });
 
         update();

@@ -82,6 +82,11 @@ public class Controller implements IGameEngineEvolve {
             ObjectInputStream ois = new ObjectInputStream(file);){
 
             game = (GameManager) ois.readObject();
+
+            //para remover
+            System.out.println("level -> " + game.getLevel());
+            System.out.println("points -> " + game.getPoints());
+
             Messages.getInstance().clearLogs();
             Messages.getInstance().addLog("jogo carregado");
 
@@ -130,5 +135,13 @@ public class Controller implements IGameEngineEvolve {
 
     public char[][] getMaze(){
         return fsm.getMaze();
+    }
+
+    public int getLevel(){
+        return fsm.getLevel();
+    }
+
+    public int getPoints(){
+        return fsm.getPoints();
     }
 }

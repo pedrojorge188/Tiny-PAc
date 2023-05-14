@@ -4,6 +4,7 @@ package pt.isec.pa.tinypac.ui.gui.components;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.effect.GaussianBlur;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.CycleMethod;
@@ -82,11 +83,14 @@ public class RootPane extends StackPane {
             if(manager.verifyGameRestore()){
 
                 new ModalRestore("Restore last Game?","Yes", "NO", manager, mainStage, this);
+                GaussianBlur blur = new GaussianBlur(10);
+                this.setEffect(blur);
 
             }else{
 
                 GamePane gamePage = new  GamePane(mainStage,manager);
                 this.getChildren().add(gamePage);
+
             }
 
         });
