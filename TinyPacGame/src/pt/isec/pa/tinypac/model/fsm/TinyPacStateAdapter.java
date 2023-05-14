@@ -1,10 +1,6 @@
 package pt.isec.pa.tinypac.model.fsm;
 
 import pt.isec.pa.tinypac.model.data.game.GameManager;
-import pt.isec.pa.tinypac.utils.Messages;
-
-import java.io.FileOutputStream;
-import java.io.ObjectOutputStream;
 
 /**
  * Classe do adaptavel aos estados gestores do jogo
@@ -26,20 +22,6 @@ public abstract class TinyPacStateAdapter implements ITinyPacState{
         context.changeState(ITinyPacState.createState(newState,this.context,game));
     }
 
-    private void save(){
-
-        try(FileOutputStream file = new FileOutputStream("files/save.dat");
-            ObjectOutputStream oos = new ObjectOutputStream(file);){
-
-            oos.writeObject(game);
-            Messages.getInstance().clearLogs();
-            Messages.getInstance().addLog("ESTADO-> START_GAME");
-
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-
-    }
 
     @Override
     public abstract boolean action();
@@ -47,10 +29,6 @@ public abstract class TinyPacStateAdapter implements ITinyPacState{
     @Override
     public boolean keyPress(int direction) {
         GameManager test = new GameManager(game);
-
-        if(direction == 5){
-            this.save();
-        }
 
         if(test.movePacman(direction)){
 

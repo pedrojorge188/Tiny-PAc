@@ -6,7 +6,7 @@ import javafx.stage.Stage;
 import pt.isec.pa.tinypac.gameengine.GameEngine;
 import pt.isec.pa.tinypac.model.Controller;
 import pt.isec.pa.tinypac.ui.gui.log.ModelStage;
-import pt.isec.pa.tinypac.ui.gui.nodes.RootPane;
+import pt.isec.pa.tinypac.ui.gui.components.RootPane;
 
 /**
  * Classe onde extendemos a application para usarmos o JavaFX
@@ -14,6 +14,7 @@ import pt.isec.pa.tinypac.ui.gui.nodes.RootPane;
 
 public class MainJFX extends Application {
 
+    private ModelStage ms;
     private Controller manager;
     private GameEngine gameEngine;
 
@@ -31,24 +32,28 @@ public class MainJFX extends Application {
     @Override
     public void start(Stage stage) throws Exception {
 
-        new ModelStage(stage);
+        ms = new ModelStage(stage);
 
         stage.setTitle("DEIS-ISEC-PA");
-        stage.setAlwaysOnTop(true);     //fica sempre por cima de todas as janelas
         stage.setFullScreen(false);     //é iniciado em fullscreen
         stage.setResizable(false);      //nao deixa alterar a dimensao da tela
         stage.centerOnScreen();
 
 
-        RootPane root = new RootPane(manager);
+        RootPane root = new RootPane(stage,manager);
+
         Scene initial_scene = new Scene(root,1000,720);
         stage.setScene(initial_scene);
-
         stage.show();
+
+        stage.setOnHidden(e ->{
+            ms.close();
+        });
     }
 
     @Override
     public void stop() throws Exception {
-        gameEngine.waitForTheEnd();
+
+        //gameEngine.waitForTheEnd();
     }
 }

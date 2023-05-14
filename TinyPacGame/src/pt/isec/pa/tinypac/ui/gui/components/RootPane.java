@@ -1,4 +1,4 @@
-package pt.isec.pa.tinypac.ui.gui.nodes;
+package pt.isec.pa.tinypac.ui.gui.components;
 
 
 import javafx.geometry.Insets;
@@ -9,8 +9,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.CycleMethod;
 import javafx.scene.paint.LinearGradient;
 import javafx.scene.paint.Stop;
+import javafx.stage.Stage;
 import pt.isec.pa.tinypac.model.Controller;
-import pt.isec.pa.tinypac.ui.gui.components.MainBtn;
 
 /**
  * Pane principal do javafx , este é o jogo è iniciado
@@ -18,7 +18,7 @@ import pt.isec.pa.tinypac.ui.gui.components.MainBtn;
 public class RootPane extends StackPane {
 
     private Controller manager;
-
+    private Stage mainStage;
     private MainBtn btn1,btn2,btn3,btn4;
     private Label pageTitle;
     private LinearGradient gradient;
@@ -26,9 +26,11 @@ public class RootPane extends StackPane {
     private Background background;
     private Stop[] limits;
 
-    public RootPane(Controller manager) {
+    public RootPane(Stage mainStage, Controller manager) {
 
+        this.mainStage = mainStage;
         this.manager = manager;
+
         createViews();
         registerHandlers();
         update();
@@ -38,6 +40,7 @@ public class RootPane extends StackPane {
     /**
      * Cria os componentes inicias deste pane
      */
+
 
     private void createViews() {
 
@@ -74,6 +77,28 @@ public class RootPane extends StackPane {
 
     private void registerHandlers() {
 
+        btn1.setOnAction(actionEvent -> {
+
+            if(manager.verifyGameRestore()){
+
+                new ModalRestore("Restore last Game?","Yes", "NO", manager, mainStage, this);
+
+            }else{
+
+                GamePane gamePage = new  GamePane(mainStage,manager);
+                this.getChildren().add(gamePage);
+            }
+
+        });
+
+        btn4.setOnAction(actionEvent -> {
+
+            mainStage.close();
+        });
+
+
+
+        update();
 
     }
 

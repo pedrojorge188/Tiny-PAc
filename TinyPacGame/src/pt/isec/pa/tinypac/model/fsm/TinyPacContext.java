@@ -3,10 +3,6 @@ package pt.isec.pa.tinypac.model.fsm;
 import pt.isec.pa.tinypac.gameengine.GameEngine;
 import pt.isec.pa.tinypac.model.data.game.GameManager;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.ObjectInputStream;
-
 /**
  * Contexo da maquina de estados:
  *  - Esta classe gere as dependencias usadas na maquina de estados.
@@ -18,19 +14,9 @@ public class TinyPacContext{
     private ITinyPacState state;
     private GameEngine gameEngine;
 
-    public TinyPacContext(){
+    public TinyPacContext(GameManager game){
 
-        File fileO = new File("files/save.dat");
-        try(FileInputStream file = new FileInputStream(fileO);
-            ObjectInputStream ois = new ObjectInputStream(file);){
-
-            game = (GameManager) ois.readObject();
-
-        }catch(Exception e){
-            this.game = new GameManager();
-        }
-
-        fileO.delete();
+        this.game = game;
 
         state = ITinyPacState.createState(TinyPacState.START_GAME,this,game);
 
@@ -49,6 +35,7 @@ public class TinyPacContext{
     void changeState(ITinyPacState newState) {
         this.state = newState;
     }
+
 
     public boolean action(){
         return state.action();
