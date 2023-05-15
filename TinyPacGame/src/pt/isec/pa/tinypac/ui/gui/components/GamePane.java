@@ -4,7 +4,6 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.effect.GaussianBlur;
-import javafx.scene.effect.Glow;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -26,7 +25,7 @@ public class GamePane extends StackPane {
     private BackgroundFill fill;
     private Background background;
     private Stop[] limits;
-    private  Label pageTitle,status,StateInfos;
+    private  Label status,StateInfos;
 
     public GamePane(Stage mainStage, Controller manager) {
 
@@ -57,16 +56,13 @@ public class GamePane extends StackPane {
         this.setBackground(background);
 
 
-        pageTitle = new Label("GAME");
-        pageTitle.setStyle("-fx-text-fill: white;" +
-                " -fx-font-size: 20px;" +
-                " -fx-font-family: 'Arial Black'"
-        );
+        StateInfos = new Label(" ");
+        StateInfos.setTranslateY(60);
 
         status = new Label();
         status.setPrefWidth(Integer.MAX_VALUE);
         status.setPadding(new Insets(20));
-        status.setStyle("-fx-text-fill: white; -fx-background-color: #1f1e1e; -fx-font-size: 16; -fx-font-family: 'Courier New'");
+        status.setStyle("-fx-text-fill: white; -fx-background-color: #1f1e1e; -fx-font-size: 16; -fx-font-family: 'Courier New'; -fx-padding: 20");
         status.setBorder(
                 new Border(
                         new BorderStroke(Color.BLACK,
@@ -75,20 +71,12 @@ public class GamePane extends StackPane {
                                 BorderWidths.DEFAULT)
                 )
         );
+
         status.setAlignment(Pos.CENTER);
-        Glow glow = new Glow();
-        glow.setLevel(0.2);
-        status.setEffect(glow);
-        status.setLineSpacing(1);
-        //groups
-        VBox vbox = new VBox(pageTitle);
-        vbox.setAlignment(Pos.TOP_CENTER);
-        vbox.setSpacing(19);
-        vbox.setTranslateY(60);
 
-        this.getChildren().addAll(vbox,status);
+        this.getChildren().addAll(StateInfos,status);
 
-        StackPane.setAlignment(vbox,Pos.TOP_CENTER);
+        StackPane.setAlignment(StateInfos,Pos.TOP_CENTER);
         StackPane.setAlignment(status,Pos.BOTTOM_CENTER);
 
     }
@@ -96,6 +84,8 @@ public class GamePane extends StackPane {
     private void registerHandlers() {
 
         mainStage.getScene().setOnKeyPressed(keyEvent -> {
+
+            update();
 
             if(keyEvent.getCode() == KeyCode.ESCAPE){
 
@@ -106,15 +96,50 @@ public class GamePane extends StackPane {
 
             }
 
-            update();
-
-
         });
 
 
     }
 
     private void update() {
+
+        switch (manager.getState()){
+            case START_GAME -> {
+                StateInfos.setText("PRESS KEY TO START!");
+                StateInfos.setStyle("-fx-text-fill: YELLOW;" +
+                        " -fx-font-size: 15px;" +
+                        " -fx-font-family: 'Arial Black'"
+                );
+            }
+            case VULNERABLE_GHOST -> {
+                StateInfos.setText("VULNERABLE GHOSTS");
+                StateInfos.setStyle("-fx-text-fill: CYAN;" +
+                        " -fx-font-size: 15px;" +
+                        " -fx-font-family: 'Arial Black'"
+                );
+            }
+            case GAME_OVER -> {
+                StateInfos.setText("GAME OVER");
+                StateInfos.setStyle("-fx-text-fill: RED;" +
+                        " -fx-font-size: 15px;" +
+                        " -fx-font-family: 'Arial Black'"
+                );
+            }
+            case GAME_WIN -> {
+                StateInfos.setText("YOU WIN");
+                StateInfos.setStyle("-fx-text-fill: GREEN;" +
+                        " -fx-font-size: 15px;" +
+                        " -fx-font-family: 'Arial Black'"
+                );
+            }
+            default -> {
+                StateInfos.setText(" ");
+                StateInfos.setStyle("-fx-text-fill: GREEN;" +
+                        " -fx-font-size: 15px;" +
+                        " -fx-font-family: 'Arial Black'"
+                );
+            }
+        }
 
         status.setText("Level: "+manager.getLevel()+"\tPacman Life:"+manager.getPacmanLife()+" ❤\t\tPoints:"+manager.getPoints());
 

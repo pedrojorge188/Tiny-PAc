@@ -98,6 +98,7 @@ public class ModalPause {
         btn1.setOnAction(actionEvent -> {
             manager.resume();
             modalStage.close();
+            init.setEffect(null);
         });
 
         btn2.setOnAction(actionEvent -> {
