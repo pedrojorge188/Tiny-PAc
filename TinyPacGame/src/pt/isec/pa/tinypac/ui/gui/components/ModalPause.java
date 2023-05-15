@@ -109,6 +109,7 @@ public class ModalPause {
         });
 
         btn3.setOnAction(actionEvent -> {
+            manager.disableGameRoles();
             init.getChildren().add(new RootPane(mainStage,manager));
             modalStage.close();
             init.setEffect(null);

@@ -19,7 +19,6 @@ public class MovePacmanState extends TinyPacStateAdapter {
 
     public MovePacmanState(TinyPacContext context, GameManager game) {
         super(context, game);
-
         Messages.getInstance().clearLogs();
         Messages.getInstance().addLog("ESTADO-> MOVE_PACMAN");
 

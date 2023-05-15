@@ -1,7 +1,7 @@
 package pt.isec.pa.tinypac.model.fsm;
 
-import pt.isec.pa.tinypac.gameengine.GameEngine;
 import pt.isec.pa.tinypac.model.data.game.GameManager;
+import pt.isec.pa.tinypac.model.fsm.states.StartGameState;
 
 /**
  * Contexo da maquina de estados:
@@ -12,7 +12,6 @@ public class TinyPacContext{
 
     private GameManager game;
     private ITinyPacState state;
-    private GameEngine gameEngine;
 
     public TinyPacContext(GameManager game){
 
@@ -35,7 +34,6 @@ public class TinyPacContext{
     void changeState(ITinyPacState newState) {
         this.state = newState;
     }
-
 
     public boolean action(){
         return state.action();
@@ -79,6 +77,14 @@ public class TinyPacContext{
 
     public boolean getFruit(){
         return game.getFruitStatus();
+    }
+
+    public void replaceGameManager(GameManager gameManager){
+        this.game = gameManager;
+    }
+
+    public void disableFsm(){
+        this.changeState(new StartGameState(this,game));
     }
 
     /**

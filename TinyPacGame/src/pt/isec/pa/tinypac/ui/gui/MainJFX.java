@@ -35,8 +35,8 @@ public class MainJFX extends Application {
         ms = new ModelStage(stage);
 
         stage.setTitle("DEIS-ISEC-PA");
-        stage.setFullScreen(false);     //é iniciado em fullscreen
-        stage.setResizable(false);      //nao deixa alterar a dimensao da tela
+        stage.setFullScreen(true);     //é iniciado em fullscreen
+        stage.setResizable(true);      //nao deixa alterar a dimensao da tela
         stage.centerOnScreen();
 
 

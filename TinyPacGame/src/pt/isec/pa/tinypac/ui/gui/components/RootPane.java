@@ -16,6 +16,7 @@ import pt.isec.pa.tinypac.model.Controller;
 /**
  * Pane principal do javafx , este é o jogo è iniciado
  */
+
 public class RootPane extends StackPane {
 
     private Controller manager;
@@ -41,7 +42,6 @@ public class RootPane extends StackPane {
     /**
      * Cria os componentes inicias deste pane
      */
-
 
     private void createViews() {
 

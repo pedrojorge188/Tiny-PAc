@@ -62,7 +62,11 @@ public class GamePane extends StackPane {
         status = new Label();
         status.setPrefWidth(Integer.MAX_VALUE);
         status.setPadding(new Insets(20));
-        status.setStyle("-fx-text-fill: white; -fx-background-color: #1f1e1e; -fx-font-size: 16; -fx-font-family: 'Courier New'; -fx-padding: 20");
+        status.setStyle("-fx-text-fill: white;" +
+                " -fx-background-color: #1f1e1e; " +
+                "-fx-font-size: 16;" +
+                " -fx-font-family: 'Courier New';" +
+                " -fx-padding: 20");
         status.setBorder(
                 new Border(
                         new BorderStroke(Color.BLACK,
@@ -94,6 +98,8 @@ public class GamePane extends StackPane {
                 GaussianBlur blur = new GaussianBlur(10);
                 this.setEffect(blur);
 
+            }else if(keyEvent.getCode() == KeyCode.W){
+                manager.keyPress(1);
             }
 
         });

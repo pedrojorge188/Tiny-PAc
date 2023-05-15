@@ -78,10 +78,12 @@ public class Controller implements IGameEngineEvolve {
 
     public boolean restoreGame(){
         File fileO = new File("files/save.dat");
+
         try(FileInputStream file = new FileInputStream(fileO);
             ObjectInputStream ois = new ObjectInputStream(file);){
 
             game = (GameManager) ois.readObject();
+            fsm.replaceGameManager(game);
 
             //para remover
             System.out.println("level -> " + game.getLevel());
@@ -91,15 +93,21 @@ public class Controller implements IGameEngineEvolve {
             Messages.getInstance().addLog("jogo carregado");
 
         }catch(Exception e){
+
             Messages.getInstance().clearLogs();
             Messages.getInstance().addLog("Nenhum jogo para carregar");
+
             this.game = new GameManager();
+            fsm.replaceGameManager(game);
+
             return false;
+
         }
 
         fileO.delete();
         return true;
     }
+
 
     public boolean keyPress(int direction){
         return fsm.keyPress(direction);
@@ -143,5 +151,13 @@ public class Controller implements IGameEngineEvolve {
 
     public int getPoints(){
         return fsm.getPoints();
+    }
+
+    public void disableGameRoles(){
+
+        game = new GameManager();
+        fsm.replaceGameManager(game);
+        fsm.disableFsm();
+
     }
 }
