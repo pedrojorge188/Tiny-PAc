@@ -9,6 +9,7 @@ import pt.isec.pa.tinypac.model.data.game.GameManager;
 public abstract class TinyPacStateAdapter implements ITinyPacState{
 
     protected static GameManager game;
+    protected static int next_direction = 0;
     protected static int direction = 0;
     protected static TinyPacState stop_state = null;
     protected TinyPacContext context;
@@ -30,11 +31,28 @@ public abstract class TinyPacStateAdapter implements ITinyPacState{
     public boolean keyPress(int direction) {
         GameManager test = new GameManager(game);
 
+        TinyPacStateAdapter.direction = direction;
+
+        if(next_direction != 0){
+
+            if(test.movePacman(next_direction)){
+
+                TinyPacStateAdapter.direction = next_direction;
+                next_direction = 0;
+                return true;
+
+            }else{
+                next_direction = direction;
+            }
+
+        }
+
         if(test.movePacman(direction)){
 
             TinyPacStateAdapter.direction = direction;
 
         }
+
         return true;
     }
 

@@ -1,7 +1,11 @@
 package pt.isec.pa.tinypac.model.fsm;
 
 import pt.isec.pa.tinypac.model.data.game.GameManager;
+import pt.isec.pa.tinypac.model.data.ghost.Ghost;
+import pt.isec.pa.tinypac.model.data.pacman.PacMan;
 import pt.isec.pa.tinypac.model.fsm.states.StartGameState;
+
+import java.util.HashSet;
 
 /**
  * Contexo da maquina de estados:
@@ -73,6 +77,14 @@ public class TinyPacContext{
 
     public char[][] getMaze(){
         return game.getMaze();
+    }
+
+    public PacMan getPacman(){
+        return game.getPacman();
+    }
+
+    public HashSet<Ghost> getGhosts(){
+        return game.getGhost();
     }
 
     public boolean getFruit(){

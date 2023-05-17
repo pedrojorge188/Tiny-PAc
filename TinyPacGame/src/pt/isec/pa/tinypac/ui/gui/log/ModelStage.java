@@ -7,6 +7,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import pt.isec.pa.tinypac.model.Controller;
 import pt.isec.pa.tinypac.utils.Messages;
 
 
@@ -16,17 +17,21 @@ import pt.isec.pa.tinypac.utils.Messages;
 
 public class ModelStage extends Stage {
     Messages model;
+    Controller manager;
+    public ModelStage(Stage stage, Controller manager) {
 
-    public ModelStage(Stage stage) {
         this.model = Messages.getInstance();
+        this.manager = manager;
 
         setScene(new Scene(new LogPane(),500,500));
         setX(Screen.getPrimary().getVisualBounds().getWidth()-500);
         setY(0);
+
         stage.addEventFilter(
                 WindowEvent.WINDOW_CLOSE_REQUEST,
                 windowEvent -> close()
         );
+
         show();
     }
 
@@ -41,17 +46,19 @@ public class ModelStage extends Stage {
 
         private void createViews() {
             lstLogs = new ListView<>();
-            btnRefresh = new Button("Refresh");
             setCenter(lstLogs);
-            btnRefresh.setPrefWidth(Integer.MAX_VALUE);
-            setBottom(btnRefresh);
         }
 
         private void registerHandlers() {
-            btnRefresh.setOnAction( a -> update());
+
+            manager.addPropertyChangeListener(Controller.PROP_GAME, evt -> {
+                update();
+            });
+
         }
 
         private void update() {
+
             lstLogs.getItems().addAll(model.listLogs());
         }
     }

@@ -167,6 +167,7 @@ public class TinyPacUI {
         try {
             char[][] m = (char[][]) fsm.getMaze();
 
+            /*
             for (int i = 0; i < (int)fsm.getMazeRows(); i++) {
                 for (int j = 0; j < (int)fsm.getMazeCols(); j++) {
                     if(m[i][j] == 'x'){
@@ -250,7 +251,7 @@ public class TinyPacUI {
                     }
                 }
             }
-
+                */
     } catch (Exception e) {
 
             tg.setBackgroundColor(TextColor.ANSI.RED);

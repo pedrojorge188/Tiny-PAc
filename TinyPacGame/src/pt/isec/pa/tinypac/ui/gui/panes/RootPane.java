@@ -1,4 +1,4 @@
-package pt.isec.pa.tinypac.ui.gui.components;
+package pt.isec.pa.tinypac.ui.gui.panes;
 
 
 import javafx.geometry.Insets;
@@ -12,6 +12,7 @@ import javafx.scene.paint.LinearGradient;
 import javafx.scene.paint.Stop;
 import javafx.stage.Stage;
 import pt.isec.pa.tinypac.model.Controller;
+import pt.isec.pa.tinypac.ui.gui.components.MainBtn;
 
 /**
  * Pane principal do javafx , este é o jogo è iniciado
@@ -89,20 +90,17 @@ public class RootPane extends StackPane {
             }else{
 
                 GamePane gamePage = new  GamePane(mainStage,manager);
-                this.getChildren().add(gamePage);
+
+                this.getChildren().addAll(gamePage);
 
             }
 
         });
 
         btn4.setOnAction(actionEvent -> {
-
             mainStage.close();
         });
 
-
-
-        update();
 
     }
 
