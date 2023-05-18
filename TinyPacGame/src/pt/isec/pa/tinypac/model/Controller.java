@@ -21,7 +21,10 @@ public class Controller implements IGameEngineEvolve {
     private PropertyChangeSupport pcs;
     private static int direction_manager;
 
-    public static final String PROP_GAME = "game_property";
+    public static final String PROP_MAZE = "maze_property";
+    public static final String PROP_GAME_INFO = "info_property";
+    public static final String PROP_LOG = "logs_property";
+    public static final String PROP_TOP5 = "leaderboard_property";
 
     public Controller() {
 
@@ -37,7 +40,11 @@ public class Controller implements IGameEngineEvolve {
 
     @Override
     public void evolve(IGameEngine gameEngine, long currentTime) {
+
+        pcs.firePropertyChange(PROP_MAZE,null,null);
+        pcs.firePropertyChange(PROP_GAME_INFO,null,null);
         fsm.action();
+
     }
 
     public boolean verifyGameRestore(){
@@ -62,12 +69,15 @@ public class Controller implements IGameEngineEvolve {
 
             oos.writeObject(game);
             Messages.getInstance().clearLogs();
-            Messages.getInstance().addLog("jogo salvado");
+            Messages.getInstance().addLog("GAME SAVED");
 
         }catch(Exception e){
 
             e.printStackTrace();
             return false;
+
+        }finally {
+            pcs.firePropertyChange(PROP_LOG,null,null);
         }
 
         return true;
@@ -103,18 +113,20 @@ public class Controller implements IGameEngineEvolve {
             fsm.disableFsm();
 
             Messages.getInstance().clearLogs();
-            Messages.getInstance().addLog("jogo carregado");
+            Messages.getInstance().addLog("GAME RESTORE");
 
         }catch(Exception e){
 
-            Messages.getInstance().clearLogs();
-            Messages.getInstance().addLog("Nenhum jogo para carregar");
 
             this.game = new GameManager();
             fsm.replaceGameManager(game);
 
             return false;
 
+        }finally {
+            pcs.firePropertyChange(PROP_MAZE,null,null);
+            pcs.firePropertyChange(PROP_LOG,null,null);
+            pcs.firePropertyChange(PROP_GAME_INFO, null , null);
         }
 
         fileO.delete();
@@ -123,7 +135,7 @@ public class Controller implements IGameEngineEvolve {
 
     public boolean keyPress(int direction){
 
-        pcs.firePropertyChange(PROP_GAME,null,null);
+        pcs.firePropertyChange(PROP_LOG,null,null);
         direction_manager = direction;
         return fsm.keyPress(direction);
     }
@@ -133,10 +145,12 @@ public class Controller implements IGameEngineEvolve {
     }
 
     public boolean pause(){
+        pcs.firePropertyChange(PROP_LOG,null,null);
         return fsm.pause();
     }
 
     public boolean resume(){
+        pcs.firePropertyChange(PROP_LOG,null,null);
         return  fsm.resume();
     }
 
@@ -178,12 +192,6 @@ public class Controller implements IGameEngineEvolve {
 
     public int getPoints(){
        return fsm.getPoints();
-    }
-
-
-
-    public void requestMaze() {
-        pcs.firePropertyChange(PROP_GAME,null,null);
     }
 
     public void disableGameRoles(){

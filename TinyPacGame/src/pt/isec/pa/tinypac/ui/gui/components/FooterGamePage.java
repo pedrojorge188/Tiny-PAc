@@ -1,5 +1,6 @@
 package pt.isec.pa.tinypac.ui.gui.components;
 
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -36,7 +37,7 @@ public class FooterGamePage extends Label {
                 " -fx-background-color: #1f1e1e; " +
                 "-fx-font-size: 16;" +
                 " -fx-font-family: 'Courier New';" +
-                " -fx-padding: 20");
+                " -fx-padding: 20; -fx-border-style: solid 2px white");
         this.setBorder(
                 new Border(
                         new BorderStroke(Color.BLACK,
@@ -52,8 +53,13 @@ public class FooterGamePage extends Label {
 
     private void registerHandlers() {
 
-        manager.addPropertyChangeListener(Controller.PROP_GAME, evt -> {
-            update();
+        manager.addPropertyChangeListener(Controller.PROP_GAME_INFO, evt -> {
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    update();
+                }
+            });
         });
 
     }

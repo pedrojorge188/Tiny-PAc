@@ -26,37 +26,38 @@ public class MainJFX extends Application {
     @Override
     public void init() throws Exception {
         gameEngine.registerClient(manager);
-        gameEngine.start(340);
+        gameEngine.start(200);
     }
 
     @Override
     public void start(Stage stage) throws Exception {
 
-       // ms = new ModelStage(stage,manager);
+        ms = new ModelStage(stage,manager);
 
         stage.setTitle("DEIS-ISEC-PA");
-        stage.setFullScreen(false);     //é iniciado em fullscreen
-        stage.setResizable(false);      //nao deixa alterar a dimensao da tela
+        stage.setFullScreen(true);
+        stage.setResizable(false);
         stage.centerOnScreen();
 
         RootPane root = new RootPane(stage,manager);
-        Scene initial_scene = new Scene(root,1280,720);
+        Scene initial_scene = new Scene(root,1000,800);
         stage.setScene(initial_scene);
 
         stage.show();
 
-
+        /*
         Stage stage2 = new Stage();
         RootPane root2 = new RootPane(stage2,manager);
         stage2.setResizable(false);      //nao deixa alterar a dimensao da tela
-        Scene initial_scene2 = new Scene(root2,1280,720);
+        Scene initial_scene2 = new Scene(root2,1000,800);
         stage2.setScene(initial_scene2);
 
         stage2.show();
+        */
 
         stage.setOnHidden(e ->{
-            //ms.close();
-            //stage2.close();
+           // ms.close();
+            // stage2.close();
         });
 
 

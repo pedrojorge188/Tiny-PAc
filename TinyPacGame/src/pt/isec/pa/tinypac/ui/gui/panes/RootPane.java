@@ -1,6 +1,7 @@
 package pt.isec.pa.tinypac.ui.gui.panes;
 
 
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -90,15 +91,15 @@ public class RootPane extends StackPane {
             }else{
 
                 GamePane gamePage = new  GamePane(mainStage,manager);
-
-                this.getChildren().addAll(gamePage);
+                this.getChildren().clear();
+                this.getChildren().add(gamePage);
 
             }
 
         });
 
         btn4.setOnAction(actionEvent -> {
-            mainStage.close();
+            Platform.exit();
         });
 
 

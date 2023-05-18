@@ -1,7 +1,6 @@
 package pt.isec.pa.tinypac.ui.gui.panes;
 
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -12,24 +11,21 @@ import javafx.scene.shape.Ellipse;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 import pt.isec.pa.tinypac.model.Controller;
 import pt.isec.pa.tinypac.model.data.ghost.Ghost;
 
 public class MazePane extends GridPane {
 
-    private static final int CELL_SIZE = 25 ;
+    private static final int CELL_SIZE = 20 ;
 
     private final Controller manager;
     private Stage mainStage;
-    Timeline timeline;
 
     public MazePane(Stage mainStage, Controller manager){
 
         super();
         this.mainStage = mainStage;
         this.manager = manager;
-
         createViews();
         registerHandlers();
         update();
@@ -40,23 +36,26 @@ public class MazePane extends GridPane {
 
         this.setAlignment(Pos.CENTER);
         this.setStyle("-fx-padding: 10px");
-        this.timeline = new Timeline(new KeyFrame(Duration.seconds(0.350), event -> manager.requestMaze()));
-        timeline.setCycleCount(Timeline.INDEFINITE);
-        timeline.play();
-
 
     }
 
     private void registerHandlers() {
 
-        manager.addPropertyChangeListener(Controller.PROP_GAME, evt -> {
-            update();
+
+        manager.addPropertyChangeListener(Controller.PROP_MAZE, evt -> {
+
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    update();
+                }
+            });
+
         });
 
     }
 
     private void update() {
-
         this.getChildren().clear();
 
         char [][] maze = manager.getMaze();
@@ -78,9 +77,9 @@ public class MazePane extends GridPane {
 
                         Image image = new Image("pt/isec/pa/tinypac/ui/gui/resources/img/portal.png");
                         ImageView imageView = new ImageView(image);
-                        imageView.setFitHeight(23);
-                        imageView.setFitWidth(23);
-                        cellShape = new Rectangle(23,23);
+                        imageView.setFitHeight(17);
+                        imageView.setFitWidth(17);
+                        cellShape = new Rectangle(17,17);
                         cellShape.setClip(imageView);
                             cellColor = Color.WHITE;
 
@@ -96,11 +95,11 @@ public class MazePane extends GridPane {
 
                         Image image = new Image("pt/isec/pa/tinypac/ui/gui/resources/img/fruit.png");
                         ImageView imageView = new ImageView(image);
-                        imageView.setFitHeight(22);
-                        imageView.setFitWidth(22);
+                        imageView.setFitHeight(16);
+                        imageView.setFitWidth(16);
 
                         if (manager.getFruit()){
-                            cellShape = new Rectangle(22,22);
+                            cellShape = new Rectangle(16,16);
                             cellShape.setClip(imageView);
                             cellColor = Color.RED;
                         }
@@ -117,10 +116,10 @@ public class MazePane extends GridPane {
 
             Image image = new Image("pt/isec/pa/tinypac/ui/gui/resources/img/ghost.png");
             ImageView imageView = new ImageView(image);
-            imageView.setFitHeight(22);
-            imageView.setFitWidth(22);
+            imageView.setFitHeight(16);
+            imageView.setFitWidth(16);
 
-            Rectangle cellShape = new Rectangle(22, 22);
+            Rectangle cellShape = new Rectangle(16, 16);
             cellShape.setClip(imageView);
 
             Color cellColor = Color.RED;
@@ -159,8 +158,8 @@ public class MazePane extends GridPane {
 
         Image image = new Image("pt/isec/pa/tinypac/ui/gui/resources/img/pacman.png");
         ImageView imageView = new ImageView(image);
-        imageView.setFitHeight(22);
-        imageView.setFitWidth(22);
+        imageView.setFitHeight(16);
+        imageView.setFitWidth(16);
 
 
         if(manager.getPacDirection() == 1) {
@@ -177,7 +176,7 @@ public class MazePane extends GridPane {
         }
 
 
-        Rectangle cellShape = new Rectangle(22, 22);
+        Rectangle cellShape = new Rectangle(16, 16);
         cellShape.setClip(imageView);
 
 

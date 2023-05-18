@@ -48,7 +48,6 @@ public class GamePane extends StackPane {
 
     }
 
-
     /**
      * Cria os componentes inicias deste pane
      */
@@ -57,7 +56,7 @@ public class GamePane extends StackPane {
 
         limits = new Stop[]{
                 new Stop(0, Color.BLACK),
-                new Stop(1, Color.BLUE)
+                new Stop(1, Color.BLACK)
         };
 
         gradient = new LinearGradient(0, 0, 2, 1, true, CycleMethod.NO_CYCLE, limits);
@@ -73,11 +72,11 @@ public class GamePane extends StackPane {
         footer = new FooterGamePage(mainStage, manager);
         StateInfos.setTranslateY(60);
 
-
         maze = new MazePane(mainStage,manager);
-        maze.setStyle("-fx-border-color: white; -fx-border-width: 2px;-fx-background-color: black;");
+        //maze.setStyle("-fx-border-color: white; -fx-border-width: 2px;-fx-background-color: black;");
 
-        maze.setMaxSize(200,200);
+        maze.setPrefHeight(5000);
+        maze.setPrefWidth(5000);
         this.getChildren().addAll(StateInfos,maze,footer);
 
         StackPane.setAlignment(StateInfos,Pos.TOP_CENTER);
@@ -90,7 +89,6 @@ public class GamePane extends StackPane {
     }
 
     private void registerHandlers() {
-
 
         mainStage.getScene().addEventFilter( KeyEvent.KEY_PRESSED, keyEvent -> {
 
@@ -123,6 +121,7 @@ public class GamePane extends StackPane {
 
 
     }
+
 
     private void update() {
 

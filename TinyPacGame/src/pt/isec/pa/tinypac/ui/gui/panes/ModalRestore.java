@@ -57,12 +57,11 @@ public class ModalRestore {
 
         modalStage = new Stage();
         modalStage.initStyle(StageStyle.UNDECORATED);
-
         modalStage.setResizable(false);
         modalStage.setMinHeight(200);
         modalStage.setMinWidth(200);
         modalStage.initModality(Modality.APPLICATION_MODAL);
-        modalStage.initOwner(mainStage);
+        modalStage.initOwner(mainStage.getScene().getWindow());
 
         limits = new Stop[]{
                 new Stop(0, Color.BLACK),

@@ -51,14 +51,14 @@ public class ModelStage extends Stage {
 
         private void registerHandlers() {
 
-            manager.addPropertyChangeListener(Controller.PROP_GAME, evt -> {
+            manager.addPropertyChangeListener(Controller.PROP_LOG, evt -> {
                 update();
             });
 
         }
 
         private void update() {
-
+            lstLogs.getItems().clear();
             lstLogs.getItems().addAll(model.listLogs());
         }
     }

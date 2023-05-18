@@ -1,5 +1,6 @@
 package pt.isec.pa.tinypac.ui.gui.components;
 
+import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
@@ -32,8 +33,13 @@ public class StateInfoHeader extends Label {
 
     private void registerHandlers() {
 
-        manager.addPropertyChangeListener(Controller.PROP_GAME, evt -> {
-            update();
+        manager.addPropertyChangeListener(Controller.PROP_GAME_INFO, evt -> {
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    update();
+                }
+            });
         });
 
     }
