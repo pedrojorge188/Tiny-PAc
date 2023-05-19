@@ -38,7 +38,6 @@ public class MazePane extends GridPane {
         this.setStyle("-fx-padding: 10px");
 
     }
-
     private void registerHandlers() {
 
 
@@ -81,7 +80,7 @@ public class MazePane extends GridPane {
                         imageView.setFitWidth(17);
                         cellShape = new Rectangle(17,17);
                         cellShape.setClip(imageView);
-                            cellColor = Color.WHITE;
+                        cellColor = Color.WHITE;
 
                     }
                     case 'x' -> {
@@ -171,7 +170,7 @@ public class MazePane extends GridPane {
         }else if(manager.getPacDirection() == 3) {
             imageView.setRotate(180);
 
-        }else if(manager.getPacDirection() == 2) {
+        }else if(manager.getPacDirection() == 4) {
             imageView.setRotate(0);
         }
 

@@ -59,7 +59,7 @@ public class GamePane extends StackPane {
                 new Stop(1, Color.BLACK)
         };
 
-        gradient = new LinearGradient(0, 0, 2, 1, true, CycleMethod.NO_CYCLE, limits);
+        gradient = new LinearGradient(2, 0, 2, 1, true, CycleMethod.NO_CYCLE, limits);
         fill = new BackgroundFill(gradient, CornerRadii.EMPTY, Insets.EMPTY);
         background = new Background(fill);
 
@@ -73,7 +73,6 @@ public class GamePane extends StackPane {
         StateInfos.setTranslateY(60);
 
         maze = new MazePane(mainStage,manager);
-        //maze.setStyle("-fx-border-color: white; -fx-border-width: 2px;-fx-background-color: black;");
 
         maze.setPrefHeight(5000);
         maze.setPrefWidth(5000);

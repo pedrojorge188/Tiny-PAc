@@ -88,7 +88,11 @@ public class StateInfoHeader extends Label {
             }
 
             default -> {
-                this.setText(" ");
+                this.setText("PAC MAN");
+                this.setStyle("-fx-text-fill: WHITE;" +
+                        " -fx-font-size: 25px;" +
+                        " -fx-font-family: 'Arial Black'"
+                );
             }
         }
 

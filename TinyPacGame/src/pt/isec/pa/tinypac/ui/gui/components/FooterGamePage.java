@@ -34,7 +34,7 @@ public class FooterGamePage extends Label {
         this.setPrefWidth(Integer.MAX_VALUE);
         this.setPadding(new Insets(20));
         this.setStyle("-fx-text-fill: white;" +
-                " -fx-background-color: #1f1e1e; " +
+                " -fx-background-color: #2d2b2b; " +
                 "-fx-font-size: 16;" +
                 " -fx-font-family: 'Courier New';" +
                 " -fx-padding: 20; -fx-border-style: solid 2px white");
