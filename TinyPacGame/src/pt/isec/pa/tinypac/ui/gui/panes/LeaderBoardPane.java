@@ -64,7 +64,7 @@ public class LeaderBoardPane extends StackPane {
         );
         title.setTranslateY(20);
         title.setAlignment(Pos.TOP_CENTER);
-        exitBtn = new MainBtn("EXIT");
+        exitBtn = new MainBtn("BACK");
         exitBtn.setTranslateY(-20);
         this.getChildren().addAll(title,exitBtn);
 

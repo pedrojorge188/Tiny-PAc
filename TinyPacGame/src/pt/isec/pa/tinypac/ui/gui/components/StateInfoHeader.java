@@ -29,6 +29,16 @@ public class StateInfoHeader extends Label {
     private void createViews() {
 
         this.setAlignment(Pos.CENTER);
+        this.setStyle("-fx-text-fill: white;" +
+                " -fx-background-color: #032672; " +
+                "-fx-padding: 20px;" +
+                "-fx-font-size: 20;" +
+                " -fx-font-family: 'Courier New';" +
+                " -fx-padding: 20;"  +
+                " -fx-border-width: 2px 1px 2px 1px;" +
+                "-fx-border-radius: 10px;" +
+                " -fx-border-color: white;" +
+                "-fx-background-radius: 10px");
     }
 
     private void registerHandlers() {
@@ -49,50 +59,31 @@ public class StateInfoHeader extends Label {
         switch (manager.getState()){
             case START_GAME -> {
                 this.setText("PRESS KEY TO START!");
-                this.setStyle("-fx-text-fill: YELLOW;" +
-                        " -fx-font-size: 15px;" +
-                        " -fx-font-family: 'Arial Black'"
-                );
             }
 
             case PAUSE_STATE -> {
                 this.setText("GAME PAUSED");
-                this.setStyle("-fx-text-fill: RED;" +
-                        " -fx-font-size: 15px;" +
-                        " -fx-font-family: 'Arial Black'"
-                );
+
             }
 
             case VULNERABLE_GHOST -> {
                 this.setText("VULNERABLE GHOSTS");
-                this.setStyle("-fx-text-fill: CYAN;" +
-                        " -fx-font-size: 15px;" +
-                        " -fx-font-family: 'Arial Black'"
-                );
+
             }
 
             case GAME_OVER -> {
                 this.setText("GAME OVER");
-                this.setStyle("-fx-text-fill: RED;" +
-                        " -fx-font-size: 15px;" +
-                        " -fx-font-family: 'Arial Black'"
-                );
+
             }
 
             case GAME_WIN -> {
                 this.setText("YOU WIN");
-                this.setStyle("-fx-text-fill: GREEN;" +
-                        " -fx-font-size: 15px;" +
-                        " -fx-font-family: 'Arial Black'"
-                );
+
             }
 
             default -> {
                 this.setText("PAC MAN");
-                this.setStyle("-fx-text-fill: WHITE;" +
-                        " -fx-font-size: 25px;" +
-                        " -fx-font-family: 'Arial Black'"
-                );
+
             }
         }
 

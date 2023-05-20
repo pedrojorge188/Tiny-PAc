@@ -58,7 +58,7 @@ public class MainJFX extends Application {
            ms.close();
             stage2.close();
         });
-        */
+*/
 
     }
 

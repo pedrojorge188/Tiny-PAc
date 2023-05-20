@@ -58,7 +58,7 @@ public class CreditsPane extends StackPane {
         this.setBackground(background);
         this.setBackground(background);
 
-        exitBtn = new MainBtn("EXIT");
+        exitBtn = new MainBtn("BACK");
         exitBtn.setTranslateY(-20);
 
         name = new Text("Nome:  Pedro Rodrigues Jorge");
