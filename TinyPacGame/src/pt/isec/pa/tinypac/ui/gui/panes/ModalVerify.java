@@ -19,7 +19,7 @@ import pt.isec.pa.tinypac.ui.gui.components.MainBtn;
 /**
  * Componente default para modal do jogo, pode ser utilizada varias vezes
  */
-public class ModalPause {
+public class ModalVerify {
 
     private Controller manager;
     private Stage mainStage;
@@ -27,16 +27,15 @@ public class ModalPause {
     private BackgroundFill fill;
     private Background background;
     private Stop[] limits;
-    private MainBtn btn1, btn2, btn3;
+    private MainBtn btn1, btn2;
     private Stage modalStage;
     private Label label;
     private VBox vbox;
     private HBox hbox;
-    private Scene modalScene;
     private StackPane init;
 
 
-    public ModalPause(Controller controller, Stage mainStage, StackPane init) {
+    public ModalVerify(Controller controller, Stage mainStage, StackPane init) {
 
         this.init = init;
         this.manager = controller;
@@ -71,17 +70,18 @@ public class ModalPause {
         fill = new BackgroundFill(gradient, CornerRadii.EMPTY, Insets.EMPTY);
         background = new Background(fill);
 
-        label = new Label("GAME PAUSED");
+        label = new Label("DO YOU WANT TO LEAVE!?");
         label.setStyle("-fx-font-family: 'Arial Black'; -fx-text-fill: White; -fx-font-size: 15px");
         vbox = new VBox();
 
-        btn1 = new MainBtn("PLAY");
-        btn2 = new MainBtn("SAVE");
-        btn3 = new MainBtn("EXIT");
+        btn1 = new MainBtn("YES");
+        btn2 = new MainBtn("NO");
+        hbox = new HBox(btn1,btn2);
+        hbox.setSpacing(10);
+        hbox.setStyle("-fx-padding: 20px");
 
-        vbox.getChildren().addAll(label, btn1, btn2, btn3);
-
-        vbox.setSpacing(15);
+        vbox.getChildren().addAll(label,hbox);
+        vbox.setSpacing(20);
         vbox.setAlignment(Pos.CENTER);
         vbox.setBackground(background);
 
@@ -98,21 +98,17 @@ public class ModalPause {
     private void registerHandlers() {
 
         btn1.setOnAction(actionEvent -> {
-            manager.resume();
+            manager.disableGameRoles();
             modalStage.close();
+            init.getChildren().add(new RootPane(mainStage,manager));
             init.setEffect(null);
+
         });
 
         btn2.setOnAction(actionEvent -> {
-            manager.saveGame();
+            modalStage.close();
             manager.resume();
-            modalStage.close();
             init.setEffect(null);
-        });
-
-        btn3.setOnAction(actionEvent -> {
-            modalStage.close();
-            new ModalVerify(manager,mainStage,init);
         });
 
         update();

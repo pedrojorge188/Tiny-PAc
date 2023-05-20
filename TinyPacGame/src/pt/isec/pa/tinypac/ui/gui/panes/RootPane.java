@@ -98,6 +98,21 @@ public class RootPane extends StackPane {
 
         });
 
+        btn2.setOnAction(actionEvent -> {
+
+            LeaderBoardPane top5 = new LeaderBoardPane(mainStage,manager);
+            this.getChildren().clear();
+            this.getChildren().add(top5);
+        });
+
+        btn3.setOnAction(actionEvent -> {
+
+            CreditsPane credits = new CreditsPane(mainStage,manager);
+            this.getChildren().clear();
+            this.getChildren().add(credits);
+
+        });
+
         btn4.setOnAction(actionEvent -> {
             Platform.exit();
         });

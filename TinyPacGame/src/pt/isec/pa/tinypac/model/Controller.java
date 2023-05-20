@@ -14,6 +14,10 @@ import java.beans.PropertyChangeSupport;
 import java.io.*;
 import java.util.HashSet;
 
+/**
+ * Manager do projeto
+ */
+
 public class Controller implements IGameEngineEvolve {
 
     private TinyPacContext fsm;
