@@ -99,6 +99,9 @@ public class TinyPacContext{
         this.changeState(new StartGameState(this,game));
     }
 
+    public int getVulnerable(){
+        return game.getVulnerable();
+    }
     /**
      * indica a direção da tecla introduzida e guarda a numa variavel
      * @param direction

@@ -46,7 +46,11 @@ public class MazePane extends GridPane {
             Platform.runLater(new Runnable() {
                 @Override
                 public void run() {
-                    update();
+                    try {
+                        update();
+                    }catch (Exception e){
+                        System.out.println("error opening new map");
+                    }
                 }
             });
 
@@ -98,7 +102,7 @@ public class MazePane extends GridPane {
                         imageView.setFitWidth(16);
 
                         if (manager.getFruit()){
-                            cellShape = new Rectangle(16,16);
+                            cellShape = new Rectangle(19,19);
                             cellShape.setClip(imageView);
                             cellColor = Color.RED;
                         }

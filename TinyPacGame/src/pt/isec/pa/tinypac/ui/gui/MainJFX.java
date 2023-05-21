@@ -1,5 +1,4 @@
 package pt.isec.pa.tinypac.ui.gui;
-
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -26,7 +25,7 @@ public class MainJFX extends Application {
     @Override
     public void init() throws Exception {
         gameEngine.registerClient(manager);
-        gameEngine.start(220);
+        gameEngine.start(250);
     }
 
     @Override
@@ -45,7 +44,7 @@ public class MainJFX extends Application {
 
         stage.show();
 
-        /*
+
         Stage stage2 = new Stage();
         RootPane root2 = new RootPane(stage2,manager);
         stage2.setResizable(false);
@@ -58,7 +57,7 @@ public class MainJFX extends Application {
            ms.close();
             stage2.close();
         });
-*/
+
 
     }
 

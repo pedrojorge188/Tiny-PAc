@@ -67,7 +67,7 @@ public class StateInfoHeader extends Label {
             }
 
             case VULNERABLE_GHOST -> {
-                this.setText("VULNERABLE GHOSTS");
+                this.setText("VULNERABLE GHOSTS ("+manager.getVulnerable()+")" );
 
             }
 

@@ -32,14 +32,15 @@ public class GameManager implements GameConsts , IConst, Serializable {
         private Fruit fruit;
         private Set <Ball> balls_list;
         private Set <WrapZone> portals;
+        private int vulnerable;
 
-        public GameManager(){
+    public GameManager(){
 
             this.level = 1;
             this.stage = 1;
             this.points = 0;
             this.current_maze = GameLevel.getLevel(this.stage).getValue2();
-
+            this.vulnerable = 0;
             ghost_list = new HashSet<>();
             balls_list = new HashSet<>();
             portals = new HashSet<>();
@@ -86,6 +87,8 @@ public class GameManager implements GameConsts , IConst, Serializable {
                     current_maze.set(e.getY(),e.getX(),new BigBallElement());
 
             }
+
+            current_maze.set(fruit.getY(),fruit.getX(),new FruitElement());
 
             for(WrapZone e: portals){
                 current_maze.set(e.getY(),e.getX(),e);
@@ -491,4 +494,11 @@ public class GameManager implements GameConsts , IConst, Serializable {
                 return fruit.getStatus();
             }
 
+    public void setVulnerable(int i) {
+            this.vulnerable = i;
+    }
+
+    public int getVulnerable() {
+        return vulnerable;
+    }
 }

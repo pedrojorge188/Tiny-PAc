@@ -46,7 +46,6 @@ public class ModalRestore {
         createViews();
         registerHandlers();
         update();
-
     }
 
     /**
@@ -100,6 +99,7 @@ public class ModalRestore {
 
     private void registerHandlers() {
 
+
         btn1.setOnAction(actionEvent -> {
             manager.restoreGame();
             GamePane gamePage = new  GamePane(mainStage,manager);
@@ -118,7 +118,6 @@ public class ModalRestore {
 
         });
 
-        update();
 
     }
 

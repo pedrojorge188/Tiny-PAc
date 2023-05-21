@@ -115,7 +115,6 @@ public class ModalPause {
             new ModalVerify(manager,mainStage,init);
         });
 
-        update();
 
     }
 

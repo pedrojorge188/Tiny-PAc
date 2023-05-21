@@ -53,6 +53,7 @@ public class Controller implements IGameEngineEvolve {
 
     public boolean verifyGameRestore(){
         File fileO = new File("files/save.dat");
+
         try(FileInputStream file = new FileInputStream(fileO);
             ObjectInputStream ois = new ObjectInputStream(file);){
 
@@ -149,11 +150,13 @@ public class Controller implements IGameEngineEvolve {
     }
 
     public boolean pause(){
+
         pcs.firePropertyChange(PROP_LOG,null,null);
         return fsm.pause();
     }
 
     public boolean resume(){
+
         pcs.firePropertyChange(PROP_LOG,null,null);
         return  fsm.resume();
     }
@@ -196,6 +199,10 @@ public class Controller implements IGameEngineEvolve {
 
     public int getPoints(){
        return fsm.getPoints();
+    }
+
+    public int getVulnerable(){
+        return fsm.getVulnerable();
     }
 
     public void disableGameRoles(){

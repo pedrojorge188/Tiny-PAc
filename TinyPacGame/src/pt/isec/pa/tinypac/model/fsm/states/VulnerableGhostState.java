@@ -22,7 +22,7 @@ public class VulnerableGhostState extends TinyPacStateAdapter {
         super(context, game);
 
         game.toogleGhostsStatus(true);
-
+        game.setVulnerable(45);
         scope_counter = game.getPacManLife();
         Messages.getInstance().clearLogs();
         Messages.getInstance().addLog("ESTADO-> VULNERABLE_GHOST");
@@ -32,10 +32,13 @@ public class VulnerableGhostState extends TinyPacStateAdapter {
     private boolean timeout() {
 
         counter++;
+        game.setVulnerable(game.getVulnerable()-1);
+
         if(counter == 45 || n_ghost_dead == 5){
             game.toogleGhostsStatus(false);
             counter = 0;
             n_ghost_dead = 1;
+            game.setVulnerable(0);
             changeState(TinyPacState.MOVE_GHOST);
         }
 
