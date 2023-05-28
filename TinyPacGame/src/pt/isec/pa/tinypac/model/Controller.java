@@ -2,6 +2,7 @@ package pt.isec.pa.tinypac.model;
 
 import pt.isec.pa.tinypac.gameengine.IGameEngine;
 import pt.isec.pa.tinypac.gameengine.IGameEngineEvolve;
+import pt.isec.pa.tinypac.model.data.LeaderBoard;
 import pt.isec.pa.tinypac.model.data.game.GameManager;
 import pt.isec.pa.tinypac.model.data.ghost.Ghost;
 import pt.isec.pa.tinypac.model.data.pacman.PacMan;
@@ -24,7 +25,7 @@ public class Controller implements IGameEngineEvolve {
     private GameManager game;
     private PropertyChangeSupport pcs;
     private static int direction_manager;
-
+    private LeaderBoard leaderBoard;
     public static final String PROP_MAZE = "maze_property";
     public static final String PROP_GAME_INFO = "info_property";
     public static final String PROP_LOG = "logs_property";
@@ -35,6 +36,19 @@ public class Controller implements IGameEngineEvolve {
         game = new GameManager();
         this.fsm = new TinyPacContext(game);
         pcs = new PropertyChangeSupport(this);
+
+        File fileO = new File("files/leaderboard.dat");
+
+        try(FileInputStream file = new FileInputStream(fileO);
+            ObjectInputStream ois = new ObjectInputStream(file);){
+
+            leaderBoard = (LeaderBoard) ois.readObject();
+
+        }catch(Exception e){
+
+            leaderBoard = new LeaderBoard();
+
+        }
     }
 
 
@@ -64,6 +78,47 @@ public class Controller implements IGameEngineEvolve {
             return false;
         }
 
+
+    }
+
+    public boolean verifyLeaderBoard(){
+
+        return leaderBoard.verifyRequirements(game.getPoints());
+
+    }
+
+    public String top_name(int top){
+       return leaderBoard.lead_name(top);
+    }
+
+    public int top_score(int top){
+        return leaderBoard.lead_score(top);
+    }
+
+    public boolean addToLeaderboard(String name){
+
+        if(leaderBoard.addRequirements(name,game.getPoints())){
+
+            try(FileOutputStream file = new FileOutputStream("files/leaderboard.dat");
+                ObjectOutputStream oos = new ObjectOutputStream(file);){
+
+                oos.writeObject(leaderBoard);
+                Messages.getInstance().clearLogs();
+                Messages.getInstance().addLog("LEADER BOARD CHANGED");
+
+            }catch(Exception e){
+
+                e.printStackTrace();
+                return false;
+
+            }finally {
+                pcs.firePropertyChange(PROP_TOP5,null,null);
+                return true;
+            }
+
+        }else{
+            return false;
+        }
 
     }
 
@@ -139,7 +194,7 @@ public class Controller implements IGameEngineEvolve {
     }
 
     public boolean keyPress(int direction){
-
+        pcs.firePropertyChange(PROP_TOP5,null,null);
         pcs.firePropertyChange(PROP_LOG,null,null);
         direction_manager = direction;
         return fsm.keyPress(direction);
@@ -203,6 +258,10 @@ public class Controller implements IGameEngineEvolve {
 
     public int getVulnerable(){
         return fsm.getVulnerable();
+    }
+
+    public void resetFsm(){
+        fsm.disableFsm();
     }
 
     public void disableGameRoles(){

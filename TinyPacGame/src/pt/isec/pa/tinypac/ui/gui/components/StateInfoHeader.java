@@ -72,12 +72,13 @@ public class StateInfoHeader extends Label {
             }
 
             case GAME_OVER -> {
-                this.setText("GAME OVER");
+
+                this.setText("YOU LOSE - PRESS KEY TO CONTINUE");
 
             }
 
             case GAME_WIN -> {
-                this.setText("YOU WIN");
+                this.setText("YOU WIN - PRESS KEY TO CONTINUE");
 
             }
 

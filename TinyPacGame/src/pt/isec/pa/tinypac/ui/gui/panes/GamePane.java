@@ -1,5 +1,6 @@
 package pt.isec.pa.tinypac.ui.gui.panes;
 
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -14,6 +15,7 @@ import javafx.scene.paint.LinearGradient;
 import javafx.scene.paint.Stop;
 import javafx.stage.Stage;
 import pt.isec.pa.tinypac.model.Controller;
+import pt.isec.pa.tinypac.model.fsm.TinyPacState;
 import pt.isec.pa.tinypac.ui.gui.components.FooterGamePage;
 import pt.isec.pa.tinypac.ui.gui.components.StateInfoHeader;
 
@@ -89,6 +91,22 @@ public class GamePane extends StackPane {
 
     private void registerHandlers() {
 
+        manager.addPropertyChangeListener(Controller.PROP_TOP5, evt -> {
+
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        if(manager.getState() == TinyPacState.GAME_OVER || manager.getState() == TinyPacState.GAME_WIN)
+                        update();
+                    }catch (Exception e){
+                        System.out.println("error opening new map");
+                    }
+                }
+            });
+
+        });
+
         mainStage.getScene().addEventFilter( KeyEvent.KEY_PRESSED, keyEvent -> {
 
             if(keyEvent.getCode()==KeyCode.ESCAPE){
@@ -123,6 +141,11 @@ public class GamePane extends StackPane {
 
     private void update() {
 
+        if(manager.verifyLeaderBoard()){
+            new ModalInputField(manager,mainStage,this, manager.getState().toString());
+            GaussianBlur blur = new GaussianBlur(10);
+            this.setEffect(blur);
+        }
     }
 
 }
