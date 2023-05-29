@@ -141,7 +141,7 @@ public class GamePane extends StackPane {
 
     private void update() {
 
-        if(manager.verifyLeaderBoard()){
+        if(manager.verifyLeaderBoard() && manager.getState() != TinyPacState.START_GAME){
             new ModalInputField(manager,mainStage,this, manager.getState().toString());
             GaussianBlur blur = new GaussianBlur(10);
             this.setEffect(blur);

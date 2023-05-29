@@ -129,11 +129,11 @@ public class LeaderBoardPane extends StackPane {
     }
 
     private void update(){
-        top1.setText("#1\t\t"+manager.top_name(1)+"\t-\t"+manager.top_score(1));
-        top2.setText("#2\t\t"+manager.top_name(2)+"\t-\t"+manager.top_score(2));
-        top3.setText("#3\t\t"+manager.top_name(3)+"\t-\t"+manager.top_score(3));
-        top4.setText("#4\t\t"+manager.top_name(4)+"\t-\t"+manager.top_score(4));
-        top5.setText("#5\t\t"+manager.top_name(5)+"\t-\t"+manager.top_score(5));
+        top1.setText("#1\t\t"+manager.top_name(1)+"\t"+manager.top_score(1)+"\tpoints");
+        top2.setText("#2\t\t"+manager.top_name(2)+"\t"+manager.top_score(2)+"\tpoints");
+        top3.setText("#3\t\t"+manager.top_name(3)+"\t"+manager.top_score(3)+"\tpoints");
+        top4.setText("#4\t\t"+manager.top_name(4)+"\t"+manager.top_score(4)+"\tpoints");
+        top5.setText("#5\t\t"+manager.top_name(5)+"\t"+manager.top_score(5)+"\tpoints");
     }
 
 }
