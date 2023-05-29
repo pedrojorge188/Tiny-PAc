@@ -23,10 +23,15 @@ public class LeaderBoardPane extends StackPane {
     private LinearGradient gradient;
     private BackgroundFill fill;
     private Background background;
-    private Label title, top1, top2, top3, top4, top5;
+    private Label title, top1_name, top1_score ,
+            top2_name, top2_score,
+            top3_name, top3_score,
+            top4_name, top4_score,
+            top5_name, top5_score;
     private MainBtn exitBtn;
     private Stop[] limits;
     private VBox main_content;
+    private HBox top1, top2, top3, top4, top5;
 
     public LeaderBoardPane(Stage mainStage, Controller manager) {
 
@@ -62,36 +67,64 @@ public class LeaderBoardPane extends StackPane {
         );
         title.setTranslateY(20);
         title.setAlignment(Pos.TOP_CENTER);
-
-        top1 = new Label(" ");
-        top1.setStyle("-fx-text-fill: WHITE;" +
-                " -fx-font-size: 20px;" +
+        top1_name = new Label(" ");
+        top1_score = new Label(" ");
+        top1_name.setStyle("-fx-text-fill: YELLOW");
+        top1_score.setStyle("-fx-text-fill: YELLOW");
+        top1 = new HBox(top1_name,top1_score);
+        top1.setPadding(new Insets(20));
+        top1.setAlignment(Pos.CENTER);
+        top1.setStyle(
+                " -fx-font-size: 26px;" +
                 " -fx-font-family: 'Arial Black'"
         );
-        top2 = new Label(" ");
-        top2.setStyle("-fx-text-fill: WHITE;" +
+        top2_name = new Label(" ");
+        top2_score = new Label(" ");
+        top2_name.setStyle("-fx-text-fill: WHITE");
+        top2_score.setStyle("-fx-text-fill: WHITE");
+        top2 = new HBox(top2_name,top2_score);
+        top2.setPadding(new Insets(20));
+        top2.setAlignment(Pos.CENTER);
+        top2.setStyle(
                 " -fx-font-size: 20px;" +
-                " -fx-font-family: 'Arial Black'"
+                        " -fx-font-family: 'Arial Black'"
         );
-        top3 = new Label(" ");
-        top3.setStyle("-fx-text-fill: WHITE;" +
+        top3_name = new Label(" ");
+        top3_score = new Label(" ");
+        top3_name.setStyle("-fx-text-fill: WHITE");
+        top3_score.setStyle("-fx-text-fill: WHITE");
+        top3 = new HBox(top3_name,top3_score);
+        top3.setPadding(new Insets(20));
+        top3.setAlignment(Pos.CENTER);
+        top3.setStyle(
                 " -fx-font-size: 20px;" +
-                " -fx-font-family: 'Arial Black'"
+                        " -fx-font-family: 'Arial Black'"
         );
-        top4 = new Label(" ");
-        top4.setStyle("-fx-text-fill: WHITE;" +
+        top4_name = new Label(" ");
+        top4_score = new Label(" ");
+        top4_name.setStyle("-fx-text-fill: WHITE");
+        top4_score.setStyle("-fx-text-fill: WHITE");
+        top4 = new HBox(top4_name,top4_score);
+        top4.setPadding(new Insets(20));
+        top4.setAlignment(Pos.CENTER);
+        top4.setStyle(
                 " -fx-font-size: 20px;" +
-                " -fx-font-family: 'Arial Black'"
+                        " -fx-font-family: 'Arial Black'"
         );
-        top5 = new Label(" ");
-        top5.setStyle("-fx-text-fill: WHITE;" +
+        top5_name = new Label(" ");
+        top5_score = new Label(" ");
+        top5_name.setStyle("-fx-text-fill: WHITE");
+        top5_score.setStyle("-fx-text-fill: WHITE");
+        top5 = new HBox(top5_name,top5_score);
+        top5.setPadding(new Insets(20));
+        top5.setAlignment(Pos.CENTER);
+        top5.setStyle(
                 " -fx-font-size: 20px;" +
-                " -fx-font-family: 'Arial Black'"
+                        " -fx-font-family: 'Arial Black'"
         );
 
         exitBtn = new MainBtn("BACK");
         exitBtn.setTranslateY(-20);
-
         main_content = new VBox(10);
         main_content.getChildren().addAll(top1,top2,top3,top4,top5);
         main_content.setPadding(new Insets(20));
@@ -129,11 +162,16 @@ public class LeaderBoardPane extends StackPane {
     }
 
     private void update(){
-        top1.setText("#1\t\t"+manager.top_name(1)+"\t"+manager.top_score(1)+"\tpoints");
-        top2.setText("#2\t\t"+manager.top_name(2)+"\t"+manager.top_score(2)+"\tpoints");
-        top3.setText("#3\t\t"+manager.top_name(3)+"\t"+manager.top_score(3)+"\tpoints");
-        top4.setText("#4\t\t"+manager.top_name(4)+"\t"+manager.top_score(4)+"\tpoints");
-        top5.setText("#5\t\t"+manager.top_name(5)+"\t"+manager.top_score(5)+"\tpoints");
+        top1_name.setText("#1  \t"+manager.top_name(1));
+        top1_score.setText("\t"+manager.top_score(1)+" Points ✰");
+        top2_name.setText("#2  \t"+manager.top_name(2));
+        top2_score.setText("\t"+manager.top_score(2)+" Points ✰");
+        top3_name.setText("#3  \t"+manager.top_name(3));
+        top3_score.setText("\t"+manager.top_score(3)+" Points ✰");
+        top4_name.setText("#4  \t"+manager.top_name(4));
+        top4_score.setText("\t"+manager.top_score(4)+" Points ✰");
+        top5_name.setText("#5  \t"+manager.top_name(5));
+        top5_score.setText("\t"+manager.top_score(5)+" Points ✰");
     }
 
 }

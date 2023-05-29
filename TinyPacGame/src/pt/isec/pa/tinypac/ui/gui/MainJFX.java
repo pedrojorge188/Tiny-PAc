@@ -44,7 +44,7 @@ public class MainJFX extends Application {
 
         stage.show();
 
-
+        /*
         Stage stage2 = new Stage();
         RootPane root2 = new RootPane(stage2,manager);
         stage2.setResizable(false);
@@ -57,7 +57,7 @@ public class MainJFX extends Application {
            ms.close();
             stage2.close();
         });
-
+        */
 
     }
 
