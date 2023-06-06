@@ -10,6 +10,10 @@ import pt.isec.pa.tinypac.model.Controller;
 
 import java.io.File;
 
+/**
+ * Pane responsavel por mostrar o header do jogo e colocar sons conforme os estados do jogo
+ */
+
 public class StateInfoHeader extends Label {
     private static int counter = 0;
     private Controller manager;
@@ -34,9 +38,6 @@ public class StateInfoHeader extends Label {
      */
 
     private void createViews() {
-
-
-
 
         this.setAlignment(Pos.CENTER);
         this.setStyle("-fx-text-fill: white;" +

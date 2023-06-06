@@ -52,8 +52,10 @@ public class MoveGhostState extends TinyPacStateAdapter {
         if(game.setLevel()){
             direction = 0;
             if(game.getLevel() == 20){
+                num_balls = game.getBuff();
                 changeState(TinyPacState.GAME_WIN);
             }else{
+                num_balls = game.getBuff();
                 changeState(TinyPacState.START_GAME);
             }
         }
@@ -77,12 +79,10 @@ public class MoveGhostState extends TinyPacStateAdapter {
 
         if(game.stepLevelState())
             pacManFinish();
-
-        if(scope_counter != game.getPacManLife()){
+        else if(scope_counter != game.getPacManLife()){
             getPacman();
-        }
 
-        if(num_balls != game.getBuff()){
+        }else if(num_balls != game.getBuff()){
             pacManBuff();
         }
 

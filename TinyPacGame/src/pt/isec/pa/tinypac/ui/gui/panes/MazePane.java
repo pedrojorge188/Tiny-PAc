@@ -14,6 +14,10 @@ import javafx.stage.Stage;
 import pt.isec.pa.tinypac.model.Controller;
 import pt.isec.pa.tinypac.model.data.ghost.Ghost;
 
+
+/**
+ * Pane onde e mostrado o tabuleiro do jogo
+ */
 public class MazePane extends GridPane {
 
     private static final int CELL_SIZE = 20 ;

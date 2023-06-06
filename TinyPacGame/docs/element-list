@@ -11,5 +11,9 @@ pt.isec.pa.tinypac.model.data.ghost
 pt.isec.pa.tinypac.model.data.pacman
 pt.isec.pa.tinypac.model.fsm
 pt.isec.pa.tinypac.model.fsm.states
+pt.isec.pa.tinypac.ui.gui
+pt.isec.pa.tinypac.ui.gui.components
+pt.isec.pa.tinypac.ui.gui.log
+pt.isec.pa.tinypac.ui.gui.panes
 pt.isec.pa.tinypac.ui.text
 pt.isec.pa.tinypac.utils

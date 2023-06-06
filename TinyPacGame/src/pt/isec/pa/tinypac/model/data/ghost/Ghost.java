@@ -108,6 +108,10 @@ public abstract class Ghost implements  IGhost , Serializable {
         return false;
     }
 
+    public void setPos(int x, int y){
+        this.x = x;
+        this.y = y;
+    }
 
     public void reset(){
         returning = true;

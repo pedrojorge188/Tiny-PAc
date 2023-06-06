@@ -65,6 +65,11 @@ public class Controller implements IGameEngineEvolve {
 
     }
 
+    /**
+     * Verifica se existe algum jogo para restaurar
+     * @return
+     */
+
     public boolean verifyGameRestore(){
         File fileO = new File("files/save.dat");
 
@@ -81,20 +86,40 @@ public class Controller implements IGameEngineEvolve {
 
     }
 
+    /**
+     * Verifica se podemos adicionar o jogador atual à leaderboard ou não
+     * @return
+     */
     public boolean verifyLeaderBoard(){
 
         return leaderBoard.verifyRequirements(game.getPoints());
 
     }
 
+    /**
+     * retorna o nome do jogador do top indicado no parametro
+     * @param top
+     * @return
+     */
     public String top_name(int top){
        return leaderBoard.lead_name(top);
     }
+
+    /**
+     * Indica os pontos do jogador representado no top indicado no parametro de entrada
+     * @param top
+     * @return
+     */
 
     public int top_score(int top){
         return leaderBoard.lead_score(top);
     }
 
+    /**
+     * Adicionar jogador ao top 5
+     * @param name
+     * @return
+     */
     public boolean addToLeaderboard(String name){
 
         if(leaderBoard.addRequirements(name,game.getPoints())){
@@ -124,6 +149,9 @@ public class Controller implements IGameEngineEvolve {
 
     public boolean saveGame(){
 
+        /**
+         * Função que salva o jogo no ficheiro binario (c/serialization)
+         */
         try(FileOutputStream file = new FileOutputStream("files/save.dat");
             ObjectOutputStream oos = new ObjectOutputStream(file);){
 
@@ -143,6 +171,10 @@ public class Controller implements IGameEngineEvolve {
         return true;
     }
 
+    /**
+     * Elimina o ficheiro do jogo passado, caso o jogador chame esta função significa que este nao deseja restaurar o jogo passado
+     * @return
+     */
     public boolean deleteCacheFiles(){
 
         File fileO = new File("files/save.dat");
@@ -161,6 +193,10 @@ public class Controller implements IGameEngineEvolve {
 
     }
 
+    /**
+     * Retaurar o jogo passado
+     * @return
+     */
     public boolean restoreGame(){
 
         File fileO = new File("files/save.dat");
@@ -180,7 +216,6 @@ public class Controller implements IGameEngineEvolve {
 
             this.game = new GameManager();
             fsm.replaceGameManager(game);
-
             return false;
 
         }finally {
@@ -193,6 +228,11 @@ public class Controller implements IGameEngineEvolve {
         return true;
     }
 
+    /**
+     * Chama a ação da máquina de estados (keyPress)
+     * @param direction
+     * @return
+     */
     public boolean keyPress(int direction){
         pcs.firePropertyChange(PROP_TOP5,null,null);
         pcs.firePropertyChange(PROP_LOG,null,null);
@@ -200,70 +240,133 @@ public class Controller implements IGameEngineEvolve {
         return fsm.keyPress(direction);
     }
 
+    /**
+     * Recebe a direção para onde o pacman esta a olhar (isto é util para rodar o pacman na interface gráfica)
+     * @return
+     */
     public int getPacDirection(){
         return direction_manager;
     }
 
+    /**
+     * Chama a ação da maquina de estados (pause)
+     * @return
+     */
     public boolean pause(){
 
         pcs.firePropertyChange(PROP_LOG,null,null);
         return fsm.pause();
     }
 
+    /**
+     * Chama a ação da maquina de estados (resume)
+     * @return
+     */
     public boolean resume(){
 
         pcs.firePropertyChange(PROP_LOG,null,null);
         return  fsm.resume();
     }
 
+    /**
+     * recebe o estado de jogo atual (startGame, movePacman, moveGhosts, vulnerableGhosts, pause, result ..)
+     * @return
+     */
     public TinyPacState getState(){
         return fsm.getState();
     }
 
+    /**
+     * Recebe a vida do pacman
+     * @return
+     */
     public int getPacmanLife(){
         return fsm.getPacManLife();
     }
 
+    /**
+     * linhas do tabuleiro do jogo
+     * @return
+     */
     public int getGameRows(){
         return fsm.getMazeRows();
     }
 
+    /**
+     * Colunas do tabuleiro do jogo
+     * @return
+     */
     public int getGameCols(){
         return fsm.getMazeCols();
     }
 
+    /**
+     * Estado da fruta
+     * @return
+     */
     public boolean getFruit(){
         return fsm.getFruit();
     }
 
+    /**
+     * Recebe o tabuleiro com os elementos do jogo
+     * @return
+     */
     public char[][] getMaze(){
         return fsm.getMaze();
     }
 
+    /**
+     * Recebe uma cópia do pacman
+     * @return
+     */
     public PacMan getPacmanCPY(){
         return fsm.getPacman();
     }
-    
+
+    /**
+     * Recebe uma copia dos fantasmas
+     * @return
+     */
     public HashSet<Ghost> getGhostCPY(){
         return fsm.getGhosts();
     }
 
+    /**
+     * Rcebe o nivel do jogo
+     * @return
+     */
     public int getLevel(){
         return fsm.getLevel();
     }
 
+    /**
+     * Recebe os pontos do jogador
+     * @return
+     */
     public int getPoints(){
        return fsm.getPoints();
     }
 
+    /**
+     *
+     * verifica o estado de vulnerabilidade (isto vai permitir mostrar o tempo na GUI)
+     * @return
+     */
     public int getVulnerable(){
         return fsm.getVulnerable();
     }
 
+    /**
+     * Coloca a maquina de estados default
+     */
     public void resetFsm(){
         fsm.disableFsm();
     }
 
+    /**
+     * Reseta todos os atributos do jogo (maquina de estados reiniciada)
+     */
     public void disableGameRoles(){
 
         game = new GameManager();

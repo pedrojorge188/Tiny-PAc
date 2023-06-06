@@ -24,8 +24,6 @@ import pt.isec.pa.tinypac.ui.gui.components.StateInfoHeader;
  * Página onde é mostrado o jogo
  */
 
-
-
 public class GamePane extends StackPane {
 
     private  Stage mainStage;

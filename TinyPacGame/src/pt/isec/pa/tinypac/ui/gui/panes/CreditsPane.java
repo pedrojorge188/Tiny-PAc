@@ -15,7 +15,7 @@ import pt.isec.pa.tinypac.model.Controller;
 import pt.isec.pa.tinypac.ui.gui.components.MainBtn;
 
 /**
- * Pane representativa do TOP 5
+ * Pane onde é mostrado os creditos do projeto
  */
 
 public class CreditsPane extends StackPane {

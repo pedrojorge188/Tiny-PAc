@@ -9,6 +9,10 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import pt.isec.pa.tinypac.model.Controller;
 
+
+/**
+ * Footer do jogo (mostrado na GUI, pontos, nivel, etc)
+ */
 public class FooterGamePage extends Label {
 
     private Controller manager;
